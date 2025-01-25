@@ -46,6 +46,7 @@ public class LorawanMessageService {
 		loraMessageVM.setData(data);
 		
 		loraMessageVM.setfPort(jsonObject.get("fPort").asText());
+		loraMessageVM.setfCnt(jsonObject.get("fCnt").asText());
 		
 		return loraMessageVM;
 	}
@@ -73,6 +74,7 @@ public class LorawanMessageService {
         lorawanMessage.setInsertDate(ZonedDateTime.now());
         lorawanMessage.sensor(deviceMessageVM.getSensor());
         lorawanMessage.setfPort(deviceMessageVM.getfPort());
+        lorawanMessage.setfPort(deviceMessageVM.getfCnt());
         
         parseSensorSpecificData(lorawanMessage, deviceMessageVM);
         

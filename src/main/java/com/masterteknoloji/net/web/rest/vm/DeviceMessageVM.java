@@ -8,6 +8,7 @@ public class DeviceMessageVM {
 	Sensor sensor;
 	String data;
 	String fPort;
+	String fCnt;
 	String base64Message;
 	String hexMessage;
 	JsonNode jsonNode;
@@ -48,6 +49,12 @@ public class DeviceMessageVM {
 	}
 	public void setJsonNode(JsonNode jsonNode) {
 		this.jsonNode = jsonNode;
+	}
+	public String getfCnt() {
+		return fCnt;
+	}
+	public void setfCnt(String fCnt) {
+		this.fCnt = fCnt;
 	}
 
 	

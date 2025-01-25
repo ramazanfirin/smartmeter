@@ -63,8 +63,9 @@ public class WaterMeterService {
 	}
 	
 	 private void combineAllImages(LorawanMessage lorawanMessage) {
-	    	String imageId = lorawanMessage.getImageId();
-	    	List<LorawanMessage>  list = lorawanMessageRepository.findByImageId(imageId);
+		    Long fcnt = lorawanMessage.get
+		 
+	    	List<LorawanMessage>  list = lorawanMessageRepository.findByFcnt(lorawanMessage.getSensor());
 	    	
 	    	lorawanMessage.setImage(null);
 	    	byte[] result=null;
