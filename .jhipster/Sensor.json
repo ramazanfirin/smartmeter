@@ -1,0 +1,54 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "devEui",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "appEui",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "appKey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imei",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "connectionType",
+            "fieldType": "ConnectionType",
+            "fieldValues": "LORA,M2M"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "Type",
+            "fieldValues": "VIBRATION,BUTTON,WATER_METER"
+        },
+        {
+            "fieldName": "lastSeenDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lastMessage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "changelogDate": "20250125110417",
+    "entityTableName": "sensor",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

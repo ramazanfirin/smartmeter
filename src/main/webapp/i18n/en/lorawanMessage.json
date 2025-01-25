@@ -1,0 +1,27 @@
+{
+    "smartmeterApp": {
+        "lorawanMessage" : {
+            "home": {
+                "title": "Lorawan Messages",
+                "createLabel": "Create a new Lorawan Message",
+                "createOrEditLabel": "Create or edit a Lorawan Message"
+            },
+            "created": "A new Lorawan Message is created with identifier {{ param }}",
+            "updated": "A Lorawan Message is updated with identifier {{ param }}",
+            "deleted": "A Lorawan Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lorawan Message {{ id }}?"
+            },
+            "detail": {
+                "title": "Lorawan Message"
+            },
+            "base64Message": "Base 64 Message",
+            "hexMessage": "Hex Message",
+            "index": "Index",
+            "totalMessageCount": "Total Message Count",
+            "insertDate": "Insert Date",
+            "image": "Image",
+            "sensor": "Sensor"
+        }
+    }
+}

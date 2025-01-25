@@ -1,0 +1,79 @@
+<div>
+    <h2 data-translate="smartmeterApp.lorawanMessage.home.title">Lorawan Messages</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="lorawan-message.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="smartmeterApp.lorawanMessage.home.createLabel">
+                        Create new Lorawan Message
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="base64Message"><span data-translate="smartmeterApp.lorawanMessage.base64Message">Base 64 Message</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hexMessage"><span data-translate="smartmeterApp.lorawanMessage.hexMessage">Hex Message</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="index"><span data-translate="smartmeterApp.lorawanMessage.index">Index</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalMessageCount"><span data-translate="smartmeterApp.lorawanMessage.totalMessageCount">Total Message Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="insertDate"><span data-translate="smartmeterApp.lorawanMessage.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="image"><span data-translate="smartmeterApp.lorawanMessage.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.lorawanMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lorawanMessage in vm.lorawanMessages track by lorawanMessage.id">
+                    <td><a ui-sref="lorawan-message-detail({id:lorawanMessage.id})">{{lorawanMessage.id}}</a></td>
+                    <td>{{lorawanMessage.base64Message}}</td>
+                    <td>{{lorawanMessage.hexMessage}}</td>
+                    <td>{{lorawanMessage.index}}</td>
+                    <td>{{lorawanMessage.totalMessageCount}}</td>
+                    <td>{{lorawanMessage.insertDate | date:'medium'}}</td>
+                    <td>
+                        <a ng-if="lorawanMessage.image" ng-click="vm.openFile(lorawanMessage.imageContentType, lorawanMessage.image)">
+                            <img data-ng-src="{{'data:' + lorawanMessage.imageContentType + ';base64,' + lorawanMessage.image}}" style="max-height: 30px;" alt="lorawanMessage image"/>
+                        </a>
+                        <span ng-if="lorawanMessage.image">{{lorawanMessage.imageContentType}}, {{vm.byteSize(lorawanMessage.image)}}</span>
+                    </td>
+                    <td>
+                        <a ui-sref="sensor-detail({id:lorawanMessage.sensor.id})">{{lorawanMessage.sensor.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="lorawan-message-detail({id:lorawanMessage.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="lorawan-message.edit({id:lorawanMessage.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="lorawan-message.delete({id:lorawanMessage.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

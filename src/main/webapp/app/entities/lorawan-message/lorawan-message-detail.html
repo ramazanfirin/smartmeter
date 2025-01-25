@@ -1,0 +1,52 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.lorawanMessage.detail.title">Lorawan Message</span> {{vm.lorawanMessage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.lorawanMessage.base64Message">Base 64 Message</span></dt>
+        <dd>
+            <span>{{vm.lorawanMessage.base64Message}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.lorawanMessage.hexMessage">Hex Message</span></dt>
+        <dd>
+            <span>{{vm.lorawanMessage.hexMessage}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.lorawanMessage.index">Index</span></dt>
+        <dd>
+            <span>{{vm.lorawanMessage.index}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.lorawanMessage.totalMessageCount">Total Message Count</span></dt>
+        <dd>
+            <span>{{vm.lorawanMessage.totalMessageCount}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.lorawanMessage.insertDate">Insert Date</span></dt>
+        <dd>
+            <span>{{vm.lorawanMessage.insertDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.lorawanMessage.image">Image</span></dt>
+        <dd>
+            <div ng-if="vm.lorawanMessage.image">
+                <a ng-click="vm.openFile(vm.lorawanMessage.imageContentType, vm.lorawanMessage.image)">
+                    <img data-ng-src="{{'data:' + vm.lorawanMessage.imageContentType + ';base64,' + vm.lorawanMessage.image}}" style="max-width: 100%;" alt="lorawanMessage image"/>
+                </a>
+                {{vm.lorawanMessage.imageContentType}}, {{vm.byteSize(vm.lorawanMessage.image)}}
+            </div>
+        </dd>
+        <dt><span data-translate="smartmeterApp.lorawanMessage.sensor">Sensor</span></dt>
+        <dd>
+            <a ui-sref="sensor-detail({id:vm.lorawanMessage.sensor.id})">{{vm.lorawanMessage.sensor.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="lorawan-message-detail.edit({id:vm.lorawanMessage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,43 @@
+entity Sensor{
+	devEui String required
+	appEui String
+	appKey String 
+	imei String
+	connectionType ConnectionType
+    type Type
+    lastSeenDate ZonedDateTime
+    lastMessage String
+    lastImage ImageBlob 
+}
+
+enum ConnectionType{
+	LORA,
+	M2M
+}
+
+enum Type{
+	VIBRATION,
+	BUTTON,
+	WATER_METER
+}
+
+entity LorawanMessage{
+	base64Message String
+	hexMessage String 	
+	index Long
+	totalMessageCount Long
+	insertDate ZonedDateTime
+	image ImageBlob 
+	batteryValue Float
+	sensorValue Float
+}   
+
+
+relationship ManyToOne {
+	LorawanMessage{sensor} to Sensor
+}	
+	
+
+
+paginate LorawanMessage,Sensor with pagination
+

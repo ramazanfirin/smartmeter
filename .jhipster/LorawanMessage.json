@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "sensor",
+            "otherEntityName": "sensor",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "base64Message",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hexMessage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "index",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "totalMessageCount",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "insertDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "changelogDate": "20250125110418",
+    "entityTableName": "lorawan_message",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,9 @@
+{
+    "smartmeterApp": {
+        "ConnectionType" : {
+            "null": "",
+            "LORA": "LORA",
+            "M2M": "M2M"
+        }
+    }
+}

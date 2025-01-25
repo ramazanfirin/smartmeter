@@ -1,0 +1,109 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySensorLabel" data-translate="smartmeterApp.sensor.home.createOrEditLabel">Create or edit a Sensor</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.sensor.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.sensor.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.devEui" for="field_devEui">Dev Eui</label>
+            <input type="text" class="form-control" name="devEui" id="field_devEui"
+                    ng-model="vm.sensor.devEui"
+                    required/>
+            <div ng-show="editForm.devEui.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.devEui.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.appEui" for="field_appEui">App Eui</label>
+            <input type="text" class="form-control" name="appEui" id="field_appEui"
+                    ng-model="vm.sensor.appEui"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.appKey" for="field_appKey">App Key</label>
+            <input type="text" class="form-control" name="appKey" id="field_appKey"
+                    ng-model="vm.sensor.appKey"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.imei" for="field_imei">Imei</label>
+            <input type="text" class="form-control" name="imei" id="field_imei"
+                    ng-model="vm.sensor.imei"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.connectionType" for="field_connectionType">Connection Type</label>
+            <select class="form-control" name="connectionType" ng-model="vm.sensor.connectionType" id="field_connectionType">
+                <option value="LORA" data-translate="smartmeterApp.ConnectionType.LORA">LORA</option>
+                <option value="M2M" data-translate="smartmeterApp.ConnectionType.M2M">M2M</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.type" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="vm.sensor.type" id="field_type">
+                <option value="VIBRATION" data-translate="smartmeterApp.Type.VIBRATION">VIBRATION</option>
+                <option value="BUTTON" data-translate="smartmeterApp.Type.BUTTON">BUTTON</option>
+                <option value="WATER_METER" data-translate="smartmeterApp.Type.WATER_METER">WATER_METER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.lastSeenDate" for="field_lastSeenDate">Last Seen Date</label>
+                <div class="input-group">
+                    <input id="field_lastSeenDate" type="text" class="form-control" name="lastSeenDate" datetime-picker="{{dateformat}}" ng-model="vm.sensor.lastSeenDate" is-open="vm.datePickerOpenStatus.lastSeenDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastSeenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.lastMessage" for="field_lastMessage">Last Message</label>
+            <input type="text" class="form-control" name="lastMessage" id="field_lastMessage"
+                    ng-model="vm.sensor.lastMessage"
+                    />
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setLastImage($file, vm.sensor)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="smartmeterApp.sensor.lastImage" for="field_lastImage">Last Image</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.sensor.lastImageContentType + ';base64,' + vm.sensor.lastImage}}" style="max-height: 100px;" ng-if="vm.sensor.lastImage" alt="sensor image"/>
+                <div ng-if="vm.sensor.lastImage" class="help-block clearfix">
+                    <span class="pull-left">{{vm.sensor.lastImageContentType}}, {{vm.byteSize(vm.sensor.lastImage)}}</span>
+                    <button type="button" ng-click="vm.sensor.lastImage=null;vm.sensor.lastImageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setLastImage($file, vm.sensor)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="lastImage" id="field_lastImage"
+                    ng-model="vm.sensor.lastImage"
+                    />
+            <input type="hidden" class="form-control" name="lastImageContentType" id="field_lastImageContentType"
+                    ng-model="vm.sensor.lastImageContentType" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,81 @@
+<div>
+    <h2 data-translate="smartmeterApp.sensor.home.title">Sensors</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="sensor.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="smartmeterApp.sensor.home.createLabel">
+                        Create new Sensor
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="devEui"><span data-translate="smartmeterApp.sensor.devEui">Dev Eui</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="appEui"><span data-translate="smartmeterApp.sensor.appEui">App Eui</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="appKey"><span data-translate="smartmeterApp.sensor.appKey">App Key</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="imei"><span data-translate="smartmeterApp.sensor.imei">Imei</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="connectionType"><span data-translate="smartmeterApp.sensor.connectionType">Connection Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="type"><span data-translate="smartmeterApp.sensor.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastSeenDate"><span data-translate="smartmeterApp.sensor.lastSeenDate">Last Seen Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastMessage"><span data-translate="smartmeterApp.sensor.lastMessage">Last Message</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastImage"><span data-translate="smartmeterApp.sensor.lastImage">Last Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sensor in vm.sensors track by sensor.id">
+                    <td><a ui-sref="sensor-detail({id:sensor.id})">{{sensor.id}}</a></td>
+                    <td>{{sensor.devEui}}</td>
+                    <td>{{sensor.appEui}}</td>
+                    <td>{{sensor.appKey}}</td>
+                    <td>{{sensor.imei}}</td>
+                    <td data-translate="{{'smartmeterApp.ConnectionType.' + sensor.connectionType}}">{{sensor.connectionType}}</td>
+                    <td data-translate="{{'smartmeterApp.Type.' + sensor.type}}">{{sensor.type}}</td>
+                    <td>{{sensor.lastSeenDate | date:'medium'}}</td>
+                    <td>{{sensor.lastMessage}}</td>
+                    <td>
+                        <a ng-if="sensor.lastImage" ng-click="vm.openFile(sensor.lastImageContentType, sensor.lastImage)">
+                            <img data-ng-src="{{'data:' + sensor.lastImageContentType + ';base64,' + sensor.lastImage}}" style="max-height: 30px;" alt="sensor image"/>
+                        </a>
+                        <span ng-if="sensor.lastImage">{{sensor.lastImageContentType}}, {{vm.byteSize(sensor.lastImage)}}</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="sensor-detail({id:sensor.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sensor.edit({id:sensor.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sensor.delete({id:sensor.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

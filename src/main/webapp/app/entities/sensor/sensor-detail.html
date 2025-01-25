@@ -1,0 +1,60 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.sensor.detail.title">Sensor</span> {{vm.sensor.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.sensor.devEui">Dev Eui</span></dt>
+        <dd>
+            <span>{{vm.sensor.devEui}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.appEui">App Eui</span></dt>
+        <dd>
+            <span>{{vm.sensor.appEui}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.appKey">App Key</span></dt>
+        <dd>
+            <span>{{vm.sensor.appKey}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.imei">Imei</span></dt>
+        <dd>
+            <span>{{vm.sensor.imei}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.connectionType">Connection Type</span></dt>
+        <dd>
+            <span data-translate="{{'smartmeterApp.ConnectionType.' + vm.sensor.connectionType}}">{{vm.sensor.connectionType}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.type">Type</span></dt>
+        <dd>
+            <span data-translate="{{'smartmeterApp.Type.' + vm.sensor.type}}">{{vm.sensor.type}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.lastSeenDate">Last Seen Date</span></dt>
+        <dd>
+            <span>{{vm.sensor.lastSeenDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.lastMessage">Last Message</span></dt>
+        <dd>
+            <span>{{vm.sensor.lastMessage}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.sensor.lastImage">Last Image</span></dt>
+        <dd>
+            <div ng-if="vm.sensor.lastImage">
+                <a ng-click="vm.openFile(vm.sensor.lastImageContentType, vm.sensor.lastImage)">
+                    <img data-ng-src="{{'data:' + vm.sensor.lastImageContentType + ';base64,' + vm.sensor.lastImage}}" style="max-width: 100%;" alt="sensor image"/>
+                </a>
+                {{vm.sensor.lastImageContentType}}, {{vm.byteSize(vm.sensor.lastImage)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="sensor-detail.edit({id:vm.sensor.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

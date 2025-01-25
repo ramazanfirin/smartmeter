@@ -1,0 +1,10 @@
+{
+    "smartmeterApp": {
+        "Type" : {
+            "null": "",
+            "VIBRATION": "VIBRATION",
+            "BUTTON": "BUTTON",
+            "WATER_METER": "WATER_METER"
+        }
+    }
+}
