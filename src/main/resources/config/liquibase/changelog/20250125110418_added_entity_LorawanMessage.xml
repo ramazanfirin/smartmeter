@@ -22,11 +22,11 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="base_64_message" type="varchar(255)">
+            <column name="base_64_message" type="varchar(4000)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="hex_message" type="varchar(255)">
+            <column name="hex_message" type="varchar(4000)">
                 <constraints nullable="true" />
             </column>
 
@@ -46,6 +46,22 @@
                 <constraints nullable="true" />
             </column>
             <column name="image_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="battery_value" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sensor_value" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="f_port" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="image_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

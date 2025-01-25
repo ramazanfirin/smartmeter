@@ -64,6 +64,18 @@ public class LorawanMessageResourceIntTest {
     private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
+    private static final Float DEFAULT_BATTERY_VALUE = 1F;
+    private static final Float UPDATED_BATTERY_VALUE = 2F;
+
+    private static final Float DEFAULT_SENSOR_VALUE = 1F;
+    private static final Float UPDATED_SENSOR_VALUE = 2F;
+
+    private static final String DEFAULT_F_PORT = "AAAAAAAAAA";
+    private static final String UPDATED_F_PORT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_IMAGE_ID = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_ID = "BBBBBBBBBB";
+
     @Autowired
     private LorawanMessageRepository lorawanMessageRepository;
 
@@ -108,7 +120,11 @@ public class LorawanMessageResourceIntTest {
             .totalMessageCount(DEFAULT_TOTAL_MESSAGE_COUNT)
             .insertDate(DEFAULT_INSERT_DATE)
             .image(DEFAULT_IMAGE)
-            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
+            .batteryValue(DEFAULT_BATTERY_VALUE)
+            .sensorValue(DEFAULT_SENSOR_VALUE)
+            .fPort(DEFAULT_F_PORT)
+            .imageId(DEFAULT_IMAGE_ID);
         return lorawanMessage;
     }
 
@@ -139,6 +155,10 @@ public class LorawanMessageResourceIntTest {
         assertThat(testLorawanMessage.getInsertDate()).isEqualTo(DEFAULT_INSERT_DATE);
         assertThat(testLorawanMessage.getImage()).isEqualTo(DEFAULT_IMAGE);
         assertThat(testLorawanMessage.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
+        assertThat(testLorawanMessage.getBatteryValue()).isEqualTo(DEFAULT_BATTERY_VALUE);
+        assertThat(testLorawanMessage.getSensorValue()).isEqualTo(DEFAULT_SENSOR_VALUE);
+        assertThat(testLorawanMessage.getfPort()).isEqualTo(DEFAULT_F_PORT);
+        assertThat(testLorawanMessage.getImageId()).isEqualTo(DEFAULT_IMAGE_ID);
     }
 
     @Test
@@ -177,7 +197,11 @@ public class LorawanMessageResourceIntTest {
             .andExpect(jsonPath("$.[*].totalMessageCount").value(hasItem(DEFAULT_TOTAL_MESSAGE_COUNT.intValue())))
             .andExpect(jsonPath("$.[*].insertDate").value(hasItem(sameInstant(DEFAULT_INSERT_DATE))))
             .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
+            .andExpect(jsonPath("$.[*].batteryValue").value(hasItem(DEFAULT_BATTERY_VALUE.doubleValue())))
+            .andExpect(jsonPath("$.[*].sensorValue").value(hasItem(DEFAULT_SENSOR_VALUE.doubleValue())))
+            .andExpect(jsonPath("$.[*].fPort").value(hasItem(DEFAULT_F_PORT.toString())))
+            .andExpect(jsonPath("$.[*].imageId").value(hasItem(DEFAULT_IMAGE_ID.toString())));
     }
 
     @Test
@@ -197,7 +221,11 @@ public class LorawanMessageResourceIntTest {
             .andExpect(jsonPath("$.totalMessageCount").value(DEFAULT_TOTAL_MESSAGE_COUNT.intValue()))
             .andExpect(jsonPath("$.insertDate").value(sameInstant(DEFAULT_INSERT_DATE)))
             .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
+            .andExpect(jsonPath("$.batteryValue").value(DEFAULT_BATTERY_VALUE.doubleValue()))
+            .andExpect(jsonPath("$.sensorValue").value(DEFAULT_SENSOR_VALUE.doubleValue()))
+            .andExpect(jsonPath("$.fPort").value(DEFAULT_F_PORT.toString()))
+            .andExpect(jsonPath("$.imageId").value(DEFAULT_IMAGE_ID.toString()));
     }
 
     @Test
@@ -226,7 +254,11 @@ public class LorawanMessageResourceIntTest {
             .totalMessageCount(UPDATED_TOTAL_MESSAGE_COUNT)
             .insertDate(UPDATED_INSERT_DATE)
             .image(UPDATED_IMAGE)
-            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .batteryValue(UPDATED_BATTERY_VALUE)
+            .sensorValue(UPDATED_SENSOR_VALUE)
+            .fPort(UPDATED_F_PORT)
+            .imageId(UPDATED_IMAGE_ID);
 
         restLorawanMessageMockMvc.perform(put("/api/lorawan-messages")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -244,6 +276,10 @@ public class LorawanMessageResourceIntTest {
         assertThat(testLorawanMessage.getInsertDate()).isEqualTo(UPDATED_INSERT_DATE);
         assertThat(testLorawanMessage.getImage()).isEqualTo(UPDATED_IMAGE);
         assertThat(testLorawanMessage.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
+        assertThat(testLorawanMessage.getBatteryValue()).isEqualTo(UPDATED_BATTERY_VALUE);
+        assertThat(testLorawanMessage.getSensorValue()).isEqualTo(UPDATED_SENSOR_VALUE);
+        assertThat(testLorawanMessage.getfPort()).isEqualTo(UPDATED_F_PORT);
+        assertThat(testLorawanMessage.getImageId()).isEqualTo(UPDATED_IMAGE_ID);
     }
 
     @Test

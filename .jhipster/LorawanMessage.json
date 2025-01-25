@@ -11,11 +11,19 @@
     "fields": [
         {
             "fieldName": "base64Message",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4000
         },
         {
             "fieldName": "hexMessage",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4000
         },
         {
             "fieldName": "index",
@@ -33,6 +41,22 @@
             "fieldName": "image",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "batteryValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "sensorValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "fPort",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imageId",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20250125110418",

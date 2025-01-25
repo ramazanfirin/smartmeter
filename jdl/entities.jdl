@@ -6,7 +6,7 @@ entity Sensor{
 	connectionType ConnectionType
     type Type
     lastSeenDate ZonedDateTime
-    lastMessage String
+    lastMessage String  maxlength(4000)
     lastImage ImageBlob 
 }
 
@@ -22,14 +22,17 @@ enum Type{
 }
 
 entity LorawanMessage{
-	base64Message String
-	hexMessage String 	
+	base64Message String maxlength(4000)
+	hexMessage String maxlength(4000)
 	index Long
 	totalMessageCount Long
 	insertDate ZonedDateTime
 	image ImageBlob 
 	batteryValue Float
 	sensorValue Float
+	fPort String
+    fCnt String
+	imageId String
 }   
 
 

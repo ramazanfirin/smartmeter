@@ -131,6 +131,10 @@
                                 insertDate: null,
                                 image: null,
                                 imageContentType: null,
+                                batteryValue: null,
+                                sensorValue: null,
+                                fPort: null,
+                                imageId: null,
                                 id: null
                             };
                         }

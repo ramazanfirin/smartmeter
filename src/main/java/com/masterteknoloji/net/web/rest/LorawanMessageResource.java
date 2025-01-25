@@ -2,9 +2,6 @@ package com.masterteknoloji.net.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,16 +22,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterteknoloji.net.domain.LorawanMessage;
-import com.masterteknoloji.net.domain.Sensor;
-import com.masterteknoloji.net.domain.enumeration.Type;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
 import com.masterteknoloji.net.repository.SensorRepository;
+import com.masterteknoloji.net.service.LorawanMessageService;
 import com.masterteknoloji.net.web.rest.errors.BadRequestAlertException;
 import com.masterteknoloji.net.web.rest.util.HeaderUtil;
 import com.masterteknoloji.net.web.rest.util.PaginationUtil;
+import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 
 import io.github.jhipster.web.util.ResponseUtil;
 
@@ -54,10 +50,13 @@ public class LorawanMessageResource {
     private final SensorRepository sensorRepository;
     
     private ObjectMapper objectMapper= new ObjectMapper();
+    
+    private LorawanMessageService lorawanMessageService;
 
-    public LorawanMessageResource(LorawanMessageRepository lorawanMessageRepository,SensorRepository sensorRepository) {
+    public LorawanMessageResource(LorawanMessageRepository lorawanMessageRepository,SensorRepository sensorRepository,LorawanMessageService lorawanMessageService) {
         this.lorawanMessageRepository = lorawanMessageRepository;
         this.sensorRepository = sensorRepository;
+        this.lorawanMessageService = lorawanMessageService;
     }
 
     /**
@@ -149,56 +148,15 @@ public class LorawanMessageResource {
     @Timed
     public void receive(@RequestBody String String) throws Exception {
         
-    	JsonNode jsonObject = objectMapper.readTree(String);
-        Sensor sensor = findSensor(jsonObject);
+    	DeviceMessageVM deviceMessageVM = lorawanMessageService.getLoraMessage(String);
+    	if(deviceMessageVM.getData() == null)
+        	return;
         
-        LorawanMessage lorawanMessage = new LorawanMessage();
+       	LorawanMessage lorawanMessage = lorawanMessageService.prepareLorawanMessage(deviceMessageVM);
+       	lorawanMessageService.save(lorawanMessage);
         
-        String base64Message = jsonObject.get("data").asText();
-        String hexMessage = base64ToHex(base64Message);
-        lorawanMessage.setBase64Message(base64Message);
-        lorawanMessage.setHexMessage(hexMessage);
-        lorawanMessage.setInsertDate(ZonedDateTime.now());
-        lorawanMessage.sensor(sensor);
-        parseSensorSpecificData(sensor, lorawanMessage, jsonObject);
-        
-        lorawanMessageRepository.save(lorawanMessage);
-        sensor.setLastMessage(hexMessage);
-        sensor.setLastSeenDate(ZonedDateTime.now());
-        sensorRepository.save(sensor);
+       	lorawanMessageService.postProcess(lorawanMessage);
        
     }
     
-    public Sensor findSensor(JsonNode jsonObject) {
-    	String devEui = getDeviceEui(jsonObject);
-    	Sensor sensor = sensorRepository.findOneByDevEui(devEui.toUpperCase());
-		return sensor;
-    	
-    }
-    
-    public String getDeviceEui(JsonNode jsonObject) {
-    	
-    	JsonNode deviceInfo = jsonObject.get("deviceInfo");
-    	JsonNode devEui = deviceInfo.get("devEui");
-    	
-    	return devEui.asText();
-    }
-    
-    public String base64ToHex(String base64Value) {
-
-        byte[] decodedBytes = Base64.getDecoder().decode(base64Value);
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : decodedBytes) {
-            hexString.append(String.format("%02x", b));
-        }
-
-        return hexString.toString();
-    }
-    
-    public void parseSensorSpecificData( Sensor sensor,LorawanMessage lorawanMessage,JsonNode jsonObject) {
-    	if(sensor.getType().equals(Type.WATER_METER)) {
-    		JsonNode object = jsonObject.get("object");
-    		lorawanMessage.set
-    	}
-    }
 }

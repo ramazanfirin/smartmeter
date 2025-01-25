@@ -21,6 +21,10 @@
             "totalMessageCount": "Total Message Count",
             "insertDate": "Insert Date",
             "image": "Image",
+            "batteryValue": "Battery Value",
+            "sensorValue": "Sensor Value",
+            "fPort": "F Port",
+            "imageId": "Image Id",
             "sensor": "Sensor"
         }
     }

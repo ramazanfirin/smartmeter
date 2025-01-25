@@ -25,6 +25,10 @@
                     <th jh-sort-by="totalMessageCount"><span data-translate="smartmeterApp.lorawanMessage.totalMessageCount">Total Message Count</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="insertDate"><span data-translate="smartmeterApp.lorawanMessage.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="image"><span data-translate="smartmeterApp.lorawanMessage.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.lorawanMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sensorValue"><span data-translate="smartmeterApp.lorawanMessage.sensorValue">Sensor Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fPort"><span data-translate="smartmeterApp.lorawanMessage.fPort">F Port</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="imageId"><span data-translate="smartmeterApp.lorawanMessage.imageId">Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.lorawanMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -43,6 +47,10 @@
                         </a>
                         <span ng-if="lorawanMessage.image">{{lorawanMessage.imageContentType}}, {{vm.byteSize(lorawanMessage.image)}}</span>
                     </td>
+                    <td>{{lorawanMessage.batteryValue}}</td>
+                    <td>{{lorawanMessage.sensorValue}}</td>
+                    <td>{{lorawanMessage.fPort}}</td>
+                    <td>{{lorawanMessage.imageId}}</td>
                     <td>
                         <a ui-sref="sensor-detail({id:lorawanMessage.sensor.id})">{{lorawanMessage.sensor.id}}</a>
                     </td>

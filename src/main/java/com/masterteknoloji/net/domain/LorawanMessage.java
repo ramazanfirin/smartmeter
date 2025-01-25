@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -23,10 +24,12 @@ public class LorawanMessage implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "base_64_message")
+    @Size(max = 4000)
+    @Column(name = "base_64_message", length = 4000)
     private String base64Message;
 
-    @Column(name = "hex_message")
+    @Size(max = 4000)
+    @Column(name = "hex_message", length = 4000)
     private String hexMessage;
 
     @Column(name = "jhi_index")
@@ -44,6 +47,18 @@ public class LorawanMessage implements Serializable {
 
     @Column(name = "image_content_type")
     private String imageContentType;
+
+    @Column(name = "battery_value")
+    private Float batteryValue;
+
+    @Column(name = "sensor_value")
+    private Float sensorValue;
+
+    @Column(name = "f_port")
+    private String fPort;
+
+    @Column(name = "image_id")
+    private String imageId;
 
     @ManyToOne
     private Sensor sensor;
@@ -148,6 +163,58 @@ public class LorawanMessage implements Serializable {
         this.imageContentType = imageContentType;
     }
 
+    public Float getBatteryValue() {
+        return batteryValue;
+    }
+
+    public LorawanMessage batteryValue(Float batteryValue) {
+        this.batteryValue = batteryValue;
+        return this;
+    }
+
+    public void setBatteryValue(Float batteryValue) {
+        this.batteryValue = batteryValue;
+    }
+
+    public Float getSensorValue() {
+        return sensorValue;
+    }
+
+    public LorawanMessage sensorValue(Float sensorValue) {
+        this.sensorValue = sensorValue;
+        return this;
+    }
+
+    public void setSensorValue(Float sensorValue) {
+        this.sensorValue = sensorValue;
+    }
+
+    public String getfPort() {
+        return fPort;
+    }
+
+    public LorawanMessage fPort(String fPort) {
+        this.fPort = fPort;
+        return this;
+    }
+
+    public void setfPort(String fPort) {
+        this.fPort = fPort;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public LorawanMessage imageId(String imageId) {
+        this.imageId = imageId;
+        return this;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
     public Sensor getSensor() {
         return sensor;
     }
@@ -193,6 +260,10 @@ public class LorawanMessage implements Serializable {
             ", insertDate='" + getInsertDate() + "'" +
             ", image='" + getImage() + "'" +
             ", imageContentType='" + getImageContentType() + "'" +
+            ", batteryValue=" + getBatteryValue() +
+            ", sensorValue=" + getSensorValue() +
+            ", fPort='" + getfPort() + "'" +
+            ", imageId='" + getImageId() + "'" +
             "}";
     }
 }
