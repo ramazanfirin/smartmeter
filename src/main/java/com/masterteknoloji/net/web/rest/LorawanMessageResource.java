@@ -198,6 +198,7 @@ public class LorawanMessageResource {
     public void parseSensorSpecificData( Sensor sensor,LorawanMessage lorawanMessage,JsonNode jsonObject) {
     	if(sensor.getType().equals(Type.WATER_METER)) {
     		JsonNode object = jsonObject.get("object");
+    		lorawanMessage.set
     	}
     }
 }
