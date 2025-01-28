@@ -9,6 +9,6 @@ public interface LoraDeviceService {
 	void parseSensorSpecificData(LorawanMessage lorawanMessage,DeviceMessageVM deviceMessageVM) throws Exception ;
 	void process(DeviceMessageVM deviceMessageVM) throws Exception ;
 	void postProcess(LorawanMessage lorawanMessage) throws Exception ;
-	void sendData(LorawanMessage lorawanMessage) throws Exception ;
+	void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage) throws Exception ;
 
 }

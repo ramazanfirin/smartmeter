@@ -6,20 +6,28 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.masterteknoloji.net.config.ApplicationProperties;
 import com.masterteknoloji.net.domain.LorawanMessage;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
 import com.masterteknoloji.net.repository.SensorRepository;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
+import com.masterteknoloji.net.web.rest.vm.thingsboard.SmartMeterVM;
 
 @Service
 public class WaterMeterService extends BaseDeviceService implements LoraDeviceService{
 	
 	private final LorawanMessageRepository lorawanMessageRepository;
 	
-	public WaterMeterService(LorawanMessageRepository lorawanMessageRepository, SensorRepository sensorRepository) {
-		super(lorawanMessageRepository, sensorRepository);
+	private final ApplicationProperties applicationProperties;
+	
+	private ObjectMapper objectMapper = new ObjectMapper();
+	
+	public WaterMeterService(LorawanMessageRepository lorawanMessageRepository, SensorRepository sensorRepository,ApplicationProperties applicationProperties) {
+		super(lorawanMessageRepository, sensorRepository,applicationProperties);
 		this.lorawanMessageRepository = lorawanMessageRepository;
+		this.applicationProperties = applicationProperties;
 	}
 
 	
@@ -106,8 +114,15 @@ public class WaterMeterService extends BaseDeviceService implements LoraDeviceSe
 	}
 
 	@Override
-	public void sendData(LorawanMessage lorawanMessage) {
-		// TODO Auto-generated method stub
+	public void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage) throws Exception {
 		
+		String deviceToken = "46zdi8vwnloavhrnot77";
+		
+		Double value = deviceMessageVM.getObjectNode().get("Reading").asDouble();
+		SmartMeterVM smartMeterVM = new SmartMeterVM(value.floatValue());
+		String json = objectMapper.writeValueAsString(smartMeterVM);
+		
+        String url = applicationProperties.getThingsBoardUrl()+deviceToken+"/telemetry ";
+		super.sendData(json, url);
 	}
 }

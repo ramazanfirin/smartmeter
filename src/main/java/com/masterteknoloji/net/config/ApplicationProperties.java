@@ -10,5 +10,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
+	
+	private String thingsBoardUrl;
+
+	public String getThingsBoardUrl() {
+		return thingsBoardUrl;
+	}
+
+	public void setThingsBoardUrl(String thingsBoardUrl) {
+		this.thingsBoardUrl = thingsBoardUrl;
+	}
 
 }
