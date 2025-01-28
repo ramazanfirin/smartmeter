@@ -1,4 +1,4 @@
-package com.masterteknoloji.net.service;
+package com.masterteknoloji.net.service.device;
 
 import java.util.Iterator;
 import java.util.List;
@@ -8,18 +8,21 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.masterteknoloji.net.domain.LorawanMessage;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
+import com.masterteknoloji.net.repository.SensorRepository;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 
 @Service
-public class WaterMeterService {
+public class WaterMeterService extends BaseDeviceService implements LoraDeviceService{
 	
 	private final LorawanMessageRepository lorawanMessageRepository;
-
-	public WaterMeterService(LorawanMessageRepository lorawanMessageRepository) {
-		super();
+	
+	public WaterMeterService(LorawanMessageRepository lorawanMessageRepository, SensorRepository sensorRepository) {
+		super(lorawanMessageRepository, sensorRepository);
 		this.lorawanMessageRepository = lorawanMessageRepository;
 	}
+
+	
 
 	public void parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM) throws Exception {
 		JsonNode object = deviceMessageVM.getJsonNode().get("object");
@@ -55,13 +58,6 @@ public class WaterMeterService {
 
 	}
 	
-	public void postProcess(LorawanMessage lorawanMessage) {
-		if(lorawanMessage.getfPort().equals("3")) {
-        	if(lorawanMessage.getIndex() == lorawanMessage.getTotalMessageCount())
-        		combineAllImages(lorawanMessage);
-        }
-	}
-	
 	 private void combineAllImages(LorawanMessage lorawanMessage) {
 		    Long fcntEnd = lorawanMessage.getfCnt();
 		    Long fcntStart = fcntEnd-lorawanMessage.getTotalMessageCount();
@@ -92,4 +88,26 @@ public class WaterMeterService {
 		    }
 		    return data;
 		}
+
+	@Override
+	public void process(DeviceMessageVM deviceMessageVM) throws Exception {
+		super.process(deviceMessageVM);
+		
+	}
+
+	@Override
+	public void postProcess(LorawanMessage lorawanMessage) {
+		super.postProcess(lorawanMessage);
+		if(lorawanMessage.getfPort().equals("3")) {
+        	if(lorawanMessage.getIndex() == lorawanMessage.getTotalMessageCount())
+        		combineAllImages(lorawanMessage);
+        }
+		
+	}
+
+	@Override
+	public void sendData(LorawanMessage lorawanMessage) {
+		// TODO Auto-generated method stub
+		
+	}
 }

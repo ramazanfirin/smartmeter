@@ -2,6 +2,7 @@ package com.masterteknoloji.net.service;
 
 import java.time.ZonedDateTime;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,6 +12,9 @@ import com.masterteknoloji.net.domain.Sensor;
 import com.masterteknoloji.net.domain.enumeration.Type;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
 import com.masterteknoloji.net.repository.SensorRepository;
+import com.masterteknoloji.net.service.device.CurrentMeterService;
+import com.masterteknoloji.net.service.device.VibrationSensorService;
+import com.masterteknoloji.net.service.device.WaterMeterService;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 
@@ -23,23 +27,63 @@ public class LorawanMessageService {
     
     private final WaterMeterService waterMeterService;
     
+    private final VibrationSensorService vibrationSensorService;
+    
+    private final CurrentMeterService currentMeterService;
+    
     private final LorawanMessageRepository lorawanMessageRepository;
 	
-	public LorawanMessageService(SensorRepository sensorRepository,WaterMeterService waterMeterService,LorawanMessageRepository lorawanMessageRepository) {
+	public LorawanMessageService(SensorRepository sensorRepository,WaterMeterService waterMeterService,
+			LorawanMessageRepository lorawanMessageRepository,
+			VibrationSensorService vibrationSensorService,
+			CurrentMeterService currentMeterService) {
 		super();
 		this.sensorRepository = sensorRepository;
 		this.waterMeterService = waterMeterService;
 		this.lorawanMessageRepository = lorawanMessageRepository;
+		this.vibrationSensorService = vibrationSensorService;
+		this.currentMeterService = currentMeterService;
 
 	}
+	
+	public void process(String message) throws Exception {
+		DeviceMessageVM deviceMessageVM = convertToDeviceMessage(message);
+		
+		if(deviceMessageVM.getSensor()==null) {
+    		System.out.println("sensor bulunamadı");
+    		return;
+    		
+    	}
+		
+		if(deviceMessageVM.getData()==null) {
+    		System.out.println("Data bulunamadı");
+    		return;
+    		
+    	}
+		
+		if(deviceMessageVM.getSensor().getType() == Type.WATER_METER)
+			waterMeterService.process(deviceMessageVM);
+		else if(deviceMessageVM.getSensor().getType() == Type.VIBRATION) 	
+			vibrationSensorService.process(deviceMessageVM);
+		else if(deviceMessageVM.getSensor().getType() == Type.BUTTON) 	
+			currentMeterService.process(deviceMessageVM);
 
-	public DeviceMessageVM getLoraMessage(String message) throws Exception {
+		
+	}
+
+	public DeviceMessageVM convertToDeviceMessage(String message) throws Exception {
 		
 		DeviceMessageVM loraMessageVM = new DeviceMessageVM();
 		JsonNode jsonObject = objectMapper.readTree(message);
 		
 		loraMessageVM.setJsonNode(jsonObject);
-		loraMessageVM.setSensor(findSensor(jsonObject));
+		
+		JsonNode deviceInfo = jsonObject.get("deviceInfo");
+    	JsonNode devEui = deviceInfo.get("devEui");
+    	String eui = devEui.asText();
+    	Sensor sensor = sensorRepository.findOneByDevEui(eui.toUpperCase());
+		
+		loraMessageVM.setSensor(sensor);
 		
 		JsonNode dataNode = jsonObject.get("data");
 		if(dataNode != null) {
@@ -48,6 +92,12 @@ public class LorawanMessageService {
 			loraMessageVM.setHexMessage(LoraMessageUtil.base64ToHex(data));
 			loraMessageVM.setData(data);
 		}
+		
+		JsonNode objectNode = jsonObject.get("object");
+		if(objectNode != null) {
+			loraMessageVM.setObjectNode(objectNode);
+		}
+		
 		if(jsonObject.get("fPort") != null)
 			loraMessageVM.setfPort(jsonObject.get("fPort").asText());
 		if(jsonObject.get("fCnt") != null)
@@ -56,56 +106,6 @@ public class LorawanMessageService {
 		return loraMessageVM;
 	}
 	
-	public Sensor findSensor(JsonNode jsonObject) {
-    	String devEui = getDeviceEui(jsonObject);
-    	Sensor sensor = sensorRepository.findOneByDevEui(devEui.toUpperCase());
-		return sensor;
-    	
-    }
-	
-	public String getDeviceEui(JsonNode jsonObject) {
-    	
-    	JsonNode deviceInfo = jsonObject.get("deviceInfo");
-    	JsonNode devEui = deviceInfo.get("devEui");
-    	
-    	return devEui.asText();
-    }
-	
-	public LorawanMessage prepareLorawanMessage(DeviceMessageVM deviceMessageVM) throws Exception {
-		LorawanMessage lorawanMessage = new LorawanMessage();
-		lorawanMessage.setBase64Message(deviceMessageVM.getBase64Message());
-       	lorawanMessage.setHexMessage(deviceMessageVM.getHexMessage());
-        
-        lorawanMessage.setInsertDate(ZonedDateTime.now());
-        lorawanMessage.sensor(deviceMessageVM.getSensor());
-        lorawanMessage.setfPort(deviceMessageVM.getfPort());
-        lorawanMessage.setfCnt(deviceMessageVM.getfCnt());
-        
-        parseSensorSpecificData(lorawanMessage, deviceMessageVM);
-        
-        return lorawanMessage;
-	}
-    
-	public void parseSensorSpecificData(LorawanMessage lorawanMessage,DeviceMessageVM deviceMessageVM) throws Exception {
-		if(deviceMessageVM.getSensor().getType().equals(Type.WATER_METER)) {
-    		waterMeterService.parseSensorSpecificData(lorawanMessage, deviceMessageVM);
-    	}
-	}
-	
-	public void save(LorawanMessage lorawanMessage) {
-		lorawanMessageRepository.save(lorawanMessage);
-		
-		Sensor sensor = lorawanMessage.getSensor();
-        sensor.setLastMessage(lorawanMessage.getHexMessage());
-        sensor.setLastSeenDate(ZonedDateTime.now());
-        
-        sensorRepository.save(sensor);
-	}
-	
-	public void postProcess(LorawanMessage lorawanMessage) {
-		if(lorawanMessage.getSensor().getType().equals(Type.WATER_METER)) {
-    		waterMeterService.postProcess(lorawanMessage);
-    	}
-	}
 
+	
 }

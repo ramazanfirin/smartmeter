@@ -28,8 +28,9 @@
         <dd>
             <div ng-if="vm.lorawanMessage.image">
                 <a ng-click="vm.openFile(vm.lorawanMessage.imageContentType, vm.lorawanMessage.image)">
-                    <img data-ng-src="{{'data:' + vm.lorawanMessage.imageContentType + ';base64,' + vm.lorawanMessage.image}}"  alt="lorawanMessage image"/>
-                </a>
+                    <img data-ng-src="{{'data:' + vm.lorawanMessage.imageContentType + ';base64,' + vm.lorawanMessage.image}}"  
+                     alt="lorawanMessage image"/>
+                </a> 
                 {{vm.lorawanMessage.imageContentType}}, {{vm.byteSize(vm.lorawanMessage.image)}}
             </div>
         </dd>

@@ -12,7 +12,7 @@ public class DeviceMessageVM {
 	String base64Message;
 	String hexMessage;
 	JsonNode jsonNode;
-	
+	JsonNode objectNode;
 	
 	public Sensor getSensor() {
 		return sensor;
@@ -55,6 +55,12 @@ public class DeviceMessageVM {
 	}
 	public void setfCnt(Long fCnt ) {
 		this.fCnt = fCnt;
+	}
+	public JsonNode getObjectNode() {
+		return objectNode;
+	}
+	public void setObjectNode(JsonNode objectNode) {
+		this.objectNode = objectNode;
 	}
 
 	

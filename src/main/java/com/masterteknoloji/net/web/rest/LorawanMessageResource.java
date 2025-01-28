@@ -152,7 +152,7 @@ public class LorawanMessageResource {
     @Timed
     public ResponseEntity<Void> receive(@RequestBody String String) throws Exception {
         
-    	DeviceMessageVM deviceMessageVM = lorawanMessageService.getLoraMessage(String);
+    	DeviceMessageVM deviceMessageVM = lorawanMessageService.convertToDeviceMessage(String);
     	System.out.println(deviceMessageVM.getfPort()+","+deviceMessageVM.getfCnt()+","+deviceMessageVM.getHexMessage());
        	
     	if(deviceMessageVM.getData() == null || deviceMessageVM.getSensor()==null) {
@@ -160,10 +160,8 @@ public class LorawanMessageResource {
     		return ResponseEntity.ok().build();
     		
     	}
-    	LorawanMessage lorawanMessage = lorawanMessageService.prepareLorawanMessage(deviceMessageVM);
-       	lorawanMessageService.save(lorawanMessage);
-        
-       	lorawanMessageService.postProcess(lorawanMessage);
+    	lorawanMessageService.process(String);
+      
        	return ResponseEntity.ok().build();
     }
     
