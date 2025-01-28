@@ -57,6 +57,9 @@ public class LorawanMessage implements Serializable {
     @Column(name = "f_port")
     private String fPort;
 
+    @Column(name = "f_cnt")
+    private Long fCnt;
+
     @Column(name = "image_id")
     private String imageId;
 
@@ -202,6 +205,19 @@ public class LorawanMessage implements Serializable {
         this.fPort = fPort;
     }
 
+    public Long getfCnt() {
+        return fCnt;
+    }
+
+    public LorawanMessage fCnt(Long fCnt) {
+        this.fCnt = fCnt;
+        return this;
+    }
+
+    public void setfCnt(Long fCnt) {
+        this.fCnt = fCnt;
+    }
+
     public String getImageId() {
         return imageId;
     }
@@ -263,6 +279,7 @@ public class LorawanMessage implements Serializable {
             ", batteryValue=" + getBatteryValue() +
             ", sensorValue=" + getSensorValue() +
             ", fPort='" + getfPort() + "'" +
+            ", fCnt=" + getfCnt() +
             ", imageId='" + getImageId() + "'" +
             "}";
     }

@@ -18,7 +18,7 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface LorawanMessageRepository extends JpaRepository<LorawanMessage, Long> {
 
-	@Query("select lorawanMessage from LorawanMessage lorawanMessage where lorawanMessage.sendor.id = :sensorId and "
-			+ "lorawanMessage.fcnt>=:startFcnt and lorawanMessage.fcnt <:endFcnt order by lorawanMessage.fcnt")
-	List<LorawanMessage> findByFcnt(@Param("sensorId") String sensorId,@Param("startFcnt") String startFcnt,@Param("endFcnt") String endFcnt);
+	@Query("select lorawanMessage from LorawanMessage lorawanMessage where lorawanMessage.fPort='3' and lorawanMessage.sensor.id = :sensorId and "
+			+ "lorawanMessage.fCnt>=:startFcnt and lorawanMessage.fCnt <:endFcnt order by lorawanMessage.fCnt")
+	List<LorawanMessage> findByFcnt(@Param("sensorId") Long sensorId,@Param("startFcnt") Long startFcnt,@Param("endFcnt") Long endFcnt);
 }

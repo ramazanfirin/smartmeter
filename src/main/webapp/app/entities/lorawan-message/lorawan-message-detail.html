@@ -28,7 +28,7 @@
         <dd>
             <div ng-if="vm.lorawanMessage.image">
                 <a ng-click="vm.openFile(vm.lorawanMessage.imageContentType, vm.lorawanMessage.image)">
-                    <img data-ng-src="{{'data:' + vm.lorawanMessage.imageContentType + ';base64,' + vm.lorawanMessage.image}}" style="max-width: 100%;" alt="lorawanMessage image"/>
+                    <img data-ng-src="{{'data:' + vm.lorawanMessage.imageContentType + ';base64,' + vm.lorawanMessage.image}}"  alt="lorawanMessage image"/>
                 </a>
                 {{vm.lorawanMessage.imageContentType}}, {{vm.byteSize(vm.lorawanMessage.image)}}
             </div>
@@ -44,6 +44,10 @@
         <dt><span data-translate="smartmeterApp.lorawanMessage.fPort">F Port</span></dt>
         <dd>
             <span>{{vm.lorawanMessage.fPort}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.lorawanMessage.fCnt">F Cnt</span></dt>
+        <dd>
+            <span>{{vm.lorawanMessage.fCnt}}</span>
         </dd>
         <dt><span data-translate="smartmeterApp.lorawanMessage.imageId">Image Id</span></dt>
         <dd>

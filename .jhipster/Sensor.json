@@ -37,7 +37,11 @@
         },
         {
             "fieldName": "lastMessage",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4000
         },
         {
             "fieldName": "lastImage",

@@ -55,6 +55,10 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "fCnt",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "imageId",
             "fieldType": "String"
         }

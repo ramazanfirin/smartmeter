@@ -73,6 +73,9 @@ public class LorawanMessageResourceIntTest {
     private static final String DEFAULT_F_PORT = "AAAAAAAAAA";
     private static final String UPDATED_F_PORT = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_F_CNT = 1L;
+    private static final Long UPDATED_F_CNT = 2L;
+
     private static final String DEFAULT_IMAGE_ID = "AAAAAAAAAA";
     private static final String UPDATED_IMAGE_ID = "BBBBBBBBBB";
 
@@ -124,6 +127,7 @@ public class LorawanMessageResourceIntTest {
             .batteryValue(DEFAULT_BATTERY_VALUE)
             .sensorValue(DEFAULT_SENSOR_VALUE)
             .fPort(DEFAULT_F_PORT)
+            .fCnt(DEFAULT_F_CNT)
             .imageId(DEFAULT_IMAGE_ID);
         return lorawanMessage;
     }
@@ -158,6 +162,7 @@ public class LorawanMessageResourceIntTest {
         assertThat(testLorawanMessage.getBatteryValue()).isEqualTo(DEFAULT_BATTERY_VALUE);
         assertThat(testLorawanMessage.getSensorValue()).isEqualTo(DEFAULT_SENSOR_VALUE);
         assertThat(testLorawanMessage.getfPort()).isEqualTo(DEFAULT_F_PORT);
+        assertThat(testLorawanMessage.getfCnt()).isEqualTo(DEFAULT_F_CNT);
         assertThat(testLorawanMessage.getImageId()).isEqualTo(DEFAULT_IMAGE_ID);
     }
 
@@ -201,6 +206,7 @@ public class LorawanMessageResourceIntTest {
             .andExpect(jsonPath("$.[*].batteryValue").value(hasItem(DEFAULT_BATTERY_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].sensorValue").value(hasItem(DEFAULT_SENSOR_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].fPort").value(hasItem(DEFAULT_F_PORT.toString())))
+            .andExpect(jsonPath("$.[*].fCnt").value(hasItem(DEFAULT_F_CNT.intValue())))
             .andExpect(jsonPath("$.[*].imageId").value(hasItem(DEFAULT_IMAGE_ID.toString())));
     }
 
@@ -225,6 +231,7 @@ public class LorawanMessageResourceIntTest {
             .andExpect(jsonPath("$.batteryValue").value(DEFAULT_BATTERY_VALUE.doubleValue()))
             .andExpect(jsonPath("$.sensorValue").value(DEFAULT_SENSOR_VALUE.doubleValue()))
             .andExpect(jsonPath("$.fPort").value(DEFAULT_F_PORT.toString()))
+            .andExpect(jsonPath("$.fCnt").value(DEFAULT_F_CNT.intValue()))
             .andExpect(jsonPath("$.imageId").value(DEFAULT_IMAGE_ID.toString()));
     }
 
@@ -258,6 +265,7 @@ public class LorawanMessageResourceIntTest {
             .batteryValue(UPDATED_BATTERY_VALUE)
             .sensorValue(UPDATED_SENSOR_VALUE)
             .fPort(UPDATED_F_PORT)
+            .fCnt(UPDATED_F_CNT)
             .imageId(UPDATED_IMAGE_ID);
 
         restLorawanMessageMockMvc.perform(put("/api/lorawan-messages")
@@ -279,6 +287,7 @@ public class LorawanMessageResourceIntTest {
         assertThat(testLorawanMessage.getBatteryValue()).isEqualTo(UPDATED_BATTERY_VALUE);
         assertThat(testLorawanMessage.getSensorValue()).isEqualTo(UPDATED_SENSOR_VALUE);
         assertThat(testLorawanMessage.getfPort()).isEqualTo(UPDATED_F_PORT);
+        assertThat(testLorawanMessage.getfCnt()).isEqualTo(UPDATED_F_CNT);
         assertThat(testLorawanMessage.getImageId()).isEqualTo(UPDATED_IMAGE_ID);
     }
 

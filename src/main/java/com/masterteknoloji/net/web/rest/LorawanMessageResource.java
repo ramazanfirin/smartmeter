@@ -33,6 +33,7 @@ import com.masterteknoloji.net.web.rest.util.PaginationUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 
 import io.github.jhipster.web.util.ResponseUtil;
+import liquibase.pro.packaged.de;
 
 /**
  * REST controller for managing LorawanMessage.
@@ -57,6 +58,9 @@ public class LorawanMessageResource {
         this.lorawanMessageRepository = lorawanMessageRepository;
         this.sensorRepository = sensorRepository;
         this.lorawanMessageService = lorawanMessageService;
+        
+		
+		this.lorawanMessageRepository.deleteAll();
     }
 
     /**
@@ -146,17 +150,21 @@ public class LorawanMessageResource {
     
     @PostMapping("/lorawan-messages/receive")
     @Timed
-    public void receive(@RequestBody String String) throws Exception {
+    public ResponseEntity<Void> receive(@RequestBody String String) throws Exception {
         
     	DeviceMessageVM deviceMessageVM = lorawanMessageService.getLoraMessage(String);
-    	if(deviceMessageVM.getData() == null)
-        	return;
-        
-       	LorawanMessage lorawanMessage = lorawanMessageService.prepareLorawanMessage(deviceMessageVM);
+    	System.out.println(deviceMessageVM.getfPort()+","+deviceMessageVM.getfCnt()+","+deviceMessageVM.getHexMessage());
+       	
+    	if(deviceMessageVM.getData() == null || deviceMessageVM.getSensor()==null) {
+    		System.out.println("sensor bulunamadı");
+    		return ResponseEntity.ok().build();
+    		
+    	}
+    	LorawanMessage lorawanMessage = lorawanMessageService.prepareLorawanMessage(deviceMessageVM);
        	lorawanMessageService.save(lorawanMessage);
         
        	lorawanMessageService.postProcess(lorawanMessage);
-       
+       	return ResponseEntity.ok().build();
     }
     
 }

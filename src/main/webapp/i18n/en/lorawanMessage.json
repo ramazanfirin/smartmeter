@@ -24,6 +24,7 @@
             "batteryValue": "Battery Value",
             "sensorValue": "Sensor Value",
             "fPort": "F Port",
+            "fCnt": "F Cnt",
             "imageId": "Image Id",
             "sensor": "Sensor"
         }

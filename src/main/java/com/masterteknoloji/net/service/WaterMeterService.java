@@ -48,7 +48,7 @@ public class WaterMeterService {
 			lorawanMessage.setImageId(imageId);
 
 			String imageData = LoraMessageUtil.removeFirst8Chars(hexMessage);
-
+			lorawanMessage.setHexMessage(imageData);
 			lorawanMessage.setImage(imageData.getBytes());
 
 		}
@@ -57,23 +57,39 @@ public class WaterMeterService {
 	
 	public void postProcess(LorawanMessage lorawanMessage) {
 		if(lorawanMessage.getfPort().equals("3")) {
-        	if(lorawanMessage.getIndex()+1 == lorawanMessage.getTotalMessageCount())
+        	if(lorawanMessage.getIndex() == lorawanMessage.getTotalMessageCount())
         		combineAllImages(lorawanMessage);
         }
 	}
 	
 	 private void combineAllImages(LorawanMessage lorawanMessage) {
-		    Long fcnt = lorawanMessage.get
-		 
-	    	List<LorawanMessage>  list = lorawanMessageRepository.findByFcnt(lorawanMessage.getSensor());
+		    Long fcntEnd = lorawanMessage.getfCnt();
+		    Long fcntStart = fcntEnd-lorawanMessage.getTotalMessageCount();
+		    
+	    	List<LorawanMessage>  list = lorawanMessageRepository.findByFcnt(lorawanMessage.getSensor().getId(),fcntStart,fcntEnd);
 	    	
 	    	lorawanMessage.setImage(null);
+	    	lorawanMessage.setHexMessage("");
+	    	
 	    	byte[] result=null;
+	    	String resultString="";
 	    	for (Iterator iterator = list.iterator(); iterator.hasNext();) {
 				LorawanMessage temp = (LorawanMessage) iterator.next();
-				 result = LoraMessageUtil.appendToByteArray(result, temp.getImage());
+				result = LoraMessageUtil.appendToByteArray(result, temp.getImage());
+				resultString = resultString + temp.getHexMessage();
 			}
-	    	lorawanMessage.setImage(result);
+	    	//lorawanMessage.setHexMessage(resultString);
+	    	lorawanMessage.setImage(hexStringToByteArray(resultString));
 	    	lorawanMessageRepository.save(lorawanMessage);
 	    }
+	 
+	 public byte[] hexStringToByteArray(String hex) {
+		    int len = hex.length();
+		    byte[] data = new byte[len / 2];
+		    for (int i = 0; i < len; i += 2) {
+		        data[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
+		                              + Character.digit(hex.charAt(i + 1), 16));
+		    }
+		    return data;
+		}
 }

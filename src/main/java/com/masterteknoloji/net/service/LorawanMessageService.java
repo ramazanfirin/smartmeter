@@ -30,6 +30,7 @@ public class LorawanMessageService {
 		this.sensorRepository = sensorRepository;
 		this.waterMeterService = waterMeterService;
 		this.lorawanMessageRepository = lorawanMessageRepository;
+
 	}
 
 	public DeviceMessageVM getLoraMessage(String message) throws Exception {
@@ -40,13 +41,17 @@ public class LorawanMessageService {
 		loraMessageVM.setJsonNode(jsonObject);
 		loraMessageVM.setSensor(findSensor(jsonObject));
 		
-		String data=jsonObject.get("data").asText();
-		loraMessageVM.setBase64Message(data);
-		loraMessageVM.setHexMessage(LoraMessageUtil.base64ToHex(data));
-		loraMessageVM.setData(data);
-		
-		loraMessageVM.setfPort(jsonObject.get("fPort").asText());
-		loraMessageVM.setfCnt(jsonObject.get("fCnt").asText());
+		JsonNode dataNode = jsonObject.get("data");
+		if(dataNode != null) {
+			String data=jsonObject.get("data").asText();
+			loraMessageVM.setBase64Message(data);
+			loraMessageVM.setHexMessage(LoraMessageUtil.base64ToHex(data));
+			loraMessageVM.setData(data);
+		}
+		if(jsonObject.get("fPort") != null)
+			loraMessageVM.setfPort(jsonObject.get("fPort").asText());
+		if(jsonObject.get("fCnt") != null)
+			loraMessageVM.setfCnt(jsonObject.get("fCnt").asLong());
 		
 		return loraMessageVM;
 	}
@@ -74,7 +79,7 @@ public class LorawanMessageService {
         lorawanMessage.setInsertDate(ZonedDateTime.now());
         lorawanMessage.sensor(deviceMessageVM.getSensor());
         lorawanMessage.setfPort(deviceMessageVM.getfPort());
-        lorawanMessage.setfPort(deviceMessageVM.getfCnt());
+        lorawanMessage.setfCnt(deviceMessageVM.getfCnt());
         
         parseSensorSpecificData(lorawanMessage, deviceMessageVM);
         

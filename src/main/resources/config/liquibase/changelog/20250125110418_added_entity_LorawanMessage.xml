@@ -61,6 +61,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="f_cnt" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="image_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

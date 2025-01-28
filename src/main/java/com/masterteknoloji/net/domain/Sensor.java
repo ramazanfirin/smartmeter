@@ -52,7 +52,8 @@ public class Sensor implements Serializable {
     @Column(name = "last_seen_date")
     private ZonedDateTime lastSeenDate;
 
-    @Column(name = "last_message")
+    @Size(max = 4000)
+    @Column(name = "last_message", length = 4000)
     private String lastMessage;
 
     @Lob

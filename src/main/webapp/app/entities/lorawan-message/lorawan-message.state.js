@@ -134,6 +134,7 @@
                                 batteryValue: null,
                                 sensorValue: null,
                                 fPort: null,
+                                fCnt: null,
                                 imageId: null,
                                 id: null
                             };
