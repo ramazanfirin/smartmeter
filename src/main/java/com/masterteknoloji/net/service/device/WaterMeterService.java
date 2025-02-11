@@ -116,13 +116,13 @@ public class WaterMeterService extends BaseDeviceService implements LoraDeviceSe
 	@Override
 	public void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage) throws Exception {
 		
-		String deviceToken = "46zdi8vwnloavhrnot77";
-		
-		Double value = deviceMessageVM.getObjectNode().get("Reading").asDouble();
-		SmartMeterVM smartMeterVM = new SmartMeterVM(value.floatValue());
-		String json = objectMapper.writeValueAsString(smartMeterVM);
-		
-        String url = applicationProperties.getThingsBoardUrl()+deviceToken+"/telemetry ";
-		super.sendData(json, url);
+//		String deviceToken = "46zdi8vwnloavhrnot77";
+//		
+//		Double value = deviceMessageVM.getObjectNode().get("Reading").asDouble();
+//		SmartMeterVM smartMeterVM = new SmartMeterVM(value.floatValue());
+//		String json = objectMapper.writeValueAsString(smartMeterVM);
+//		
+//        String url = applicationProperties.getThingsBoardUrl()+deviceToken+"/telemetry ";
+//		super.sendData(json, url);
 	}
 }

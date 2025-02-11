@@ -60,7 +60,7 @@ public class LorawanMessageResource {
         this.lorawanMessageService = lorawanMessageService;
         
 		
-		this.lorawanMessageRepository.deleteAll();
+		//this.lorawanMessageRepository.deleteAll();
     }
 
     /**
