@@ -1,4 +1,4 @@
-package com.masterteknoloji.net.service.device;
+package com.masterteknoloji.net.service.device.lora;
 
 import com.masterteknoloji.net.domain.LorawanMessage;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;

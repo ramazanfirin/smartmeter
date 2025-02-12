@@ -1,0 +1,31 @@
+{
+    "smartmeterApp": {
+        "m2mMessage" : {
+            "home": {
+                "title": "M 2 M Messages",
+                "createLabel": "Create a new M 2 M Message",
+                "createOrEditLabel": "Create or edit a M 2 M Message"
+            },
+            "created": "A new M 2 M Message is created with identifier {{ param }}",
+            "updated": "A M 2 M Message is updated with identifier {{ param }}",
+            "deleted": "A M 2 M Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete M 2 M Message {{ id }}?"
+            },
+            "detail": {
+                "title": "M 2 M Message"
+            },
+            "base64Message": "Base 64 Message",
+            "hexMessage": "Hex Message",
+            "index": "Index",
+            "totalMessageCount": "Total Message Count",
+            "insertDate": "Insert Date",
+            "image": "Image",
+            "batteryValue": "Battery Value",
+            "sensorValue": "Sensor Value",
+            "port": "Port",
+            "imageData": "Image Data",
+            "sensor": "Sensor"
+        }
+    }
+}

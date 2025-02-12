@@ -1,0 +1,123 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myM2mMessageLabel" data-translate="smartmeterApp.m2mMessage.home.createOrEditLabel">Create or edit a M 2 M Message</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.m2mMessage.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.m2mMessage.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.base64Message" for="field_base64Message">Base 64 Message</label>
+            <input type="text" class="form-control" name="base64Message" id="field_base64Message"
+                    ng-model="vm.m2mMessage.base64Message"
+                    ng-maxlength="4000"/>
+            <div ng-show="editForm.base64Message.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.base64Message.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000">
+                    This field cannot be longer than 4000 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.hexMessage" for="field_hexMessage">Hex Message</label>
+            <input type="text" class="form-control" name="hexMessage" id="field_hexMessage"
+                    ng-model="vm.m2mMessage.hexMessage"
+                    ng-maxlength="4000"/>
+            <div ng-show="editForm.hexMessage.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.hexMessage.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000">
+                    This field cannot be longer than 4000 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.index" for="field_index">Index</label>
+            <input type="number" class="form-control" name="index" id="field_index"
+                    ng-model="vm.m2mMessage.index"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.totalMessageCount" for="field_totalMessageCount">Total Message Count</label>
+            <input type="number" class="form-control" name="totalMessageCount" id="field_totalMessageCount"
+                    ng-model="vm.m2mMessage.totalMessageCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.insertDate" for="field_insertDate">Insert Date</label>
+                <div class="input-group">
+                    <input id="field_insertDate" type="text" class="form-control" name="insertDate" datetime-picker="{{dateformat}}" ng-model="vm.m2mMessage.insertDate" is-open="vm.datePickerOpenStatus.insertDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('insertDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.m2mMessage)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.image" for="field_image">Image</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.m2mMessage.imageContentType + ';base64,' + vm.m2mMessage.image}}" style="max-height: 100px;" ng-if="vm.m2mMessage.image" alt="m2mMessage image"/>
+                <div ng-if="vm.m2mMessage.image" class="help-block clearfix">
+                    <span class="pull-left">{{vm.m2mMessage.imageContentType}}, {{vm.byteSize(vm.m2mMessage.image)}}</span>
+                    <button type="button" ng-click="vm.m2mMessage.image=null;vm.m2mMessage.imageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setImage($file, vm.m2mMessage)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                    ng-model="vm.m2mMessage.image"
+                    />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                    ng-model="vm.m2mMessage.imageContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.batteryValue" for="field_batteryValue">Battery Value</label>
+            <input type="number" class="form-control" name="batteryValue" id="field_batteryValue"
+                    ng-model="vm.m2mMessage.batteryValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.sensorValue" for="field_sensorValue">Sensor Value</label>
+            <input type="number" class="form-control" name="sensorValue" id="field_sensorValue"
+                    ng-model="vm.m2mMessage.sensorValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.port" for="field_port">Port</label>
+            <input type="number" class="form-control" name="port" id="field_port"
+                    ng-model="vm.m2mMessage.port"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.m2mMessage.imageData" for="field_imageData">Image Data</label>
+                <input type="checkbox" name="imageData" id="field_imageData"
+                          ng-model="vm.m2mMessage.imageData"/>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="smartmeterApp.m2mMessage.sensor" for="field_sensor">Sensor</label>
+            <select class="form-control" id="field_sensor" name="sensor" ng-model="vm.m2mMessage.sensor" ng-options="sensor as sensor.id for sensor in vm.sensors track by sensor.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

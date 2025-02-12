@@ -1,4 +1,4 @@
-package com.masterteknoloji.net.service.device;
+package com.masterteknoloji.net.service.device.lora;
 
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +16,7 @@ import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 import com.masterteknoloji.net.web.rest.vm.thingsboard.SmartMeterVM;
 
 @Service
-public class WaterMeterService extends BaseDeviceService implements LoraDeviceService{
+public class WaterMeterService extends BaseLoraDeviceService implements LoraDeviceService{
 	
 	private final LorawanMessageRepository lorawanMessageRepository;
 	
@@ -58,7 +58,7 @@ public class WaterMeterService extends BaseDeviceService implements LoraDeviceSe
 			String imageId = LoraMessageUtil.getFirst14Chars(hexMessage);
 			lorawanMessage.setImageId(imageId);
 
-			String imageData = LoraMessageUtil.removeFirst8Chars(hexMessage);
+			String imageData = LoraMessageUtil.removeFirst8Chars(8,hexMessage);
 			lorawanMessage.setHexMessage(imageData);
 			lorawanMessage.setImage(imageData.getBytes());
 

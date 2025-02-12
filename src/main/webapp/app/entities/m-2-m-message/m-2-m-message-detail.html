@@ -1,0 +1,68 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.m2mMessage.detail.title">M 2 M Message</span> {{vm.m2mMessage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.m2mMessage.base64Message">Base 64 Message</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.base64Message}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.hexMessage">Hex Message</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.hexMessage}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.index">Index</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.index}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.totalMessageCount">Total Message Count</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.totalMessageCount}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.insertDate">Insert Date</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.insertDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.image">Image</span></dt>
+        <dd>
+            <div ng-if="vm.m2mMessage.image">
+                <a ng-click="vm.openFile(vm.m2mMessage.imageContentType, vm.m2mMessage.image)">
+                    <img data-ng-src="{{'data:' + vm.m2mMessage.imageContentType + ';base64,' + vm.m2mMessage.image}}" style="max-width: 100%;" alt="m2mMessage image"/>
+                </a>
+                {{vm.m2mMessage.imageContentType}}, {{vm.byteSize(vm.m2mMessage.image)}}
+            </div>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.batteryValue">Battery Value</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.batteryValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.sensorValue">Sensor Value</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.sensorValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.port">Port</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.port}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span></dt>
+        <dd>
+            <span>{{vm.m2mMessage.imageData}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span></dt>
+        <dd>
+            <a ui-sref="sensor-detail({id:vm.m2mMessage.sensor.id})">{{vm.m2mMessage.sensor.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="m-2-m-message-detail.edit({id:vm.m2mMessage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

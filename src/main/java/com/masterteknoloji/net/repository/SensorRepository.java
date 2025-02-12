@@ -14,5 +14,7 @@ import org.springframework.data.jpa.repository.*;
 public interface SensorRepository extends JpaRepository<Sensor, Long> {
 	
 	Sensor findOneByDevEui(String devEui);
+	
+	Sensor findOneByImei(String imei);
 
 }

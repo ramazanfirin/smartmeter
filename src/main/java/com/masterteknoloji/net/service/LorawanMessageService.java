@@ -12,9 +12,9 @@ import com.masterteknoloji.net.domain.Sensor;
 import com.masterteknoloji.net.domain.enumeration.Type;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
 import com.masterteknoloji.net.repository.SensorRepository;
-import com.masterteknoloji.net.service.device.CurrentMeterService;
-import com.masterteknoloji.net.service.device.VibrationSensorService;
-import com.masterteknoloji.net.service.device.WaterMeterService;
+import com.masterteknoloji.net.service.device.lora.CurrentMeterService;
+import com.masterteknoloji.net.service.device.lora.VibrationSensorService;
+import com.masterteknoloji.net.service.device.lora.WaterMeterService;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 

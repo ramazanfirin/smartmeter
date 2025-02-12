@@ -15,13 +15,13 @@ public class LoraMessageUtil {
 		return hexString.toString();
 	}
 
-	public static String removeFirst8Chars(String input) {
+	public static String removeFirst8Chars(int count,String input) {
 		// Eğer giriş değeri 8 karakterden kısa ise boş string döner
-		if (input == null || input.length() <= 8) {
+		if (input == null || input.length() <= count) {
 			return ""; // Kısa ise tüm string silinir
 		}
 		// İlk 8 karakteri çıkar ve geri kalan kısmı döndür
-		return input.substring(16);
+		return input.substring(count);
 	}
 
 	public static String getFirst14Chars(String input) {
@@ -49,4 +49,13 @@ public class LoraMessageUtil {
 		return result;
 	}
 
+	public static byte[] hexStringToByteArray(String hex) {
+	    int len = hex.length();
+	    byte[] data = new byte[len / 2];
+	    for (int i = 0; i < len; i += 2) {
+	        data[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
+	                              + Character.digit(hex.charAt(i + 1), 16));
+	    }
+	    return data;
+	}
 }

@@ -14,6 +14,10 @@ public class DeviceMessageVM {
 	JsonNode jsonNode;
 	JsonNode objectNode;
 	
+	String imei;
+	Long port;
+	Boolean isImageData = false;
+	
 	public Sensor getSensor() {
 		return sensor;
 	}
@@ -61,6 +65,24 @@ public class DeviceMessageVM {
 	}
 	public void setObjectNode(JsonNode objectNode) {
 		this.objectNode = objectNode;
+	}
+	public String getImei() {
+		return imei;
+	}
+	public void setImei(String imei) {
+		this.imei = imei;
+	}
+	public Long getPort() {
+		return port;
+	}
+	public void setPort(Long port) {
+		this.port = port;
+	}
+	public Boolean getIsImageData() {
+		return isImageData;
+	}
+	public void setIsImageData(Boolean isImageData) {
+		this.isImageData = isImageData;
 	}
 
 	

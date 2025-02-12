@@ -1,0 +1,83 @@
+<div>
+    <h2 data-translate="smartmeterApp.m2mMessage.home.title">M 2 M Messages</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="m-2-m-message.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="smartmeterApp.m2mMessage.home.createLabel">
+                        Create new M 2 M Message
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+<!--                     <th><span data-translate="smartmeterApp.m2mMessage.base64Message">Base 64 Message</span></th> -->
+<!--                     <th><span data-translate="smartmeterApp.m2mMessage.hexMessage">Hex Message</span></th> -->
+<!--                     <th><span data-translate="smartmeterApp.m2mMessage.index">Index</span></th> -->
+<!--                     <th><span data-translate="smartmeterApp.m2mMessage.totalMessageCount">Total Message Count</span></th> -->
+                    <th><span data-translate="smartmeterApp.m2mMessage.insertDate">Insert Date</span></th>
+                    <th><span data-translate="smartmeterApp.m2mMessage.image">Image</span></th>
+                    <th><span data-translate="smartmeterApp.m2mMessage.batteryValue">Battery Value</span></th>
+                    <th><span data-translate="smartmeterApp.m2mMessage.sensorValue">Sensor Value</span></th>
+                    <th><span data-translate="smartmeterApp.m2mMessage.port">Port</span></th>
+                    <th><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span></th>
+                    <th><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="m2mMessage in vm.m2mMessages track by m2mMessage.id">
+                    <td><a ui-sref="m-2-m-message-detail({id:m2mMessage.id})">{{m2mMessage.id}}</a></td>
+<!--                     <td>{{m2mMessage.base64Message}}</td> -->
+<!--                     <td>{{m2mMessage.hexMessage}}</td> -->
+<!--                     <td>{{m2mMessage.index}}</td> -->
+<!--                     <td>{{m2mMessage.totalMessageCount}}</td> -->
+                    <td>{{m2mMessage.insertDate | date:'medium'}}</td>
+                    <td>
+                        <a ng-if="m2mMessage.image" ng-click="vm.openFile(m2mMessage.imageContentType, m2mMessage.image)">
+                            <img data-ng-src="{{'data:' + m2mMessage.imageContentType + ';base64,' + m2mMessage.image}}" style="max-height: 30px;" alt="m2mMessage image"/>
+                        </a>
+                        <span ng-if="m2mMessage.image">{{m2mMessage.imageContentType}}, {{vm.byteSize(m2mMessage.image)}}</span>
+                    </td>
+                    <td>{{m2mMessage.batteryValue}}</td>
+                    <td>{{m2mMessage.sensorValue}}</td>
+                    <td>{{m2mMessage.port}}</td>
+                    <td>{{m2mMessage.imageData}}</td>
+                    <td>
+                        <a ui-sref="sensor-detail({id:m2mMessage.sensor.id})">{{m2mMessage.sensor.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="m-2-m-message-detail({id:m2mMessage.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="m-2-m-message.edit({id:m2mMessage.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="m-2-m-message.delete({id:m2mMessage.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
