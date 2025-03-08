@@ -27,7 +27,7 @@ public class MultiThreadedUdpServer {
 	
     private final Logger log = LoggerFactory.getLogger(MultiThreadedUdpServer.class);
 	
-    private static final int PORT = 5000;
+    private static final int PORT = 6000;
     private static final int THREAD_POOL_SIZE = 10;
     private volatile boolean running = true;
     private DatagramSocket socket;

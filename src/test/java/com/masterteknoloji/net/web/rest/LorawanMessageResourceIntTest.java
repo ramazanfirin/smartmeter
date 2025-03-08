@@ -4,6 +4,8 @@ import com.masterteknoloji.net.SmartmeterApp;
 
 import com.masterteknoloji.net.domain.LorawanMessage;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
+import com.masterteknoloji.net.repository.SensorRepository;
+import com.masterteknoloji.net.service.LorawanMessageService;
 import com.masterteknoloji.net.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -87,6 +89,10 @@ public class LorawanMessageResourceIntTest {
 
     @Autowired
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
+      
+    private SensorRepository sensorRepository;
+    
+    private  LorawanMessageService lorawanMessageService;
 
     @Autowired
     private ExceptionTranslator exceptionTranslator;
@@ -101,7 +107,7 @@ public class LorawanMessageResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final LorawanMessageResource lorawanMessageResource = new LorawanMessageResource(lorawanMessageRepository);
+        final LorawanMessageResource lorawanMessageResource = new LorawanMessageResource(lorawanMessageRepository,sensorRepository,lorawanMessageService);
         this.restLorawanMessageMockMvc = MockMvcBuilders.standaloneSetup(lorawanMessageResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
