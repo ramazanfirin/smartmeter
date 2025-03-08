@@ -83,7 +83,7 @@ public class MultiThreadedUdpServer {
 
             log.info("[" + clientAddress.getHostAddress() + ":" + clientPort + "] Gelen Mesaj: " + receivedMessage);
             
-            if(receivedMessage.startsWith("P"))
+            if(!receivedMessage.startsWith("P"))
             	sendPackage(packet);
             
             m2mMessageService.process(receivedMessage, Long.valueOf(clientPort),clientAddress.getHostAddress());

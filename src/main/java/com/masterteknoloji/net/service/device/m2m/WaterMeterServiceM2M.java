@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -76,7 +77,7 @@ public class WaterMeterServiceM2M extends BaseM2mDeviceService implements M2mDev
             if(!m2mMessage.isImageData())
             	return;
 		    
-	    	List<M2mMessage>  list = m2mMessageRepository.findBySensorId(m2mMessage.getSensor().getId(),m2mMessage.getPort());
+	    	List<M2mMessage>  list = m2mMessageRepository.findBySensorId(m2mMessage.getSensor().getId(),m2mMessage.getPort(),ZonedDateTime.now().minusMinutes(1));
 	    	M2mMessage firstData = list.get(0);
 	    	
 	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -84,9 +85,10 @@ public class WaterMeterServiceM2M extends BaseM2mDeviceService implements M2mDev
 	        outputStream.write(m2mMessage.getImage());
 	    	
 	        firstData.setImage(outputStream.toByteArray());
-	        firstData.setValidImage(isValidImage(outputStream));
+	        //firstData.setValidImage(isValidImage(outputStream));
+	        isValidImage(outputStream);
 	        m2mMessageRepository.save(firstData);
-	        log.info("Image eklemesi yapıldı.");
+	        log.info("Image eklemesi yapıldı."+firstData.getId()+","+firstData.getImage().length);
 	    }
 	 
 	 public boolean isValidImage(ByteArrayOutputStream baos) {
