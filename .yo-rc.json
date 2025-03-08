@@ -34,6 +34,12 @@
     "languages": [
       "en",
       "tr"
-    ]
+    ],
+    "appsFolders": [
+      "smartmeter"
+    ],
+    "directoryPath": "../",
+    "monitoring": "elk",
+    "consoleOptions": []
   }
 }

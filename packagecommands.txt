@@ -1,0 +1,7 @@
+sudo ./mvnw verify -DskipTests
+sudo cp target/parkingpro-0.0.1-SNAPSHOT.war src/main/docker/
+docker build -t ramazanfirin/parkingpro:test_12012024 .
+docker push ramazanfirin/parkingpro:test_12012024 
+
+ssh root@parkingpro.kalitebilgisayar.com
+746292Rf
