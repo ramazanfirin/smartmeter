@@ -58,5 +58,5 @@ relationship ManyToOne {
 	
 
 
-paginate LorawanMessage,Sensor with pagination
+paginate LorawanMessage,Sensor,M2mMessage with pagination
 

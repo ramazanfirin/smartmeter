@@ -70,7 +70,7 @@
     "changelogDate": "20250211142457",
     "entityTableName": "m_2_m_message",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false
 }

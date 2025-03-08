@@ -17,21 +17,21 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr>
-                    <th><span data-translate="global.field.id">ID</span></th>
-<!--                     <th><span data-translate="smartmeterApp.m2mMessage.base64Message">Base 64 Message</span></th> -->
-<!--                     <th><span data-translate="smartmeterApp.m2mMessage.hexMessage">Hex Message</span></th> -->
-<!--                     <th><span data-translate="smartmeterApp.m2mMessage.index">Index</span></th> -->
-<!--                     <th><span data-translate="smartmeterApp.m2mMessage.totalMessageCount">Total Message Count</span></th> -->
-                    <th><span data-translate="smartmeterApp.m2mMessage.insertDate">Insert Date</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.image">Image</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.batteryValue">Battery Value</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.sensorValue">Sensor Value</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.port">Port</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.ip">Ip</span></th>
-                    <th><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span></th>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+<!--                     <th jh-sort-by="base64Message"><span data-translate="smartmeterApp.m2mMessage.base64Message">Base 64 Message</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+<!--                     <th jh-sort-by="hexMessage"><span data-translate="smartmeterApp.m2mMessage.hexMessage">Hex Message</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+<!--                     <th jh-sort-by="index"><span data-translate="smartmeterApp.m2mMessage.index">Index</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+<!--                     <th jh-sort-by="totalMessageCount"><span data-translate="smartmeterApp.m2mMessage.totalMessageCount">Total Message Count</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+                    <th jh-sort-by="insertDate"><span data-translate="smartmeterApp.m2mMessage.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="image"><span data-translate="smartmeterApp.m2mMessage.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.m2mMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sensorValue"><span data-translate="smartmeterApp.m2mMessage.sensorValue">Sensor Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="port"><span data-translate="smartmeterApp.m2mMessage.port">Port</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="imageData"><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="validImage"><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ip"><span data-translate="smartmeterApp.m2mMessage.ip">Ip</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -47,7 +47,7 @@
                         <a ng-if="m2mMessage.image" ng-click="vm.openFile(m2mMessage.imageContentType, m2mMessage.image)">
                             <img data-ng-src="{{'data:' + m2mMessage.imageContentType + ';base64,' + m2mMessage.image}}" style="max-height: 30px;" alt="m2mMessage image"/>
                         </a>
-                        <span ng-if="m2mMessage.image">{{m2mMessage.imageContentType}}, {{vm.byteSize(m2mMessage.image)}}</span>
+<!--                         <span ng-if="m2mMessage.image">{{m2mMessage.imageContentType}}, {{vm.byteSize(m2mMessage.image)}}</span> -->
                     </td>
                     <td>{{m2mMessage.batteryValue}}</td>
                     <td>{{m2mMessage.sensorValue}}</td>
@@ -83,5 +83,9 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>
