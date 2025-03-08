@@ -1,5 +1,5 @@
 version: '2'
-services:
+services: 
     jhipster-elasticsearch:
         image: jhipster/jhipster-elasticsearch:v2.2.1
         # Uncomment this as well as the volume section down below
