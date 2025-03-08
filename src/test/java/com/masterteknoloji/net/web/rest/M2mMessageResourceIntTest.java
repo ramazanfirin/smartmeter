@@ -76,6 +76,9 @@ public class M2mMessageResourceIntTest {
     private static final Boolean DEFAULT_IMAGE_DATA = false;
     private static final Boolean UPDATED_IMAGE_DATA = true;
 
+    private static final Boolean DEFAULT_VALID_IMAGE = false;
+    private static final Boolean UPDATED_VALID_IMAGE = true;
+
     @Autowired
     private M2mMessageRepository m2mMessageRepository;
 
@@ -124,7 +127,8 @@ public class M2mMessageResourceIntTest {
             .batteryValue(DEFAULT_BATTERY_VALUE)
             .sensorValue(DEFAULT_SENSOR_VALUE)
             .port(DEFAULT_PORT)
-            .imageData(DEFAULT_IMAGE_DATA);
+            .imageData(DEFAULT_IMAGE_DATA)
+            .validImage(DEFAULT_VALID_IMAGE);
         return m2mMessage;
     }
 
@@ -159,6 +163,7 @@ public class M2mMessageResourceIntTest {
         assertThat(testM2mMessage.getSensorValue()).isEqualTo(DEFAULT_SENSOR_VALUE);
         assertThat(testM2mMessage.getPort()).isEqualTo(DEFAULT_PORT);
         assertThat(testM2mMessage.isImageData()).isEqualTo(DEFAULT_IMAGE_DATA);
+        assertThat(testM2mMessage.isValidImage()).isEqualTo(DEFAULT_VALID_IMAGE);
     }
 
     @Test
@@ -201,7 +206,8 @@ public class M2mMessageResourceIntTest {
             .andExpect(jsonPath("$.[*].batteryValue").value(hasItem(DEFAULT_BATTERY_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].sensorValue").value(hasItem(DEFAULT_SENSOR_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].port").value(hasItem(DEFAULT_PORT.intValue())))
-            .andExpect(jsonPath("$.[*].imageData").value(hasItem(DEFAULT_IMAGE_DATA.booleanValue())));
+            .andExpect(jsonPath("$.[*].imageData").value(hasItem(DEFAULT_IMAGE_DATA.booleanValue())))
+            .andExpect(jsonPath("$.[*].validImage").value(hasItem(DEFAULT_VALID_IMAGE.booleanValue())));
     }
 
     @Test
@@ -225,7 +231,8 @@ public class M2mMessageResourceIntTest {
             .andExpect(jsonPath("$.batteryValue").value(DEFAULT_BATTERY_VALUE.doubleValue()))
             .andExpect(jsonPath("$.sensorValue").value(DEFAULT_SENSOR_VALUE.doubleValue()))
             .andExpect(jsonPath("$.port").value(DEFAULT_PORT.intValue()))
-            .andExpect(jsonPath("$.imageData").value(DEFAULT_IMAGE_DATA.booleanValue()));
+            .andExpect(jsonPath("$.imageData").value(DEFAULT_IMAGE_DATA.booleanValue()))
+            .andExpect(jsonPath("$.validImage").value(DEFAULT_VALID_IMAGE.booleanValue()));
     }
 
     @Test
@@ -258,7 +265,8 @@ public class M2mMessageResourceIntTest {
             .batteryValue(UPDATED_BATTERY_VALUE)
             .sensorValue(UPDATED_SENSOR_VALUE)
             .port(UPDATED_PORT)
-            .imageData(UPDATED_IMAGE_DATA);
+            .imageData(UPDATED_IMAGE_DATA)
+            .validImage(UPDATED_VALID_IMAGE);
 
         restM2mMessageMockMvc.perform(put("/api/m-2-m-messages")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -280,6 +288,7 @@ public class M2mMessageResourceIntTest {
         assertThat(testM2mMessage.getSensorValue()).isEqualTo(UPDATED_SENSOR_VALUE);
         assertThat(testM2mMessage.getPort()).isEqualTo(UPDATED_PORT);
         assertThat(testM2mMessage.isImageData()).isEqualTo(UPDATED_IMAGE_DATA);
+        assertThat(testM2mMessage.isValidImage()).isEqualTo(UPDATED_VALID_IMAGE);
     }
 
     @Test

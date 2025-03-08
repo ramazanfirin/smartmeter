@@ -25,6 +25,7 @@
             "sensorValue": "Sensor Value",
             "port": "Port",
             "imageData": "Image Data",
+            "validImage": "Valid Image",
             "sensor": "Sensor"
         }
     }

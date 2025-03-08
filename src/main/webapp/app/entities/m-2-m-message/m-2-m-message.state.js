@@ -115,6 +115,7 @@
                                 sensorValue: null,
                                 port: null,
                                 imageData: null,
+                                validImage: null,
                                 id: null
                             };
                         }

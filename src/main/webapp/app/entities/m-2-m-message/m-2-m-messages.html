@@ -29,6 +29,7 @@
                     <th><span data-translate="smartmeterApp.m2mMessage.sensorValue">Sensor Value</span></th>
                     <th><span data-translate="smartmeterApp.m2mMessage.port">Port</span></th>
                     <th><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span></th>
+                    <th><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span></th>
                     <th><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span></th>
                     <th></th>
                 </tr>
@@ -51,6 +52,7 @@
                     <td>{{m2mMessage.sensorValue}}</td>
                     <td>{{m2mMessage.port}}</td>
                     <td>{{m2mMessage.imageData}}</td>
+                    <td>{{m2mMessage.validImage}}</td>
                     <td>
                         <a ui-sref="sensor-detail({id:m2mMessage.sensor.id})">{{m2mMessage.sensor.id}}</a>
                     </td>

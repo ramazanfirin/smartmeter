@@ -60,6 +60,9 @@ public class M2mMessage implements Serializable {
     @Column(name = "image_data")
     private Boolean imageData;
 
+    @Column(name = "valid_image")
+    private Boolean validImage;
+
     @ManyToOne
     private Sensor sensor;
 
@@ -215,6 +218,19 @@ public class M2mMessage implements Serializable {
         this.imageData = imageData;
     }
 
+    public Boolean isValidImage() {
+        return validImage;
+    }
+
+    public M2mMessage validImage(Boolean validImage) {
+        this.validImage = validImage;
+        return this;
+    }
+
+    public void setValidImage(Boolean validImage) {
+        this.validImage = validImage;
+    }
+
     public Sensor getSensor() {
         return sensor;
     }
@@ -264,6 +280,7 @@ public class M2mMessage implements Serializable {
             ", sensorValue=" + getSensorValue() +
             ", port=" + getPort() +
             ", imageData='" + isImageData() + "'" +
+            ", validImage='" + isValidImage() + "'" +
             "}";
     }
 }

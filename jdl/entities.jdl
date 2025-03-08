@@ -46,6 +46,7 @@ entity M2mMessage{
 	sensorValue Float
 	port Long
 	imageData Boolean
+	validImage Boolean
 }   
 
 
