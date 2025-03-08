@@ -47,6 +47,7 @@ entity M2mMessage{
 	port Long
 	imageData Boolean
 	validImage Boolean
+	ip String
 }   
 
 

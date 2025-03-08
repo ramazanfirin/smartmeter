@@ -1,8 +1,12 @@
 package com.masterteknoloji.net.service.device.m2m;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,10 +84,20 @@ public class WaterMeterServiceM2M extends BaseM2mDeviceService implements M2mDev
 	        outputStream.write(m2mMessage.getImage());
 	    	
 	        firstData.setImage(outputStream.toByteArray());
+	        firstData.setValidImage(isValidImage(outputStream));
 	        m2mMessageRepository.save(firstData);
 	        log.info("Image eklemesi yapıldı.");
 	    }
 	 
+	 public boolean isValidImage(ByteArrayOutputStream baos) {
+	        try {
+	            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+	            BufferedImage image = ImageIO.read(bais);
+	            return image != null;
+	        } catch (IOException e) {
+	            return false;
+	        }
+	    } 
 
 	@Override
 	public void process(DeviceMessageVM deviceMessageVM) throws Exception {

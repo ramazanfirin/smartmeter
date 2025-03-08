@@ -26,6 +26,7 @@
             "port": "Port",
             "imageData": "Image Data",
             "validImage": "Valid Image",
+            "ip": "Ip",
             "sensor": "Sensor"
         }
     }

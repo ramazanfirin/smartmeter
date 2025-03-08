@@ -4,12 +4,14 @@ public class ClientDto {
 	
 	String message;
 	Long port;
+	String ip;
 	
 	
-	public ClientDto(String message, Long port) {
+	public ClientDto(String message, Long port,String ip) {
 		super();
 		this.message = message;
 		this.port = port;
+		this.ip = ip;
 	}
 	public String getMessage() {
 		return message;
@@ -22,6 +24,12 @@ public class ClientDto {
 	}
 	public void setPort(Long port) {
 		this.port = port;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	
 

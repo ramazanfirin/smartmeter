@@ -2,9 +2,12 @@ package com.masterteknoloji.net.service.device.m2m;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.List;
 
+import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.masterteknoloji.net.config.ApplicationProperties;
 import com.masterteknoloji.net.domain.LorawanMessage;
 import com.masterteknoloji.net.domain.M2mMessage;
@@ -56,6 +59,7 @@ public class BaseM2mDeviceService implements M2mDeviceService{
         m2mMessage.setInsertDate(ZonedDateTime.now());
         m2mMessage.sensor(deviceMessageVM.getSensor());
         m2mMessage.setPort(deviceMessageVM.getPort());
+        m2mMessage.setIp(deviceMessageVM.getIp());
         m2mMessage.setImageData(deviceMessageVM.getIsImageData());
         //parseSensorSpecificData(m2mMessage,deviceMessageVM);
         
@@ -83,7 +87,6 @@ public class BaseM2mDeviceService implements M2mDeviceService{
 		// TODO Auto-generated method stub
 		
 	}
-
 	
 	public void sendData(String jsonString,String url) throws IOException {
 

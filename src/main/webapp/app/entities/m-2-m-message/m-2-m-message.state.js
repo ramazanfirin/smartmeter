@@ -116,6 +116,7 @@
                                 port: null,
                                 imageData: null,
                                 validImage: null,
+                                ip: null,
                                 id: null
                             };
                         }

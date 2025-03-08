@@ -86,15 +86,15 @@ public class MultiThreadedUdpServer {
             if(receivedMessage.startsWith("P"))
             	sendPackage(packet);
             
-            //m2mMessageService.process(receivedMessage, Long.valueOf(clientPort));
+            m2mMessageService.process(receivedMessage, Long.valueOf(clientPort),clientAddress.getHostAddress());
             
-            queue.add(new ClientDto(receivedMessage, Long.valueOf(clientPort)));
-            if(queue.size()==4) {
-            	while (!queue.isEmpty()) {
-            		ClientDto clientDto = queue.poll();
-            		m2mMessageService.process(clientDto.getMessage(), clientDto.getPort());
-                }
-            }
+//            queue.add(new ClientDto(receivedMessage, Long.valueOf(clientPort),clientAddress.getHostAddress()));
+//            if(queue.size()==4) {
+//            	while (!queue.isEmpty()) {
+//            		ClientDto clientDto = queue.poll();
+//            		m2mMessageService.process(clientDto.getMessage(), clientDto.getPort(),clientDto.getIp());
+//                }
+//            }
            
         } catch (Exception e) {
             e.printStackTrace();

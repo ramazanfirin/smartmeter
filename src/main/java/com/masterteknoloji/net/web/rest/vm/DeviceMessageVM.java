@@ -17,6 +17,7 @@ public class DeviceMessageVM {
 	String imei;
 	Long port;
 	Boolean isImageData = false;
+	String ip;
 	
 	public Sensor getSensor() {
 		return sensor;
@@ -83,6 +84,12 @@ public class DeviceMessageVM {
 	}
 	public void setIsImageData(Boolean isImageData) {
 		this.isImageData = isImageData;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	

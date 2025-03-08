@@ -61,7 +61,10 @@ public class M2mMessage implements Serializable {
     private Boolean imageData;
 
     @Column(name = "valid_image")
-    private Boolean validImage;
+    private Boolean validImage = false;
+
+    @Column(name = "ip")
+    private String ip;
 
     @ManyToOne
     private Sensor sensor;
@@ -231,6 +234,19 @@ public class M2mMessage implements Serializable {
         this.validImage = validImage;
     }
 
+    public String getIp() {
+        return ip;
+    }
+
+    public M2mMessage ip(String ip) {
+        this.ip = ip;
+        return this;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
     public Sensor getSensor() {
         return sensor;
     }
@@ -281,6 +297,7 @@ public class M2mMessage implements Serializable {
             ", port=" + getPort() +
             ", imageData='" + isImageData() + "'" +
             ", validImage='" + isValidImage() + "'" +
+            ", ip='" + getIp() + "'" +
             "}";
     }
 }

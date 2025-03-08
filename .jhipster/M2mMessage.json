@@ -61,6 +61,10 @@
         {
             "fieldName": "validImage",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "ip",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20250211142457",
