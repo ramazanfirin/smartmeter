@@ -93,7 +93,13 @@ public class WaterMeterServiceM2M extends BaseM2mDeviceService implements M2mDev
 	        try {
 	            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 	            BufferedImage image = ImageIO.read(bais);
-	            return image != null;
+	            if(image != null) {
+	            	log.info("image size:"+image.getWidth()+"x"+image.getHeight()+" - "+baos.size()+ " bytes" );
+	            	return true;
+	            }else {
+	            	return false;
+	            }
+	            
 	        } catch (IOException e) {
 	            return false;
 	        }
