@@ -18,7 +18,9 @@ enum ConnectionType{
 enum Type{
 	VIBRATION,
 	BUTTON,
-	WATER_METER
+	WATER_METER,
+	VIBRATION_ECO,
+	VIBRATION_PRO
 }
 
 entity LorawanMessage{
