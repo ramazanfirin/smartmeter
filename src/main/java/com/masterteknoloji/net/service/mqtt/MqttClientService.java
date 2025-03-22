@@ -1,5 +1,7 @@
 package com.masterteknoloji.net.service.mqtt;
 
+import java.math.BigInteger;
+
 import javax.annotation.PostConstruct;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -97,11 +99,14 @@ public class MqttClientService implements MqttCallback {
     	String imei = topic.replace("device/sub/", "");
     	log.info("Mqtt mesaj alındı. IMEI: " + imei + " Mesaj: " + receivedMessage);
         try {
-			m2mMessageService.process(receivedMessage, 0l,"");
+        	if(!receivedMessage.startsWith("P"))
+            	sendGetImageCommand(imei);
+        	
+			m2mMessageService.process("MQTT",imei,receivedMessage, 0l,"");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new RuntimeException();
+			//throw new RuntimeException();
 		}
     }
 
@@ -110,14 +115,21 @@ public class MqttClientService implements MqttCallback {
     	//log.info("Mesaj başarıyla gönderildi.");
     }
 
+    public void sendGetImageCommand(String imei) {
+    	publish(imei, "0A01");
+    }
     
-    public void publish(String topic, String message) {
+    public void publish(String topic, String hexString) {
     	try {
-            MqttMessage mqttMessage = new MqttMessage(message.getBytes());
+            MqttMessage mqttMessage = new MqttMessage(hexString.getBytes());
+            
+            //byte[] payload = new BigInteger(hexString, 16).toByteArray();
+            //MqttMessage mqttMessage = new MqttMessage(payload);
+            
             mqttMessage.setQos(1);
             if(mqttClient.isConnected()) {
             	mqttClient.publish(topic, mqttMessage);
-            	log.info("Mesaj gönderildi: Mesaj:" + message+",topic:"+topic);
+            	log.info("Mesaj gönderildi: Mesaj:" + hexString+",topic:"+topic);
             }
             } catch (MqttException e) {
             e.printStackTrace();

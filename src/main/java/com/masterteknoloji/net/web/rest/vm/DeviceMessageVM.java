@@ -18,6 +18,7 @@ public class DeviceMessageVM {
 	Long port;
 	Boolean isImageData = false;
 	String ip;
+	String connectionType;
 	
 	public Sensor getSensor() {
 		return sensor;
@@ -90,6 +91,12 @@ public class DeviceMessageVM {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public String getConnectionType() {
+		return connectionType;
+	}
+	public void setConnectionType(String connectionType) {
+		this.connectionType = connectionType;
 	}
 
 	

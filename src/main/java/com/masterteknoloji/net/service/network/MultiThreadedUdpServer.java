@@ -86,7 +86,7 @@ public class MultiThreadedUdpServer {
             if(!receivedMessage.startsWith("P"))
             	sendPackage(packet);
             
-            m2mMessageService.process(receivedMessage, Long.valueOf(clientPort),clientAddress.getHostAddress());
+            m2mMessageService.process("UDP","",receivedMessage, Long.valueOf(clientPort),clientAddress.getHostAddress());
             
 //            queue.add(new ClientDto(receivedMessage, Long.valueOf(clientPort),clientAddress.getHostAddress()));
 //            if(queue.size()==4) {
