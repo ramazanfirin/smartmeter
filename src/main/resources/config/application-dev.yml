@@ -148,3 +148,7 @@ jhipster:
 
 application:
     thingsBoardUrl: http://localhost:9090/api/v1/
+    mqttBrokerUrl: tcp://127.0.0.1:1983
+    mqttUsername: ramazan
+    mqttPassword: ra5699mo
+    mqttSubTopicName: device/sub/+
