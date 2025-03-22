@@ -10,3 +10,9 @@ ssh root@parkingpro.kalitebilgisayar.com
 cp target/smartmeter-0.0.1-SNAPSHOT.war src/main/docker/
 docker build -t ramazanfirin/smartmeter:test_08032025 4 .
 docker push ramazanfirin/smartmeter:test_08032025  
+
+mvnw verify -DskipTests
+copy target\smartmeter-0.0.1-SNAPSHOT.war src\main\docker
+cd src\main\docker
+docker build -t ramazanfirin/smartmeter:test_08032025 .
+docker push ramazanfirin/smartmeter:test_08032025  

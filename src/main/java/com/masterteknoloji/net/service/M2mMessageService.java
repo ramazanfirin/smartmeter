@@ -40,8 +40,22 @@ public class M2mMessageService {
 
 	}
 
-	public void process(String message,Long port,String ip) throws Exception {
-		DeviceMessageVM deviceMessageVM = convertToDeviceMessageForM2m(message,port,ip);
+//	public void process(String message,Long port,String ip) throws Exception {
+//		DeviceMessageVM deviceMessageVM = convertToDeviceMessageForM2m(message,port,ip);
+//
+//		if (deviceMessageVM.getSensor() == null) {
+//			System.out.println("sensor bulunamadı");
+//			return;
+//
+//		}
+//
+//		if (deviceMessageVM.getSensor().getType() == Type.WATER_METER)
+//			waterMeterService.process(deviceMessageVM);
+//
+//	}
+
+	public void process(String connectionType, String deviceId,String message,Long port,String ip) throws Exception {
+		DeviceMessageVM deviceMessageVM = convertToDeviceMessageForM2m(connectionType,deviceId,message,port,ip);
 
 		if (deviceMessageVM.getSensor() == null) {
 			System.out.println("sensor bulunamadı");
@@ -53,13 +67,14 @@ public class M2mMessageService {
 			waterMeterService.process(deviceMessageVM);
 
 	}
-
 	
-	private DeviceMessageVM convertToDeviceMessageForM2m(String message, Long port,String ip) throws Exception {
+	private DeviceMessageVM convertToDeviceMessageForM2m(String connectionType,String deviceId,String message, Long port,String ip) throws Exception {
 
 		DeviceMessageVM deviceMessageVM = new DeviceMessageVM();
 		deviceMessageVM.setPort(port);
 		deviceMessageVM.setIp(ip);
+		deviceMessageVM.setImei(deviceId);
+		deviceMessageVM.setConnectionType(connectionType);
 		
 		if (message.startsWith("P")) {
 			deviceMessageVM.setIsImageData(true);
@@ -69,11 +84,18 @@ public class M2mMessageService {
 			JsonNode jsonObject = objectMapper.readTree(message);
 			deviceMessageVM.setJsonNode(jsonObject);
 		}
-		deviceMessageVM.setSensor(getSensor(deviceMessageVM));
+		
+		Sensor sensor = null;
+		if(connectionType.equals("UDP"))
+			sensor = getSensorForUDP(deviceMessageVM);
+		else if(connectionType.equals("MQTT"))
+			sensor = getSensorForMqtt(deviceMessageVM);
+			
+		deviceMessageVM.setSensor(sensor);
 		return deviceMessageVM;
 	}
 	
-	public Sensor getSensor(DeviceMessageVM deviceMessageVM) {
+	public Sensor getSensorForUDP(DeviceMessageVM deviceMessageVM) {
 		if(!deviceMessageVM.getIsImageData()) {
 			JsonNode imei = deviceMessageVM.getJsonNode().get("IMEI");
 			String imeiValue = imei.asText();
@@ -87,6 +109,11 @@ public class M2mMessageService {
 			return list.get(0).getSensor();
 		}
 	
+	}
+	
+	public Sensor getSensorForMqtt(DeviceMessageVM deviceMessageVM) {
+		Sensor sensor = sensorRepository.findOneByImei(deviceMessageVM.getImei());
+ 		return sensor;
 	}
 
 }
