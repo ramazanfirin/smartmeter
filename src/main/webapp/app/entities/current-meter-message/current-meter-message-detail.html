@@ -1,0 +1,59 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.currentMeterMessage.detail.title">Current Meter Message</span> {{vm.currentMeterMessage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.insertDate">Insert Date</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.insertDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.base64Message">Base 64 Message</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.base64Message}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.hexMessage">Hex Message</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.hexMessage}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.batteryValue">Battery Value</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.batteryValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.current">Current</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.current}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.totalEnergy">Total Energy</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.totalEnergy}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.reason">Reason</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.reason}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.fPort">F Port</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.fPort}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.fCnt">F Cnt</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.fCnt}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.sensor">Sensor</span></dt>
+        <dd>
+            <a ui-sref="sensor-detail({id:vm.currentMeterMessage.sensor.id})">{{vm.currentMeterMessage.sensor.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="current-meter-message-detail.edit({id:vm.currentMeterMessage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

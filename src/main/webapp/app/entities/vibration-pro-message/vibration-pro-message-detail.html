@@ -1,0 +1,63 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.vibrationProMessage.detail.title">Vibration Pro Message</span> {{vm.vibrationProMessage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.insertDate">Insert Date</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.insertDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.base64Message">Base 64 Message</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.base64Message}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.hexMessage">Hex Message</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.hexMessage}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.batteryValue">Battery Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.batteryValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.xAxisValue">X Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.xAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.yAxisValue">Y Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.yAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.zAxisValue">Z Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.zAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.temperature">Temperature</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.temperature}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.fPort">F Port</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.fPort}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.fCnt">F Cnt</span></dt>
+        <dd>
+            <span>{{vm.vibrationProMessage.fCnt}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.sensor">Sensor</span></dt>
+        <dd>
+            <a ui-sref="sensor-detail({id:vm.vibrationProMessage.sensor.id})">{{vm.vibrationProMessage.sensor.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="vibration-pro-message-detail.edit({id:vm.vibrationProMessage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

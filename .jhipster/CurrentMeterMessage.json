@@ -1,0 +1,63 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "sensor",
+            "otherEntityName": "sensor",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "insertDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "base64Message",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4000
+        },
+        {
+            "fieldName": "hexMessage",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4000
+        },
+        {
+            "fieldName": "batteryValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "current",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "totalEnergy",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "reason",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fPort",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fCnt",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20250322151716",
+    "entityTableName": "current_meter_message",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

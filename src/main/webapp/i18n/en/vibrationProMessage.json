@@ -1,0 +1,31 @@
+{
+    "smartmeterApp": {
+        "vibrationProMessage" : {
+            "home": {
+                "title": "Vibration Pro Messages",
+                "createLabel": "Create a new Vibration Pro Message",
+                "createOrEditLabel": "Create or edit a Vibration Pro Message"
+            },
+            "created": "A new Vibration Pro Message is created with identifier {{ param }}",
+            "updated": "A Vibration Pro Message is updated with identifier {{ param }}",
+            "deleted": "A Vibration Pro Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Vibration Pro Message {{ id }}?"
+            },
+            "detail": {
+                "title": "Vibration Pro Message"
+            },
+            "insertDate": "Insert Date",
+            "base64Message": "Base 64 Message",
+            "hexMessage": "Hex Message",
+            "batteryValue": "Battery Value",
+            "xAxisValue": "X Axis Value",
+            "yAxisValue": "Y Axis Value",
+            "zAxisValue": "Z Axis Value",
+            "temperature": "Temperature",
+            "fPort": "F Port",
+            "fCnt": "F Cnt",
+            "sensor": "Sensor"
+        }
+    }
+}

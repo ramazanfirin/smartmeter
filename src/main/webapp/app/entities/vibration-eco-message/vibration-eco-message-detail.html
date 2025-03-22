@@ -1,0 +1,59 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.vibrationEcoMessage.detail.title">Vibration Eco Message</span> {{vm.vibrationEcoMessage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.insertDate">Insert Date</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.insertDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.base64Message">Base 64 Message</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.base64Message}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.hexMessage">Hex Message</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.hexMessage}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.batteryValue">Battery Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.batteryValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.xAxisValue">X Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.xAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.yAxisValue">Y Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.yAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.zAxisValue">Z Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.zAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.fPort">F Port</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.fPort}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.fCnt">F Cnt</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.fCnt}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.sensor">Sensor</span></dt>
+        <dd>
+            <a ui-sref="sensor-detail({id:vm.vibrationEcoMessage.sensor.id})">{{vm.vibrationEcoMessage.sensor.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="vibration-eco-message-detail.edit({id:vm.vibrationEcoMessage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

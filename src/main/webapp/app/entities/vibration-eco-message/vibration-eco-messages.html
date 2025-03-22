@@ -1,0 +1,80 @@
+<div>
+    <h2 data-translate="smartmeterApp.vibrationEcoMessage.home.title">Vibration Eco Messages</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="vibration-eco-message.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="smartmeterApp.vibrationEcoMessage.home.createLabel">
+                        Create new Vibration Eco Message
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="insertDate"><span data-translate="smartmeterApp.vibrationEcoMessage.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="base64Message"><span data-translate="smartmeterApp.vibrationEcoMessage.base64Message">Base 64 Message</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hexMessage"><span data-translate="smartmeterApp.vibrationEcoMessage.hexMessage">Hex Message</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.vibrationEcoMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="xAxisValue"><span data-translate="smartmeterApp.vibrationEcoMessage.xAxisValue">X Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="yAxisValue"><span data-translate="smartmeterApp.vibrationEcoMessage.yAxisValue">Y Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="zAxisValue"><span data-translate="smartmeterApp.vibrationEcoMessage.zAxisValue">Z Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fPort"><span data-translate="smartmeterApp.vibrationEcoMessage.fPort">F Port</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fCnt"><span data-translate="smartmeterApp.vibrationEcoMessage.fCnt">F Cnt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.vibrationEcoMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="vibrationEcoMessage in vm.vibrationEcoMessages track by vibrationEcoMessage.id">
+                    <td><a ui-sref="vibration-eco-message-detail({id:vibrationEcoMessage.id})">{{vibrationEcoMessage.id}}</a></td>
+                    <td>{{vibrationEcoMessage.insertDate | date:'medium'}}</td>
+                    <td>{{vibrationEcoMessage.base64Message}}</td>
+                    <td>{{vibrationEcoMessage.hexMessage}}</td>
+                    <td>{{vibrationEcoMessage.batteryValue}}</td>
+                    <td>{{vibrationEcoMessage.xAxisValue}}</td>
+                    <td>{{vibrationEcoMessage.yAxisValue}}</td>
+                    <td>{{vibrationEcoMessage.zAxisValue}}</td>
+                    <td>{{vibrationEcoMessage.fPort}}</td>
+                    <td>{{vibrationEcoMessage.fCnt}}</td>
+                    <td>
+                        <a ui-sref="sensor-detail({id:vibrationEcoMessage.sensor.id})">{{vibrationEcoMessage.sensor.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="vibration-eco-message-detail({id:vibrationEcoMessage.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="vibration-eco-message.edit({id:vibrationEcoMessage.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="vibration-eco-message.delete({id:vibrationEcoMessage.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

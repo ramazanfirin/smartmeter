@@ -1,0 +1,102 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myVibrationEcoMessageLabel" data-translate="smartmeterApp.vibrationEcoMessage.home.createOrEditLabel">Create or edit a Vibration Eco Message</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.vibrationEcoMessage.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.vibrationEcoMessage.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.insertDate" for="field_insertDate">Insert Date</label>
+                <div class="input-group">
+                    <input id="field_insertDate" type="text" class="form-control" name="insertDate" datetime-picker="{{dateformat}}" ng-model="vm.vibrationEcoMessage.insertDate" is-open="vm.datePickerOpenStatus.insertDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('insertDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.base64Message" for="field_base64Message">Base 64 Message</label>
+            <input type="text" class="form-control" name="base64Message" id="field_base64Message"
+                    ng-model="vm.vibrationEcoMessage.base64Message"
+                    ng-maxlength="4000"/>
+            <div ng-show="editForm.base64Message.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.base64Message.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000">
+                    This field cannot be longer than 4000 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.hexMessage" for="field_hexMessage">Hex Message</label>
+            <input type="text" class="form-control" name="hexMessage" id="field_hexMessage"
+                    ng-model="vm.vibrationEcoMessage.hexMessage"
+                    ng-maxlength="4000"/>
+            <div ng-show="editForm.hexMessage.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.hexMessage.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000">
+                    This field cannot be longer than 4000 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.batteryValue" for="field_batteryValue">Battery Value</label>
+            <input type="number" class="form-control" name="batteryValue" id="field_batteryValue"
+                    ng-model="vm.vibrationEcoMessage.batteryValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.xAxisValue" for="field_xAxisValue">X Axis Value</label>
+            <input type="number" class="form-control" name="xAxisValue" id="field_xAxisValue"
+                    ng-model="vm.vibrationEcoMessage.xAxisValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.yAxisValue" for="field_yAxisValue">Y Axis Value</label>
+            <input type="number" class="form-control" name="yAxisValue" id="field_yAxisValue"
+                    ng-model="vm.vibrationEcoMessage.yAxisValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.zAxisValue" for="field_zAxisValue">Z Axis Value</label>
+            <input type="number" class="form-control" name="zAxisValue" id="field_zAxisValue"
+                    ng-model="vm.vibrationEcoMessage.zAxisValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.fPort" for="field_fPort">F Port</label>
+            <input type="text" class="form-control" name="fPort" id="field_fPort"
+                    ng-model="vm.vibrationEcoMessage.fPort"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.fCnt" for="field_fCnt">F Cnt</label>
+            <input type="number" class="form-control" name="fCnt" id="field_fCnt"
+                    ng-model="vm.vibrationEcoMessage.fCnt"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="smartmeterApp.vibrationEcoMessage.sensor" for="field_sensor">Sensor</label>
+            <select class="form-control" id="field_sensor" name="sensor" ng-model="vm.vibrationEcoMessage.sensor" ng-options="sensor as sensor.id for sensor in vm.sensors track by sensor.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

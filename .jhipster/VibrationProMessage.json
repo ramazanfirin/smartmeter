@@ -1,0 +1,67 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "sensor",
+            "otherEntityName": "sensor",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "insertDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "base64Message",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4000
+        },
+        {
+            "fieldName": "hexMessage",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 4000
+        },
+        {
+            "fieldName": "batteryValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "xAxisValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "yAxisValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "zAxisValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "temperature",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "fPort",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fCnt",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20250322151715",
+    "entityTableName": "vibration_pro_message",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}
