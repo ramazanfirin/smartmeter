@@ -116,6 +116,12 @@ public class MqttClientService implements MqttCallback {
     }
 
     public void sendGetImageCommand(String imei) {
+//    	 try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
     	publish(imei, "0A01");
     }
     
@@ -127,8 +133,9 @@ public class MqttClientService implements MqttCallback {
             //MqttMessage mqttMessage = new MqttMessage(payload);
             
             mqttMessage.setQos(1);
+            mqttMessage.setRetained(true);
             if(mqttClient.isConnected()) {
-            	mqttClient.publish(topic, mqttMessage);
+            	mqttClient.publish("device/"+topic, mqttMessage);
             	log.info("Mesaj gönderildi: Mesaj:" + hexString+",topic:"+topic);
             }
             } catch (MqttException e) {
@@ -136,7 +143,7 @@ public class MqttClientService implements MqttCallback {
         }
     }
     
-    @Scheduled(fixedRate = 15000)
+   // @Scheduled(fixedRate = 15000)
     public void publishTest() {
     	publish("device/sub/aaaa", "merhaba");
     }
