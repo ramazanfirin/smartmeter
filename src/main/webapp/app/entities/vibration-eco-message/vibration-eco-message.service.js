@@ -4,9 +4,9 @@
         .module('smartmeterApp')
         .factory('VibrationEcoMessage', VibrationEcoMessage);
 
-    VibrationEcoMessage.$inject = ['$resource', 'DateUtils'];
+    VibrationEcoMessage.$inject = ['$resource'];
 
-    function VibrationEcoMessage ($resource, DateUtils) {
+    function VibrationEcoMessage ($resource) {
         var resourceUrl =  'api/vibration-eco-messages/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,7 +16,6 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
-                        data.insertDate = DateUtils.convertDateTimeFromServer(data.insertDate);
                     }
                     return data;
                 }

@@ -4,18 +4,6 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.insertDate">Insert Date</span></dt>
-        <dd>
-            <span>{{vm.vibrationEcoMessage.insertDate | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.base64Message">Base 64 Message</span></dt>
-        <dd>
-            <span>{{vm.vibrationEcoMessage.base64Message}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.hexMessage">Hex Message</span></dt>
-        <dd>
-            <span>{{vm.vibrationEcoMessage.hexMessage}}</span>
-        </dd>
         <dt><span data-translate="smartmeterApp.vibrationEcoMessage.batteryValue">Battery Value</span></dt>
         <dd>
             <span>{{vm.vibrationEcoMessage.batteryValue}}</span>
@@ -32,17 +20,9 @@
         <dd>
             <span>{{vm.vibrationEcoMessage.zAxisValue}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.fPort">F Port</span></dt>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.loraMessage">Lora Message</span></dt>
         <dd>
-            <span>{{vm.vibrationEcoMessage.fPort}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.fCnt">F Cnt</span></dt>
-        <dd>
-            <span>{{vm.vibrationEcoMessage.fCnt}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.sensor">Sensor</span></dt>
-        <dd>
-            <a ui-sref="sensor-detail({id:vm.vibrationEcoMessage.sensor.id})">{{vm.vibrationEcoMessage.sensor.id}}</a>
+            <a ui-sref="lorawan-message-detail({id:vm.vibrationEcoMessage.loraMessage.id})">{{vm.vibrationEcoMessage.loraMessage.id}}</a>
         </dd>
     </dl>
 

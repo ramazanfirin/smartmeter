@@ -32,6 +32,10 @@
             "fieldValues": "VIBRATION,BUTTON,WATER_METER,VIBRATION_ECO,VIBRATION_PRO"
         },
         {
+            "fieldName": "thingsBoardDeviceId",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "lastSeenDate",
             "fieldType": "ZonedDateTime"
         },

@@ -7,39 +7,57 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterteknoloji.net.config.ApplicationProperties;
-import com.masterteknoloji.net.domain.CurrentMeterMessage;
 import com.masterteknoloji.net.domain.LorawanMessage;
 import com.masterteknoloji.net.domain.Sensor;
 import com.masterteknoloji.net.domain.VibrationEcoMessage;
-import com.masterteknoloji.net.repository.CurrentMeterMessageRepository;
+import com.masterteknoloji.net.domain.VibrationProMessage;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
 import com.masterteknoloji.net.repository.SensorRepository;
+import com.masterteknoloji.net.repository.VibrationEcoMessageRepository;
+import com.masterteknoloji.net.repository.VibrationProMessageRepository;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
-import com.masterteknoloji.net.web.rest.vm.thingsboard.CurrentSensorVM;
 import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationSensorVM;
 
 @Service
-public class CurrentMeterService extends BaseLoraDeviceService implements LoraDeviceService{
+public class VibrationProSensorService extends BaseLoraDeviceService implements LoraDeviceService{
 
+    private final LorawanMessageRepository lorawanMessageRepository;
 	
-	private final LorawanMessageRepository lorawanMessageRepository;
-	private final SensorRepository sensorRepository;
 	private final ApplicationProperties applicationProperties;
-	private final CurrentMeterMessageRepository currentMeterMessageRepository;
+	
+	private final SensorRepository sensorRepository;
+	
+	private final VibrationProMessageRepository vibrationProMessageRepository;
+	
 	private final ObjectMapper objectMapper;
 	
-	public CurrentMeterService(LorawanMessageRepository lorawanMessageRepository, SensorRepository sensorRepository, 
-			ApplicationProperties applicationProperties,CurrentMeterMessageRepository currentMeterMessageRepository,ObjectMapper objectMapper) {
+	public VibrationProSensorService(LorawanMessageRepository lorawanMessageRepository,
+			SensorRepository sensorRepository, ApplicationProperties applicationProperties,
+			VibrationProMessageRepository vibrationProMessageRepository,ObjectMapper objectMapper) {
 		super(lorawanMessageRepository, sensorRepository,applicationProperties);
-        
+		
+		this.applicationProperties = applicationProperties;
 		this.lorawanMessageRepository = lorawanMessageRepository;
 		this.sensorRepository = sensorRepository;
-		this.applicationProperties = applicationProperties;
-		this.currentMeterMessageRepository = currentMeterMessageRepository;
+		this.vibrationProMessageRepository = vibrationProMessageRepository;
 		this.objectMapper = objectMapper;
+		
+		
+
 	}
 
+//	@Override
+//	public VibrationEcoMessage parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM) throws Exception {
+//		VibrationEcoMessage vibrationEcoMessage = new VibrationEcoMessage();
+//		vibrationEcoMessage.setBatteryValue(null);
+//		vibrationEcoMessage.setxAxisValue(null);
+//		vibrationEcoMessage.setyAxisValue(null);
+//		vibrationEcoMessage.setzAxisValue(null);
+//		
+//		return vibrationEcoMessageRepository.save(vibrationEcoMessage);
+//	}
+	
 	@Scheduled(fixedDelay = 15000)
 	public void test() {
 		try {
@@ -58,15 +76,14 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 	@Override
 	public Object parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM)
 			throws Exception {
-		CurrentMeterMessage currentMeterMessage = new CurrentMeterMessage();
+		VibrationProMessage vibrationProMessage = new VibrationProMessage();
+		VibrationSensorVM vibrationSensorVM = parseHexData(lorawanMessage);
+		vibrationProMessage.setBatteryValue(0f);
+		vibrationProMessage.setxAxisValue(vibrationSensorVM.getxAxisValue());
+		vibrationProMessage.setyAxisValue(vibrationSensorVM.getyAxisValue());
+		vibrationProMessage.setzAxisValue(vibrationSensorVM.getzAxisValue());
 		
-		CurrentSensorVM currentSensorVM = parseHexData(lorawanMessage);
-		currentMeterMessage.setBatteryValue(currentSensorVM.getBattery());
-		currentMeterMessage.setCurrent(currentSensorVM.getCurrent());
-		currentMeterMessage.setTotalEnergy(currentSensorVM.getTotalEnergy());
-		currentMeterMessage.setReason(currentSensorVM.getReason());
-		
-		return currentMeterMessageRepository.save(currentMeterMessage);
+		return vibrationProMessageRepository.save(vibrationProMessage);
 	}
 	
 	@Override
@@ -80,14 +97,10 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 	public void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage,Object object) throws Exception {
 		
 		try {
-			CurrentMeterMessage ecoMessage = (CurrentMeterMessage)object;
+			VibrationProMessage message = (VibrationProMessage)object;
 			
-			CurrentSensorVM currentSensorVM = new CurrentSensorVM();
-			currentSensorVM.setBattery(ecoMessage.getBatteryValue());
-			currentSensorVM.setCurrent(ecoMessage.getCurrent());
-			currentSensorVM.setTotalEnergy(ecoMessage.getCurrent());
-			currentSensorVM.setReason(ecoMessage.getReason());
-			String json = objectMapper.writeValueAsString(currentSensorVM);	
+			VibrationSensorVM vibrationSensorVM = new VibrationSensorVM(message.getxAxisValue(), message.getyAxisValue(), message.getzAxisValue(), 0f);
+			String json = objectMapper.writeValueAsString(vibrationSensorVM);	
 
 			
 			sendData(lorawanMessage.getSensor(), json);
@@ -100,7 +113,7 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 		
 	}
 	
-	public CurrentSensorVM parseHexData(LorawanMessage lorawanMessage) {
+	public VibrationSensorVM parseHexData(LorawanMessage lorawanMessage) {
 		Float xAxisValue = 0F;
 		Float yAxisValue = 0F;
 		Float zAxisValue = 0F;
@@ -130,12 +143,7 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 		
 		System.out.println(xAxisValue+","+yAxisValue+","+zAxisValue);
 		
-		CurrentSensorVM currentSensorVM = new CurrentSensorVM();
-		currentSensorVM.setBattery(0f);
-		currentSensorVM.setCurrent(0f);
-		currentSensorVM.setTotalEnergy(0f);
-		currentSensorVM.setReason("");
-		currentSensorVM.setCableTemperature(0f);
-		return currentSensorVM;
+		VibrationSensorVM vibrationSensorVM = new VibrationSensorVM(xAxisValue, yAxisValue, zAxisValue, 0F);
+		return vibrationSensorVM;
 	}
 }

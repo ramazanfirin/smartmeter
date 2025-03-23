@@ -21,6 +21,7 @@
             "imei": "Imei",
             "connectionType": "Connection Type",
             "type": "Type",
+            "thingsBoardDeviceId": "Things Board Device Id",
             "lastSeenDate": "Last Seen Date",
             "lastMessage": "Last Message",
             "lastImage": "Last Image"

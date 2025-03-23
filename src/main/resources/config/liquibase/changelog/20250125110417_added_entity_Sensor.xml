@@ -46,6 +46,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="things_board_device_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="last_seen_date" type="timestamp">
                 <constraints nullable="true" />
             </column>

@@ -134,6 +134,7 @@
                                 imei: null,
                                 connectionType: null,
                                 type: null,
+                                thingsBoardDeviceId: null,
                                 lastSeenDate: null,
                                 lastMessage: null,
                                 lastImage: null,

@@ -4,18 +4,6 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="smartmeterApp.vibrationProMessage.insertDate">Insert Date</span></dt>
-        <dd>
-            <span>{{vm.vibrationProMessage.insertDate | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationProMessage.base64Message">Base 64 Message</span></dt>
-        <dd>
-            <span>{{vm.vibrationProMessage.base64Message}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationProMessage.hexMessage">Hex Message</span></dt>
-        <dd>
-            <span>{{vm.vibrationProMessage.hexMessage}}</span>
-        </dd>
         <dt><span data-translate="smartmeterApp.vibrationProMessage.batteryValue">Battery Value</span></dt>
         <dd>
             <span>{{vm.vibrationProMessage.batteryValue}}</span>
@@ -36,17 +24,9 @@
         <dd>
             <span>{{vm.vibrationProMessage.temperature}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.vibrationProMessage.fPort">F Port</span></dt>
+        <dt><span data-translate="smartmeterApp.vibrationProMessage.loraMessage">Lora Message</span></dt>
         <dd>
-            <span>{{vm.vibrationProMessage.fPort}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationProMessage.fCnt">F Cnt</span></dt>
-        <dd>
-            <span>{{vm.vibrationProMessage.fCnt}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.vibrationProMessage.sensor">Sensor</span></dt>
-        <dd>
-            <a ui-sref="sensor-detail({id:vm.vibrationProMessage.sensor.id})">{{vm.vibrationProMessage.sensor.id}}</a>
+            <a ui-sref="lorawan-message-detail({id:vm.vibrationProMessage.loraMessage.id})">{{vm.vibrationProMessage.loraMessage.id}}</a>
         </dd>
     </dl>
 

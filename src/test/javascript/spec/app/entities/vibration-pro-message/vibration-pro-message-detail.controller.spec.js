@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('VibrationProMessage Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockVibrationProMessage, MockSensor;
+        var MockEntity, MockPreviousState, MockVibrationProMessage, MockLorawanMessage;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,7 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockVibrationProMessage = jasmine.createSpy('MockVibrationProMessage');
-            MockSensor = jasmine.createSpy('MockSensor');
+            MockLorawanMessage = jasmine.createSpy('MockLorawanMessage');
             
 
             var locals = {
@@ -22,7 +22,7 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'VibrationProMessage': MockVibrationProMessage,
-                'Sensor': MockSensor
+                'LorawanMessage': MockLorawanMessage
             };
             createController = function() {
                 $injector.get('$controller')("VibrationProMessageDetailController", locals);

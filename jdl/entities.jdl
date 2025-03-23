@@ -5,6 +5,7 @@ entity Sensor{
 	imei String
 	connectionType ConnectionType
     type Type
+    thingsBoardDeviceId String
     lastSeenDate ZonedDateTime
     lastMessage String  maxlength(4000)
     lastImage ImageBlob 

@@ -19,35 +19,25 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="insertDate"><span data-translate="smartmeterApp.vibrationProMessage.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="base64Message"><span data-translate="smartmeterApp.vibrationProMessage.base64Message">Base 64 Message</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="hexMessage"><span data-translate="smartmeterApp.vibrationProMessage.hexMessage">Hex Message</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.vibrationProMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="xAxisValue"><span data-translate="smartmeterApp.vibrationProMessage.xAxisValue">X Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="yAxisValue"><span data-translate="smartmeterApp.vibrationProMessage.yAxisValue">Y Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="zAxisValue"><span data-translate="smartmeterApp.vibrationProMessage.zAxisValue">Z Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="temperature"><span data-translate="smartmeterApp.vibrationProMessage.temperature">Temperature</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fPort"><span data-translate="smartmeterApp.vibrationProMessage.fPort">F Port</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fCnt"><span data-translate="smartmeterApp.vibrationProMessage.fCnt">F Cnt</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.vibrationProMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="loraMessage.id"><span data-translate="smartmeterApp.vibrationProMessage.loraMessage">Lora Message</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="vibrationProMessage in vm.vibrationProMessages track by vibrationProMessage.id">
                     <td><a ui-sref="vibration-pro-message-detail({id:vibrationProMessage.id})">{{vibrationProMessage.id}}</a></td>
-                    <td>{{vibrationProMessage.insertDate | date:'medium'}}</td>
-                    <td>{{vibrationProMessage.base64Message}}</td>
-                    <td>{{vibrationProMessage.hexMessage}}</td>
                     <td>{{vibrationProMessage.batteryValue}}</td>
                     <td>{{vibrationProMessage.xAxisValue}}</td>
                     <td>{{vibrationProMessage.yAxisValue}}</td>
                     <td>{{vibrationProMessage.zAxisValue}}</td>
                     <td>{{vibrationProMessage.temperature}}</td>
-                    <td>{{vibrationProMessage.fPort}}</td>
-                    <td>{{vibrationProMessage.fCnt}}</td>
                     <td>
-                        <a ui-sref="sensor-detail({id:vibrationProMessage.sensor.id})">{{vibrationProMessage.sensor.id}}</a>
+                        <a ui-sref="lorawan-message-detail({id:vibrationProMessage.loraMessage.id})">{{vibrationProMessage.loraMessage.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

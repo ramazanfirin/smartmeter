@@ -82,7 +82,7 @@ public class BaseLoraDeviceService implements LoraDeviceService{
 
 		OkHttpClient client = new OkHttpClient();
  
-		String url = applicationProperties.getThingsBoardUrl()+sensor.getAppEui()+"/telemetry ";
+		String url = applicationProperties.getThingsBoardUrl()+sensor.getThingsBoardDeviceId()+"/telemetry ";
         RequestBody body = RequestBody.create(jsonString, MediaType.parse("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()

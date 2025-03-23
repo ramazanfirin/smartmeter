@@ -15,16 +15,11 @@
             "detail": {
                 "title": "Vibration Eco Message"
             },
-            "insertDate": "Insert Date",
-            "base64Message": "Base 64 Message",
-            "hexMessage": "Hex Message",
             "batteryValue": "Battery Value",
             "xAxisValue": "X Axis Value",
             "yAxisValue": "Y Axis Value",
             "zAxisValue": "Z Axis Value",
-            "fPort": "F Port",
-            "fCnt": "F Cnt",
-            "sensor": "Sensor"
+            "loraMessage": "Lora Message"
         }
     }
 }

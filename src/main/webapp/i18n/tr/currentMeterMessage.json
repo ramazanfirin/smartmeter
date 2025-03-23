@@ -15,16 +15,11 @@
             "detail": {
                 "title": "Current Meter Message"
             },
-            "insertDate": "Insert Date",
-            "base64Message": "Base 64 Message",
-            "hexMessage": "Hex Message",
             "batteryValue": "Battery Value",
             "current": "Current",
             "totalEnergy": "Total Energy",
             "reason": "Reason",
-            "fPort": "F Port",
-            "fCnt": "F Cnt",
-            "sensor": "Sensor"
+            "loraMessage": "Lora Message"
         }
     }
 }

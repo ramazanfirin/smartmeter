@@ -124,16 +124,11 @@
                     resolve: {
                         entity: function () {
                             return {
-                                insertDate: null,
-                                base64Message: null,
-                                hexMessage: null,
                                 batteryValue: null,
                                 xAxisValue: null,
                                 yAxisValue: null,
                                 zAxisValue: null,
                                 temperature: null,
-                                fPort: null,
-                                fCnt: null,
                                 id: null
                             };
                         }

@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('VibrationProMessageDetailController', VibrationProMessageDetailController);
 
-    VibrationProMessageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'VibrationProMessage', 'Sensor'];
+    VibrationProMessageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'VibrationProMessage', 'LorawanMessage'];
 
-    function VibrationProMessageDetailController($scope, $rootScope, $stateParams, previousState, entity, VibrationProMessage, Sensor) {
+    function VibrationProMessageDetailController($scope, $rootScope, $stateParams, previousState, entity, VibrationProMessage, LorawanMessage) {
         var vm = this;
 
         vm.vibrationProMessage = entity;

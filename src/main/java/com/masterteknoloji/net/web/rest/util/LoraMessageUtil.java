@@ -58,4 +58,9 @@ public class LoraMessageUtil {
 	    }
 	    return data;
 	}
+	
+	public static String[] parseHex(String hex) {
+		String[] hexArray = hex.replace(" ", "").split("(?<=\\G.{2})");
+		return hexArray;
+	}
 }

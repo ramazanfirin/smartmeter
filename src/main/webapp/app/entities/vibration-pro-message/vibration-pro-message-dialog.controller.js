@@ -5,17 +5,15 @@
         .module('smartmeterApp')
         .controller('VibrationProMessageDialogController', VibrationProMessageDialogController);
 
-    VibrationProMessageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'VibrationProMessage', 'Sensor'];
+    VibrationProMessageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'VibrationProMessage', 'LorawanMessage'];
 
-    function VibrationProMessageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, VibrationProMessage, Sensor) {
+    function VibrationProMessageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, VibrationProMessage, LorawanMessage) {
         var vm = this;
 
         vm.vibrationProMessage = entity;
         vm.clear = clear;
-        vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.sensors = Sensor.query();
+        vm.lorawanmessages = LorawanMessage.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -44,10 +42,6 @@
             vm.isSaving = false;
         }
 
-        vm.datePickerOpenStatus.insertDate = false;
 
-        function openCalendar (date) {
-            vm.datePickerOpenStatus[date] = true;
-        }
     }
 })();

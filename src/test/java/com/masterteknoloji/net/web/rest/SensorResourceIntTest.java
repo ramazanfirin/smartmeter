@@ -64,6 +64,9 @@ public class SensorResourceIntTest {
     private static final Type DEFAULT_TYPE = Type.VIBRATION;
     private static final Type UPDATED_TYPE = Type.BUTTON;
 
+    private static final String DEFAULT_THINGS_BOARD_DEVICE_ID = "AAAAAAAAAA";
+    private static final String UPDATED_THINGS_BOARD_DEVICE_ID = "BBBBBBBBBB";
+
     private static final ZonedDateTime DEFAULT_LAST_SEEN_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_LAST_SEEN_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
@@ -119,6 +122,7 @@ public class SensorResourceIntTest {
             .imei(DEFAULT_IMEI)
             .connectionType(DEFAULT_CONNECTION_TYPE)
             .type(DEFAULT_TYPE)
+            .thingsBoardDeviceId(DEFAULT_THINGS_BOARD_DEVICE_ID)
             .lastSeenDate(DEFAULT_LAST_SEEN_DATE)
             .lastMessage(DEFAULT_LAST_MESSAGE)
             .lastImage(DEFAULT_LAST_IMAGE)
@@ -152,6 +156,7 @@ public class SensorResourceIntTest {
         assertThat(testSensor.getImei()).isEqualTo(DEFAULT_IMEI);
         assertThat(testSensor.getConnectionType()).isEqualTo(DEFAULT_CONNECTION_TYPE);
         assertThat(testSensor.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testSensor.getThingsBoardDeviceId()).isEqualTo(DEFAULT_THINGS_BOARD_DEVICE_ID);
         assertThat(testSensor.getLastSeenDate()).isEqualTo(DEFAULT_LAST_SEEN_DATE);
         assertThat(testSensor.getLastMessage()).isEqualTo(DEFAULT_LAST_MESSAGE);
         assertThat(testSensor.getLastImage()).isEqualTo(DEFAULT_LAST_IMAGE);
@@ -212,6 +217,7 @@ public class SensorResourceIntTest {
             .andExpect(jsonPath("$.[*].imei").value(hasItem(DEFAULT_IMEI.toString())))
             .andExpect(jsonPath("$.[*].connectionType").value(hasItem(DEFAULT_CONNECTION_TYPE.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].thingsBoardDeviceId").value(hasItem(DEFAULT_THINGS_BOARD_DEVICE_ID.toString())))
             .andExpect(jsonPath("$.[*].lastSeenDate").value(hasItem(sameInstant(DEFAULT_LAST_SEEN_DATE))))
             .andExpect(jsonPath("$.[*].lastMessage").value(hasItem(DEFAULT_LAST_MESSAGE.toString())))
             .andExpect(jsonPath("$.[*].lastImageContentType").value(hasItem(DEFAULT_LAST_IMAGE_CONTENT_TYPE)))
@@ -235,6 +241,7 @@ public class SensorResourceIntTest {
             .andExpect(jsonPath("$.imei").value(DEFAULT_IMEI.toString()))
             .andExpect(jsonPath("$.connectionType").value(DEFAULT_CONNECTION_TYPE.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.thingsBoardDeviceId").value(DEFAULT_THINGS_BOARD_DEVICE_ID.toString()))
             .andExpect(jsonPath("$.lastSeenDate").value(sameInstant(DEFAULT_LAST_SEEN_DATE)))
             .andExpect(jsonPath("$.lastMessage").value(DEFAULT_LAST_MESSAGE.toString()))
             .andExpect(jsonPath("$.lastImageContentType").value(DEFAULT_LAST_IMAGE_CONTENT_TYPE))
@@ -267,6 +274,7 @@ public class SensorResourceIntTest {
             .imei(UPDATED_IMEI)
             .connectionType(UPDATED_CONNECTION_TYPE)
             .type(UPDATED_TYPE)
+            .thingsBoardDeviceId(UPDATED_THINGS_BOARD_DEVICE_ID)
             .lastSeenDate(UPDATED_LAST_SEEN_DATE)
             .lastMessage(UPDATED_LAST_MESSAGE)
             .lastImage(UPDATED_LAST_IMAGE)
@@ -287,6 +295,7 @@ public class SensorResourceIntTest {
         assertThat(testSensor.getImei()).isEqualTo(UPDATED_IMEI);
         assertThat(testSensor.getConnectionType()).isEqualTo(UPDATED_CONNECTION_TYPE);
         assertThat(testSensor.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testSensor.getThingsBoardDeviceId()).isEqualTo(UPDATED_THINGS_BOARD_DEVICE_ID);
         assertThat(testSensor.getLastSeenDate()).isEqualTo(UPDATED_LAST_SEEN_DATE);
         assertThat(testSensor.getLastMessage()).isEqualTo(UPDATED_LAST_MESSAGE);
         assertThat(testSensor.getLastImage()).isEqualTo(UPDATED_LAST_IMAGE);
