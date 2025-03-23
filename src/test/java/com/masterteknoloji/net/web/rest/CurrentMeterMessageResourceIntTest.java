@@ -21,13 +21,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
 import java.util.List;
 
-import static com.masterteknoloji.net.web.rest.TestUtil.sameInstant;
 import static com.masterteknoloji.net.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -43,15 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = SmartmeterApp.class)
 public class CurrentMeterMessageResourceIntTest {
 
-    private static final ZonedDateTime DEFAULT_INSERT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_INSERT_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
-    private static final String DEFAULT_BASE_64_MESSAGE = "AAAAAAAAAA";
-    private static final String UPDATED_BASE_64_MESSAGE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_HEX_MESSAGE = "AAAAAAAAAA";
-    private static final String UPDATED_HEX_MESSAGE = "BBBBBBBBBB";
-
     private static final Float DEFAULT_BATTERY_VALUE = 1F;
     private static final Float UPDATED_BATTERY_VALUE = 2F;
 
@@ -63,12 +49,6 @@ public class CurrentMeterMessageResourceIntTest {
 
     private static final String DEFAULT_REASON = "AAAAAAAAAA";
     private static final String UPDATED_REASON = "BBBBBBBBBB";
-
-    private static final String DEFAULT_F_PORT = "AAAAAAAAAA";
-    private static final String UPDATED_F_PORT = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_F_CNT = 1L;
-    private static final Long UPDATED_F_CNT = 2L;
 
     @Autowired
     private CurrentMeterMessageRepository currentMeterMessageRepository;
@@ -108,15 +88,10 @@ public class CurrentMeterMessageResourceIntTest {
      */
     public static CurrentMeterMessage createEntity(EntityManager em) {
         CurrentMeterMessage currentMeterMessage = new CurrentMeterMessage()
-            .insertDate(DEFAULT_INSERT_DATE)
-            .base64Message(DEFAULT_BASE_64_MESSAGE)
-            .hexMessage(DEFAULT_HEX_MESSAGE)
             .batteryValue(DEFAULT_BATTERY_VALUE)
             .current(DEFAULT_CURRENT)
             .totalEnergy(DEFAULT_TOTAL_ENERGY)
-            .reason(DEFAULT_REASON)
-            .fPort(DEFAULT_F_PORT)
-            .fCnt(DEFAULT_F_CNT);
+            .reason(DEFAULT_REASON);
         return currentMeterMessage;
     }
 
@@ -140,15 +115,10 @@ public class CurrentMeterMessageResourceIntTest {
         List<CurrentMeterMessage> currentMeterMessageList = currentMeterMessageRepository.findAll();
         assertThat(currentMeterMessageList).hasSize(databaseSizeBeforeCreate + 1);
         CurrentMeterMessage testCurrentMeterMessage = currentMeterMessageList.get(currentMeterMessageList.size() - 1);
-        assertThat(testCurrentMeterMessage.getInsertDate()).isEqualTo(DEFAULT_INSERT_DATE);
-        assertThat(testCurrentMeterMessage.getBase64Message()).isEqualTo(DEFAULT_BASE_64_MESSAGE);
-        assertThat(testCurrentMeterMessage.getHexMessage()).isEqualTo(DEFAULT_HEX_MESSAGE);
         assertThat(testCurrentMeterMessage.getBatteryValue()).isEqualTo(DEFAULT_BATTERY_VALUE);
         assertThat(testCurrentMeterMessage.getCurrent()).isEqualTo(DEFAULT_CURRENT);
         assertThat(testCurrentMeterMessage.getTotalEnergy()).isEqualTo(DEFAULT_TOTAL_ENERGY);
         assertThat(testCurrentMeterMessage.getReason()).isEqualTo(DEFAULT_REASON);
-        assertThat(testCurrentMeterMessage.getfPort()).isEqualTo(DEFAULT_F_PORT);
-        assertThat(testCurrentMeterMessage.getfCnt()).isEqualTo(DEFAULT_F_CNT);
     }
 
     @Test
@@ -181,15 +151,10 @@ public class CurrentMeterMessageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(currentMeterMessage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].insertDate").value(hasItem(sameInstant(DEFAULT_INSERT_DATE))))
-            .andExpect(jsonPath("$.[*].base64Message").value(hasItem(DEFAULT_BASE_64_MESSAGE.toString())))
-            .andExpect(jsonPath("$.[*].hexMessage").value(hasItem(DEFAULT_HEX_MESSAGE.toString())))
             .andExpect(jsonPath("$.[*].batteryValue").value(hasItem(DEFAULT_BATTERY_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].current").value(hasItem(DEFAULT_CURRENT.doubleValue())))
             .andExpect(jsonPath("$.[*].totalEnergy").value(hasItem(DEFAULT_TOTAL_ENERGY.doubleValue())))
-            .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
-            .andExpect(jsonPath("$.[*].fPort").value(hasItem(DEFAULT_F_PORT.toString())))
-            .andExpect(jsonPath("$.[*].fCnt").value(hasItem(DEFAULT_F_CNT.intValue())));
+            .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())));
     }
 
     @Test
@@ -203,15 +168,10 @@ public class CurrentMeterMessageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(currentMeterMessage.getId().intValue()))
-            .andExpect(jsonPath("$.insertDate").value(sameInstant(DEFAULT_INSERT_DATE)))
-            .andExpect(jsonPath("$.base64Message").value(DEFAULT_BASE_64_MESSAGE.toString()))
-            .andExpect(jsonPath("$.hexMessage").value(DEFAULT_HEX_MESSAGE.toString()))
             .andExpect(jsonPath("$.batteryValue").value(DEFAULT_BATTERY_VALUE.doubleValue()))
             .andExpect(jsonPath("$.current").value(DEFAULT_CURRENT.doubleValue()))
             .andExpect(jsonPath("$.totalEnergy").value(DEFAULT_TOTAL_ENERGY.doubleValue()))
-            .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
-            .andExpect(jsonPath("$.fPort").value(DEFAULT_F_PORT.toString()))
-            .andExpect(jsonPath("$.fCnt").value(DEFAULT_F_CNT.intValue()));
+            .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()));
     }
 
     @Test
@@ -234,15 +194,10 @@ public class CurrentMeterMessageResourceIntTest {
         // Disconnect from session so that the updates on updatedCurrentMeterMessage are not directly saved in db
         em.detach(updatedCurrentMeterMessage);
         updatedCurrentMeterMessage
-            .insertDate(UPDATED_INSERT_DATE)
-            .base64Message(UPDATED_BASE_64_MESSAGE)
-            .hexMessage(UPDATED_HEX_MESSAGE)
             .batteryValue(UPDATED_BATTERY_VALUE)
             .current(UPDATED_CURRENT)
             .totalEnergy(UPDATED_TOTAL_ENERGY)
-            .reason(UPDATED_REASON)
-            .fPort(UPDATED_F_PORT)
-            .fCnt(UPDATED_F_CNT);
+            .reason(UPDATED_REASON);
 
         restCurrentMeterMessageMockMvc.perform(put("/api/current-meter-messages")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -253,15 +208,10 @@ public class CurrentMeterMessageResourceIntTest {
         List<CurrentMeterMessage> currentMeterMessageList = currentMeterMessageRepository.findAll();
         assertThat(currentMeterMessageList).hasSize(databaseSizeBeforeUpdate);
         CurrentMeterMessage testCurrentMeterMessage = currentMeterMessageList.get(currentMeterMessageList.size() - 1);
-        assertThat(testCurrentMeterMessage.getInsertDate()).isEqualTo(UPDATED_INSERT_DATE);
-        assertThat(testCurrentMeterMessage.getBase64Message()).isEqualTo(UPDATED_BASE_64_MESSAGE);
-        assertThat(testCurrentMeterMessage.getHexMessage()).isEqualTo(UPDATED_HEX_MESSAGE);
         assertThat(testCurrentMeterMessage.getBatteryValue()).isEqualTo(UPDATED_BATTERY_VALUE);
         assertThat(testCurrentMeterMessage.getCurrent()).isEqualTo(UPDATED_CURRENT);
         assertThat(testCurrentMeterMessage.getTotalEnergy()).isEqualTo(UPDATED_TOTAL_ENERGY);
         assertThat(testCurrentMeterMessage.getReason()).isEqualTo(UPDATED_REASON);
-        assertThat(testCurrentMeterMessage.getfPort()).isEqualTo(UPDATED_F_PORT);
-        assertThat(testCurrentMeterMessage.getfCnt()).isEqualTo(UPDATED_F_CNT);
     }
 
     @Test

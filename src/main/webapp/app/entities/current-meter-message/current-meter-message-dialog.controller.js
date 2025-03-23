@@ -5,17 +5,15 @@
         .module('smartmeterApp')
         .controller('CurrentMeterMessageDialogController', CurrentMeterMessageDialogController);
 
-    CurrentMeterMessageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CurrentMeterMessage', 'Sensor'];
+    CurrentMeterMessageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CurrentMeterMessage', 'LorawanMessage'];
 
-    function CurrentMeterMessageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CurrentMeterMessage, Sensor) {
+    function CurrentMeterMessageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CurrentMeterMessage, LorawanMessage) {
         var vm = this;
 
         vm.currentMeterMessage = entity;
         vm.clear = clear;
-        vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.sensors = Sensor.query();
+        vm.lorawanmessages = LorawanMessage.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -44,10 +42,6 @@
             vm.isSaving = false;
         }
 
-        vm.datePickerOpenStatus.insertDate = false;
 
-        function openCalendar (date) {
-            vm.datePickerOpenStatus[date] = true;
-        }
     }
 })();

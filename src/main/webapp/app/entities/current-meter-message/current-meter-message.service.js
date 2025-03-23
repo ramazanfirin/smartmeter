@@ -4,9 +4,9 @@
         .module('smartmeterApp')
         .factory('CurrentMeterMessage', CurrentMeterMessage);
 
-    CurrentMeterMessage.$inject = ['$resource', 'DateUtils'];
+    CurrentMeterMessage.$inject = ['$resource'];
 
-    function CurrentMeterMessage ($resource, DateUtils) {
+    function CurrentMeterMessage ($resource) {
         var resourceUrl =  'api/current-meter-messages/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,7 +16,6 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
-                        data.insertDate = DateUtils.convertDateTimeFromServer(data.insertDate);
                     }
                     return data;
                 }

@@ -4,18 +4,6 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="smartmeterApp.currentMeterMessage.insertDate">Insert Date</span></dt>
-        <dd>
-            <span>{{vm.currentMeterMessage.insertDate | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.currentMeterMessage.base64Message">Base 64 Message</span></dt>
-        <dd>
-            <span>{{vm.currentMeterMessage.base64Message}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.currentMeterMessage.hexMessage">Hex Message</span></dt>
-        <dd>
-            <span>{{vm.currentMeterMessage.hexMessage}}</span>
-        </dd>
         <dt><span data-translate="smartmeterApp.currentMeterMessage.batteryValue">Battery Value</span></dt>
         <dd>
             <span>{{vm.currentMeterMessage.batteryValue}}</span>
@@ -32,17 +20,9 @@
         <dd>
             <span>{{vm.currentMeterMessage.reason}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.currentMeterMessage.fPort">F Port</span></dt>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.loraMessage">Lora Message</span></dt>
         <dd>
-            <span>{{vm.currentMeterMessage.fPort}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.currentMeterMessage.fCnt">F Cnt</span></dt>
-        <dd>
-            <span>{{vm.currentMeterMessage.fCnt}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.currentMeterMessage.sensor">Sensor</span></dt>
-        <dd>
-            <a ui-sref="sensor-detail({id:vm.currentMeterMessage.sensor.id})">{{vm.currentMeterMessage.sensor.id}}</a>
+            <a ui-sref="lorawan-message-detail({id:vm.currentMeterMessage.loraMessage.id})">{{vm.currentMeterMessage.loraMessage.id}}</a>
         </dd>
     </dl>
 

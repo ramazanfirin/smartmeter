@@ -4,10 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -24,17 +22,6 @@ public class CurrentMeterMessage implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "insert_date")
-    private ZonedDateTime insertDate;
-
-    @Size(max = 4000)
-    @Column(name = "base_64_message", length = 4000)
-    private String base64Message;
-
-    @Size(max = 4000)
-    @Column(name = "hex_message", length = 4000)
-    private String hexMessage;
-
     @Column(name = "battery_value")
     private Float batteryValue;
 
@@ -47,14 +34,8 @@ public class CurrentMeterMessage implements Serializable {
     @Column(name = "reason")
     private String reason;
 
-    @Column(name = "f_port")
-    private String fPort;
-
-    @Column(name = "f_cnt")
-    private Long fCnt;
-
     @ManyToOne
-    private Sensor sensor;
+    private LorawanMessage loraMessage;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -63,45 +44,6 @@ public class CurrentMeterMessage implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ZonedDateTime getInsertDate() {
-        return insertDate;
-    }
-
-    public CurrentMeterMessage insertDate(ZonedDateTime insertDate) {
-        this.insertDate = insertDate;
-        return this;
-    }
-
-    public void setInsertDate(ZonedDateTime insertDate) {
-        this.insertDate = insertDate;
-    }
-
-    public String getBase64Message() {
-        return base64Message;
-    }
-
-    public CurrentMeterMessage base64Message(String base64Message) {
-        this.base64Message = base64Message;
-        return this;
-    }
-
-    public void setBase64Message(String base64Message) {
-        this.base64Message = base64Message;
-    }
-
-    public String getHexMessage() {
-        return hexMessage;
-    }
-
-    public CurrentMeterMessage hexMessage(String hexMessage) {
-        this.hexMessage = hexMessage;
-        return this;
-    }
-
-    public void setHexMessage(String hexMessage) {
-        this.hexMessage = hexMessage;
     }
 
     public Float getBatteryValue() {
@@ -156,43 +98,17 @@ public class CurrentMeterMessage implements Serializable {
         this.reason = reason;
     }
 
-    public String getfPort() {
-        return fPort;
+    public LorawanMessage getLoraMessage() {
+        return loraMessage;
     }
 
-    public CurrentMeterMessage fPort(String fPort) {
-        this.fPort = fPort;
+    public CurrentMeterMessage loraMessage(LorawanMessage lorawanMessage) {
+        this.loraMessage = lorawanMessage;
         return this;
     }
 
-    public void setfPort(String fPort) {
-        this.fPort = fPort;
-    }
-
-    public Long getfCnt() {
-        return fCnt;
-    }
-
-    public CurrentMeterMessage fCnt(Long fCnt) {
-        this.fCnt = fCnt;
-        return this;
-    }
-
-    public void setfCnt(Long fCnt) {
-        this.fCnt = fCnt;
-    }
-
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public CurrentMeterMessage sensor(Sensor sensor) {
-        this.sensor = sensor;
-        return this;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
+    public void setLoraMessage(LorawanMessage lorawanMessage) {
+        this.loraMessage = lorawanMessage;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -220,15 +136,10 @@ public class CurrentMeterMessage implements Serializable {
     public String toString() {
         return "CurrentMeterMessage{" +
             "id=" + getId() +
-            ", insertDate='" + getInsertDate() + "'" +
-            ", base64Message='" + getBase64Message() + "'" +
-            ", hexMessage='" + getHexMessage() + "'" +
             ", batteryValue=" + getBatteryValue() +
             ", current=" + getCurrent() +
             ", totalEnergy=" + getTotalEnergy() +
             ", reason='" + getReason() + "'" +
-            ", fPort='" + getfPort() + "'" +
-            ", fCnt=" + getfCnt() +
             "}";
     }
 }

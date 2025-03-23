@@ -53,48 +53,34 @@ entity M2mMessage{
 }   
 
 entity VibrationEcoMessage{
-    insertDate ZonedDateTime
-	base64Message String maxlength(4000)
-	hexMessage String maxlength(4000)
-	batteryValue Float
+    batteryValue Float
 	xAxisValue Float	
 	yAxisValue Float
 	zAxisValue Float
-	fPort String
-    fCnt Long
 }
 
 entity VibrationProMessage{
-    insertDate ZonedDateTime
-	base64Message String maxlength(4000)
-	hexMessage String maxlength(4000)
-	batteryValue Float
+    batteryValue Float
 	xAxisValue Float	
 	yAxisValue Float
 	zAxisValue Float
 	temperature Float
-	fPort String
-    fCnt Long
+	
 }
 
 entity CurrentMeterMessage{
-    insertDate ZonedDateTime
-	base64Message String maxlength(4000)
-	hexMessage String maxlength(4000)
-	batteryValue Float
+    batteryValue Float
 	current Float	
 	totalEnergy Float
 	reason String
-	fPort String
-    fCnt Long
 }
 
 relationship ManyToOne {
 	LorawanMessage{sensor} to Sensor
 	M2mMessage{sensor} to Sensor
-	VibrationEcoMessage{sensor} to Sensor
-	VibrationProMessage{sensor} to Sensor
-	CurrentMeterMessage{sensor} to Sensor
+	VibrationEcoMessage{loraMessage} to LorawanMessage
+	VibrationProMessage{loraMessage} to LorawanMessage
+	CurrentMeterMessage{loraMessage} to LorawanMessage
 }	
 	
 

@@ -19,33 +19,23 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="insertDate"><span data-translate="smartmeterApp.currentMeterMessage.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="base64Message"><span data-translate="smartmeterApp.currentMeterMessage.base64Message">Base 64 Message</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="hexMessage"><span data-translate="smartmeterApp.currentMeterMessage.hexMessage">Hex Message</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.currentMeterMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="current"><span data-translate="smartmeterApp.currentMeterMessage.current">Current</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="totalEnergy"><span data-translate="smartmeterApp.currentMeterMessage.totalEnergy">Total Energy</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="reason"><span data-translate="smartmeterApp.currentMeterMessage.reason">Reason</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fPort"><span data-translate="smartmeterApp.currentMeterMessage.fPort">F Port</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fCnt"><span data-translate="smartmeterApp.currentMeterMessage.fCnt">F Cnt</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.currentMeterMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="loraMessage.id"><span data-translate="smartmeterApp.currentMeterMessage.loraMessage">Lora Message</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="currentMeterMessage in vm.currentMeterMessages track by currentMeterMessage.id">
                     <td><a ui-sref="current-meter-message-detail({id:currentMeterMessage.id})">{{currentMeterMessage.id}}</a></td>
-                    <td>{{currentMeterMessage.insertDate | date:'medium'}}</td>
-                    <td>{{currentMeterMessage.base64Message}}</td>
-                    <td>{{currentMeterMessage.hexMessage}}</td>
                     <td>{{currentMeterMessage.batteryValue}}</td>
                     <td>{{currentMeterMessage.current}}</td>
                     <td>{{currentMeterMessage.totalEnergy}}</td>
                     <td>{{currentMeterMessage.reason}}</td>
-                    <td>{{currentMeterMessage.fPort}}</td>
-                    <td>{{currentMeterMessage.fCnt}}</td>
                     <td>
-                        <a ui-sref="sensor-detail({id:currentMeterMessage.sensor.id})">{{currentMeterMessage.sensor.id}}</a>
+                        <a ui-sref="lorawan-message-detail({id:currentMeterMessage.loraMessage.id})">{{currentMeterMessage.loraMessage.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

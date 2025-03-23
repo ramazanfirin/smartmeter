@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -50,7 +49,7 @@ public class VibrationEcoMessageResource {
      */
     @PostMapping("/vibration-eco-messages")
     @Timed
-    public ResponseEntity<VibrationEcoMessage> createVibrationEcoMessage(@Valid @RequestBody VibrationEcoMessage vibrationEcoMessage) throws URISyntaxException {
+    public ResponseEntity<VibrationEcoMessage> createVibrationEcoMessage(@RequestBody VibrationEcoMessage vibrationEcoMessage) throws URISyntaxException {
         log.debug("REST request to save VibrationEcoMessage : {}", vibrationEcoMessage);
         if (vibrationEcoMessage.getId() != null) {
             throw new BadRequestAlertException("A new vibrationEcoMessage cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +71,7 @@ public class VibrationEcoMessageResource {
      */
     @PutMapping("/vibration-eco-messages")
     @Timed
-    public ResponseEntity<VibrationEcoMessage> updateVibrationEcoMessage(@Valid @RequestBody VibrationEcoMessage vibrationEcoMessage) throws URISyntaxException {
+    public ResponseEntity<VibrationEcoMessage> updateVibrationEcoMessage(@RequestBody VibrationEcoMessage vibrationEcoMessage) throws URISyntaxException {
         log.debug("REST request to update VibrationEcoMessage : {}", vibrationEcoMessage);
         if (vibrationEcoMessage.getId() == null) {
             return createVibrationEcoMessage(vibrationEcoMessage);

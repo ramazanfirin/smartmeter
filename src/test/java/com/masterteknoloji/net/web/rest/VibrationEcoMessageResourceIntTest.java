@@ -21,13 +21,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
 import java.util.List;
 
-import static com.masterteknoloji.net.web.rest.TestUtil.sameInstant;
 import static com.masterteknoloji.net.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -43,15 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = SmartmeterApp.class)
 public class VibrationEcoMessageResourceIntTest {
 
-    private static final ZonedDateTime DEFAULT_INSERT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_INSERT_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
-    private static final String DEFAULT_BASE_64_MESSAGE = "AAAAAAAAAA";
-    private static final String UPDATED_BASE_64_MESSAGE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_HEX_MESSAGE = "AAAAAAAAAA";
-    private static final String UPDATED_HEX_MESSAGE = "BBBBBBBBBB";
-
     private static final Float DEFAULT_BATTERY_VALUE = 1F;
     private static final Float UPDATED_BATTERY_VALUE = 2F;
 
@@ -63,12 +49,6 @@ public class VibrationEcoMessageResourceIntTest {
 
     private static final Float DEFAULT_Z_AXIS_VALUE = 1F;
     private static final Float UPDATED_Z_AXIS_VALUE = 2F;
-
-    private static final String DEFAULT_F_PORT = "AAAAAAAAAA";
-    private static final String UPDATED_F_PORT = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_F_CNT = 1L;
-    private static final Long UPDATED_F_CNT = 2L;
 
     @Autowired
     private VibrationEcoMessageRepository vibrationEcoMessageRepository;
@@ -108,15 +88,10 @@ public class VibrationEcoMessageResourceIntTest {
      */
     public static VibrationEcoMessage createEntity(EntityManager em) {
         VibrationEcoMessage vibrationEcoMessage = new VibrationEcoMessage()
-            .insertDate(DEFAULT_INSERT_DATE)
-            .base64Message(DEFAULT_BASE_64_MESSAGE)
-            .hexMessage(DEFAULT_HEX_MESSAGE)
             .batteryValue(DEFAULT_BATTERY_VALUE)
             .xAxisValue(DEFAULT_X_AXIS_VALUE)
             .yAxisValue(DEFAULT_Y_AXIS_VALUE)
-            .zAxisValue(DEFAULT_Z_AXIS_VALUE)
-            .fPort(DEFAULT_F_PORT)
-            .fCnt(DEFAULT_F_CNT);
+            .zAxisValue(DEFAULT_Z_AXIS_VALUE);
         return vibrationEcoMessage;
     }
 
@@ -140,15 +115,10 @@ public class VibrationEcoMessageResourceIntTest {
         List<VibrationEcoMessage> vibrationEcoMessageList = vibrationEcoMessageRepository.findAll();
         assertThat(vibrationEcoMessageList).hasSize(databaseSizeBeforeCreate + 1);
         VibrationEcoMessage testVibrationEcoMessage = vibrationEcoMessageList.get(vibrationEcoMessageList.size() - 1);
-        assertThat(testVibrationEcoMessage.getInsertDate()).isEqualTo(DEFAULT_INSERT_DATE);
-        assertThat(testVibrationEcoMessage.getBase64Message()).isEqualTo(DEFAULT_BASE_64_MESSAGE);
-        assertThat(testVibrationEcoMessage.getHexMessage()).isEqualTo(DEFAULT_HEX_MESSAGE);
         assertThat(testVibrationEcoMessage.getBatteryValue()).isEqualTo(DEFAULT_BATTERY_VALUE);
         assertThat(testVibrationEcoMessage.getxAxisValue()).isEqualTo(DEFAULT_X_AXIS_VALUE);
         assertThat(testVibrationEcoMessage.getyAxisValue()).isEqualTo(DEFAULT_Y_AXIS_VALUE);
         assertThat(testVibrationEcoMessage.getzAxisValue()).isEqualTo(DEFAULT_Z_AXIS_VALUE);
-        assertThat(testVibrationEcoMessage.getfPort()).isEqualTo(DEFAULT_F_PORT);
-        assertThat(testVibrationEcoMessage.getfCnt()).isEqualTo(DEFAULT_F_CNT);
     }
 
     @Test
@@ -181,15 +151,10 @@ public class VibrationEcoMessageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(vibrationEcoMessage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].insertDate").value(hasItem(sameInstant(DEFAULT_INSERT_DATE))))
-            .andExpect(jsonPath("$.[*].base64Message").value(hasItem(DEFAULT_BASE_64_MESSAGE.toString())))
-            .andExpect(jsonPath("$.[*].hexMessage").value(hasItem(DEFAULT_HEX_MESSAGE.toString())))
             .andExpect(jsonPath("$.[*].batteryValue").value(hasItem(DEFAULT_BATTERY_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].xAxisValue").value(hasItem(DEFAULT_X_AXIS_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].yAxisValue").value(hasItem(DEFAULT_Y_AXIS_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].zAxisValue").value(hasItem(DEFAULT_Z_AXIS_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].fPort").value(hasItem(DEFAULT_F_PORT.toString())))
-            .andExpect(jsonPath("$.[*].fCnt").value(hasItem(DEFAULT_F_CNT.intValue())));
+            .andExpect(jsonPath("$.[*].zAxisValue").value(hasItem(DEFAULT_Z_AXIS_VALUE.doubleValue())));
     }
 
     @Test
@@ -203,15 +168,10 @@ public class VibrationEcoMessageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(vibrationEcoMessage.getId().intValue()))
-            .andExpect(jsonPath("$.insertDate").value(sameInstant(DEFAULT_INSERT_DATE)))
-            .andExpect(jsonPath("$.base64Message").value(DEFAULT_BASE_64_MESSAGE.toString()))
-            .andExpect(jsonPath("$.hexMessage").value(DEFAULT_HEX_MESSAGE.toString()))
             .andExpect(jsonPath("$.batteryValue").value(DEFAULT_BATTERY_VALUE.doubleValue()))
             .andExpect(jsonPath("$.xAxisValue").value(DEFAULT_X_AXIS_VALUE.doubleValue()))
             .andExpect(jsonPath("$.yAxisValue").value(DEFAULT_Y_AXIS_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.zAxisValue").value(DEFAULT_Z_AXIS_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.fPort").value(DEFAULT_F_PORT.toString()))
-            .andExpect(jsonPath("$.fCnt").value(DEFAULT_F_CNT.intValue()));
+            .andExpect(jsonPath("$.zAxisValue").value(DEFAULT_Z_AXIS_VALUE.doubleValue()));
     }
 
     @Test
@@ -234,15 +194,10 @@ public class VibrationEcoMessageResourceIntTest {
         // Disconnect from session so that the updates on updatedVibrationEcoMessage are not directly saved in db
         em.detach(updatedVibrationEcoMessage);
         updatedVibrationEcoMessage
-            .insertDate(UPDATED_INSERT_DATE)
-            .base64Message(UPDATED_BASE_64_MESSAGE)
-            .hexMessage(UPDATED_HEX_MESSAGE)
             .batteryValue(UPDATED_BATTERY_VALUE)
             .xAxisValue(UPDATED_X_AXIS_VALUE)
             .yAxisValue(UPDATED_Y_AXIS_VALUE)
-            .zAxisValue(UPDATED_Z_AXIS_VALUE)
-            .fPort(UPDATED_F_PORT)
-            .fCnt(UPDATED_F_CNT);
+            .zAxisValue(UPDATED_Z_AXIS_VALUE);
 
         restVibrationEcoMessageMockMvc.perform(put("/api/vibration-eco-messages")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -253,15 +208,10 @@ public class VibrationEcoMessageResourceIntTest {
         List<VibrationEcoMessage> vibrationEcoMessageList = vibrationEcoMessageRepository.findAll();
         assertThat(vibrationEcoMessageList).hasSize(databaseSizeBeforeUpdate);
         VibrationEcoMessage testVibrationEcoMessage = vibrationEcoMessageList.get(vibrationEcoMessageList.size() - 1);
-        assertThat(testVibrationEcoMessage.getInsertDate()).isEqualTo(UPDATED_INSERT_DATE);
-        assertThat(testVibrationEcoMessage.getBase64Message()).isEqualTo(UPDATED_BASE_64_MESSAGE);
-        assertThat(testVibrationEcoMessage.getHexMessage()).isEqualTo(UPDATED_HEX_MESSAGE);
         assertThat(testVibrationEcoMessage.getBatteryValue()).isEqualTo(UPDATED_BATTERY_VALUE);
         assertThat(testVibrationEcoMessage.getxAxisValue()).isEqualTo(UPDATED_X_AXIS_VALUE);
         assertThat(testVibrationEcoMessage.getyAxisValue()).isEqualTo(UPDATED_Y_AXIS_VALUE);
         assertThat(testVibrationEcoMessage.getzAxisValue()).isEqualTo(UPDATED_Z_AXIS_VALUE);
-        assertThat(testVibrationEcoMessage.getfPort()).isEqualTo(UPDATED_F_PORT);
-        assertThat(testVibrationEcoMessage.getfCnt()).isEqualTo(UPDATED_F_CNT);
     }
 
     @Test

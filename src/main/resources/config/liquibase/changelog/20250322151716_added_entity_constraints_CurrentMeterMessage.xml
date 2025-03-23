@@ -8,11 +8,11 @@
     -->
     <changeSet id="20250322151716-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="sensor_id"
+        <addForeignKeyConstraint baseColumnNames="lora_message_id"
                                  baseTableName="current_meter_message"
-                                 constraintName="fk_current_meter_message_sensor_id"
+                                 constraintName="fk_current_meter_message_lora_message_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="sensor"/>
+                                 referencedTableName="lorawan_message"/>
 
     </changeSet>
 </databaseChangeLog>

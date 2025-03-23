@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -12,40 +12,6 @@
             <label for="id" data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.currentMeterMessage.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.currentMeterMessage.insertDate" for="field_insertDate">Insert Date</label>
-                <div class="input-group">
-                    <input id="field_insertDate" type="text" class="form-control" name="insertDate" datetime-picker="{{dateformat}}" ng-model="vm.currentMeterMessage.insertDate" is-open="vm.datePickerOpenStatus.insertDate"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('insertDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.currentMeterMessage.base64Message" for="field_base64Message">Base 64 Message</label>
-            <input type="text" class="form-control" name="base64Message" id="field_base64Message"
-                    ng-model="vm.currentMeterMessage.base64Message"
-                    ng-maxlength="4000"/>
-            <div ng-show="editForm.base64Message.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.base64Message.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000">
-                    This field cannot be longer than 4000 characters.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.currentMeterMessage.hexMessage" for="field_hexMessage">Hex Message</label>
-            <input type="text" class="form-control" name="hexMessage" id="field_hexMessage"
-                    ng-model="vm.currentMeterMessage.hexMessage"
-                    ng-maxlength="4000"/>
-            <div ng-show="editForm.hexMessage.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.hexMessage.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000">
-                    This field cannot be longer than 4000 characters.
-                </p>
-            </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="smartmeterApp.currentMeterMessage.batteryValue" for="field_batteryValue">Battery Value</label>
@@ -71,22 +37,10 @@
                     ng-model="vm.currentMeterMessage.reason"
                     />
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.currentMeterMessage.fPort" for="field_fPort">F Port</label>
-            <input type="text" class="form-control" name="fPort" id="field_fPort"
-                    ng-model="vm.currentMeterMessage.fPort"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.currentMeterMessage.fCnt" for="field_fCnt">F Cnt</label>
-            <input type="number" class="form-control" name="fCnt" id="field_fCnt"
-                    ng-model="vm.currentMeterMessage.fCnt"
-                    />
-        </div>
 
         <div class="form-group">
-            <label data-translate="smartmeterApp.currentMeterMessage.sensor" for="field_sensor">Sensor</label>
-            <select class="form-control" id="field_sensor" name="sensor" ng-model="vm.currentMeterMessage.sensor" ng-options="sensor as sensor.id for sensor in vm.sensors track by sensor.id">
+            <label data-translate="smartmeterApp.currentMeterMessage.loraMessage" for="field_loraMessage">Lora Message</label>
+            <select class="form-control" id="field_loraMessage" name="loraMessage" ng-model="vm.currentMeterMessage.loraMessage" ng-options="lorawanMessage as lorawanMessage.id for lorawanMessage in vm.lorawanmessages track by lorawanMessage.id">
                 <option value=""></option>
             </select>
         </div>

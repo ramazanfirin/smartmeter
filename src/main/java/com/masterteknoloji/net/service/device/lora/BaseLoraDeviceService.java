@@ -38,9 +38,9 @@ public class BaseLoraDeviceService implements LoraDeviceService{
 	@Override
 	public void process(DeviceMessageVM deviceMessageVM) throws Exception {
 		LorawanMessage lorawanMessage = prepareLorawanMessage(deviceMessageVM);
-		parseSensorSpecificData(lorawanMessage, deviceMessageVM);
+		Object object=parseSensorSpecificData(lorawanMessage, deviceMessageVM);
 		postProcess(lorawanMessage);
-		sendData(deviceMessageVM,lorawanMessage);
+		sendData(deviceMessageVM,lorawanMessage,object);
 	}
 	
 	
@@ -67,11 +67,7 @@ public class BaseLoraDeviceService implements LoraDeviceService{
         return lorawanMessage;
 	}
 
-	@Override
-	public void parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	
 
@@ -82,10 +78,11 @@ public class BaseLoraDeviceService implements LoraDeviceService{
 	}
 
 	
-	public void sendData(String jsonString,String url) throws IOException {
+	public void sendData(Sensor sensor,String jsonString) throws IOException {
 
 		OkHttpClient client = new OkHttpClient();
  
+		String url = applicationProperties.getThingsBoardUrl()+sensor.getAppEui()+"/telemetry ";
         RequestBody body = RequestBody.create(jsonString, MediaType.parse("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()
@@ -105,8 +102,18 @@ public class BaseLoraDeviceService implements LoraDeviceService{
 
 
 	@Override
-	public void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage) throws Exception {
+	public void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage,Object object) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public Object parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

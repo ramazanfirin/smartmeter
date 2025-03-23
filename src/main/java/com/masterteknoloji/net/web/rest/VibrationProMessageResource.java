@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -50,7 +49,7 @@ public class VibrationProMessageResource {
      */
     @PostMapping("/vibration-pro-messages")
     @Timed
-    public ResponseEntity<VibrationProMessage> createVibrationProMessage(@Valid @RequestBody VibrationProMessage vibrationProMessage) throws URISyntaxException {
+    public ResponseEntity<VibrationProMessage> createVibrationProMessage(@RequestBody VibrationProMessage vibrationProMessage) throws URISyntaxException {
         log.debug("REST request to save VibrationProMessage : {}", vibrationProMessage);
         if (vibrationProMessage.getId() != null) {
             throw new BadRequestAlertException("A new vibrationProMessage cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +71,7 @@ public class VibrationProMessageResource {
      */
     @PutMapping("/vibration-pro-messages")
     @Timed
-    public ResponseEntity<VibrationProMessage> updateVibrationProMessage(@Valid @RequestBody VibrationProMessage vibrationProMessage) throws URISyntaxException {
+    public ResponseEntity<VibrationProMessage> updateVibrationProMessage(@RequestBody VibrationProMessage vibrationProMessage) throws URISyntaxException {
         log.debug("REST request to update VibrationProMessage : {}", vibrationProMessage);
         if (vibrationProMessage.getId() == null) {
             return createVibrationProMessage(vibrationProMessage);

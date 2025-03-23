@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('CurrentMeterMessageDetailController', CurrentMeterMessageDetailController);
 
-    CurrentMeterMessageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'CurrentMeterMessage', 'Sensor'];
+    CurrentMeterMessageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'CurrentMeterMessage', 'LorawanMessage'];
 
-    function CurrentMeterMessageDetailController($scope, $rootScope, $stateParams, previousState, entity, CurrentMeterMessage, Sensor) {
+    function CurrentMeterMessageDetailController($scope, $rootScope, $stateParams, previousState, entity, CurrentMeterMessage, LorawanMessage) {
         var vm = this;
 
         vm.currentMeterMessage = entity;

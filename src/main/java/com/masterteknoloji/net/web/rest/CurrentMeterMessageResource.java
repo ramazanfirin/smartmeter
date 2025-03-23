@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -50,7 +49,7 @@ public class CurrentMeterMessageResource {
      */
     @PostMapping("/current-meter-messages")
     @Timed
-    public ResponseEntity<CurrentMeterMessage> createCurrentMeterMessage(@Valid @RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
+    public ResponseEntity<CurrentMeterMessage> createCurrentMeterMessage(@RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
         log.debug("REST request to save CurrentMeterMessage : {}", currentMeterMessage);
         if (currentMeterMessage.getId() != null) {
             throw new BadRequestAlertException("A new currentMeterMessage cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +71,7 @@ public class CurrentMeterMessageResource {
      */
     @PutMapping("/current-meter-messages")
     @Timed
-    public ResponseEntity<CurrentMeterMessage> updateCurrentMeterMessage(@Valid @RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
+    public ResponseEntity<CurrentMeterMessage> updateCurrentMeterMessage(@RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
         log.debug("REST request to update CurrentMeterMessage : {}", currentMeterMessage);
         if (currentMeterMessage.getId() == null) {
             return createCurrentMeterMessage(currentMeterMessage);
