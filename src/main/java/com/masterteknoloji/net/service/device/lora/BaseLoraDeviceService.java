@@ -54,7 +54,7 @@ public class BaseLoraDeviceService implements LoraDeviceService{
         lorawanMessage.setfPort(deviceMessageVM.getfPort());
         lorawanMessage.setfCnt(deviceMessageVM.getfCnt());
         
-        parseSensorSpecificData(lorawanMessage,deviceMessageVM);
+        //parseSensorSpecificData(lorawanMessage,deviceMessageVM);
         
         lorawanMessageRepository.save(lorawanMessage);
 		

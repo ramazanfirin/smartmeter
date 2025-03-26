@@ -40,7 +40,7 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 		this.objectMapper = objectMapper;
 	}
 
-	@Scheduled(fixedDelay = 15000)
+	//@Scheduled(fixedDelay = 15000)
 	public void test() {
 		try {
 			LorawanMessage lorawanMessage = new LorawanMessage();

@@ -58,7 +58,7 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 //		return vibrationEcoMessageRepository.save(vibrationEcoMessage);
 //	}
 	
-	@Scheduled(fixedDelay = 15000)
+	//@Scheduled(fixedDelay = 15000)
 	public void test() {
 		try {
 			LorawanMessage lorawanMessage = new LorawanMessage();

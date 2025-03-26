@@ -5,6 +5,7 @@ import java.util.Random;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterteknoloji.net.config.ApplicationProperties;
 import com.masterteknoloji.net.domain.LorawanMessage;
@@ -56,7 +57,7 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 //		return vibrationEcoMessageRepository.save(vibrationEcoMessage);
 //	}
 	
-	@Scheduled(fixedDelay = 15000)
+	//@Scheduled(fixedDelay = 15000)
 	public void test() {
 		try {
 			LorawanMessage lorawanMessage = new LorawanMessage();
@@ -75,7 +76,7 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 	public Object parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM)
 			throws Exception {
 		VibrationEcoMessage vibrationEcoMessage = new VibrationEcoMessage();
-		VibrationSensorVM vibrationSensorVM = parseHexData(lorawanMessage);
+		VibrationSensorVM vibrationSensorVM = parseHexData(deviceMessageVM);
 		vibrationEcoMessage.setBatteryValue(0f);
 		vibrationEcoMessage.setxAxisValue(vibrationSensorVM.getxAxisValue());
 		vibrationEcoMessage.setyAxisValue(vibrationSensorVM.getyAxisValue());
@@ -111,35 +112,36 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 		
 	}
 	
-	public VibrationSensorVM parseHexData(LorawanMessage lorawanMessage) {
-		Float xAxisValue = 0F;
-		Float yAxisValue = 0F;
-		Float zAxisValue = 0F;
+	public VibrationSensorVM parseHexData(DeviceMessageVM deviceMessageVM) {
 		
-		String[] values = LoraMessageUtil.parseHex(lorawanMessage.getHexMessage());
-		String xHexValue = values[5]+values[6];
-		String yHexValue = values[7]+values[8];
-		String zHexValue = values[9]+values[10];
-				
-		int xIntvalue =Integer.parseInt(xHexValue, 16);
-		short xSignedValue = (short) xIntvalue;
+		Float xAxisValue = 0f;
+		Float yAxisValue = 0f;
+		Float zAxisValue = 0f;
 		
-		int yIntvalue =Integer.parseInt(yHexValue, 16);
-		short ySignedValue = (short) yIntvalue;
+		Float angle = 0f;
+		Float battery = 0f;
+		Float res = 0f;
+		Float evt = 0f;
 		
-		int zIntvalue =Integer.parseInt(zHexValue, 16);
-		short zSignedValue = (short) zIntvalue;
+		JsonNode object = deviceMessageVM.getJsonNode().get("object");
+		if (object.get("acceX") != null)
+			xAxisValue =((float) object.get("acceX").asDouble());
+		if (object.get("acceY") != null)
+			yAxisValue =((float) object.get("acceY").asDouble());
+		if (object.get("acceZ") != null)
+			zAxisValue =((float) object.get("acceZ").asDouble());
 		
-		xAxisValue = (float)xSignedValue;
-		yAxisValue = (float)ySignedValue;
-		zAxisValue = (float)zSignedValue;
+		if (object.get("angle") != null)
+			angle =((float) object.get("angle").asDouble());
 		
-		Random random = new Random();
-		xAxisValue = 1 + random.nextFloat() * 99;
-		yAxisValue = 1 + random.nextFloat() * 99;
-		zAxisValue = 1 + random.nextFloat() * 99;
+		if (object.get("battery") != null)
+			battery =((float) object.get("battery").asDouble());
 		
-		System.out.println(xAxisValue+","+yAxisValue+","+zAxisValue);
+		if (object.get("res") != null)
+			res =((float) object.get("res").asDouble());
+		
+		if (object.get("evt") != null)
+			evt =((float) object.get("evt").asDouble());
 		
 		VibrationSensorVM vibrationSensorVM = new VibrationSensorVM(xAxisValue, yAxisValue, zAxisValue, 0F);
 		return vibrationSensorVM;
