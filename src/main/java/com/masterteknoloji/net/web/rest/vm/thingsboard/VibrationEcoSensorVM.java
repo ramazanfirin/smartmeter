@@ -1,6 +1,6 @@
 package com.masterteknoloji.net.web.rest.vm.thingsboard;
 
-public class VibrationSensorVM {
+public class VibrationEcoSensorVM {
 	
 	private Float xAxisValue;
 
@@ -12,7 +12,7 @@ public class VibrationSensorVM {
 	
 	
 
-	public VibrationSensorVM(Float xAxisValue, Float yAxisValue, Float zAxisValue, Float temperature) {
+	public VibrationEcoSensorVM(Float xAxisValue, Float yAxisValue, Float zAxisValue, Float temperature) {
 		super();
 		this.xAxisValue = xAxisValue;
 		this.yAxisValue = yAxisValue;

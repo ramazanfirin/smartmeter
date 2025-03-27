@@ -16,7 +16,7 @@ import com.masterteknoloji.net.repository.SensorRepository;
 import com.masterteknoloji.net.repository.VibrationEcoMessageRepository;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
-import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationSensorVM;
+import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationEcoSensorVM;
 
 @Service
 public class VibrationEcoSensorService extends BaseLoraDeviceService implements LoraDeviceService{
@@ -76,7 +76,7 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 	public Object parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM)
 			throws Exception {
 		VibrationEcoMessage vibrationEcoMessage = new VibrationEcoMessage();
-		VibrationSensorVM vibrationSensorVM = parseHexData(deviceMessageVM);
+		VibrationEcoSensorVM vibrationSensorVM = parseHexData(deviceMessageVM);
 		vibrationEcoMessage.setBatteryValue(0f);
 		vibrationEcoMessage.setxAxisValue(vibrationSensorVM.getxAxisValue());
 		vibrationEcoMessage.setyAxisValue(vibrationSensorVM.getyAxisValue());
@@ -98,7 +98,7 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 		try {
 			VibrationEcoMessage ecoMessage = (VibrationEcoMessage)object;
 			
-			VibrationSensorVM vibrationSensorVM = new VibrationSensorVM(ecoMessage.getxAxisValue(), ecoMessage.getyAxisValue(), ecoMessage.getzAxisValue(), 0f);
+			VibrationEcoSensorVM vibrationSensorVM = new VibrationEcoSensorVM(ecoMessage.getxAxisValue(), ecoMessage.getyAxisValue(), ecoMessage.getzAxisValue(), 0f);
 			String json = objectMapper.writeValueAsString(vibrationSensorVM);	
 
 			
@@ -112,7 +112,7 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 		
 	}
 	
-	public VibrationSensorVM parseHexData(DeviceMessageVM deviceMessageVM) {
+	public VibrationEcoSensorVM parseHexData(DeviceMessageVM deviceMessageVM) {
 		
 		Float xAxisValue = 0f;
 		Float yAxisValue = 0f;
@@ -143,7 +143,7 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 		if (object.get("evt") != null)
 			evt =((float) object.get("evt").asDouble());
 		
-		VibrationSensorVM vibrationSensorVM = new VibrationSensorVM(xAxisValue, yAxisValue, zAxisValue, 0F);
+		VibrationEcoSensorVM vibrationSensorVM = new VibrationEcoSensorVM(xAxisValue, yAxisValue, zAxisValue, 0F);
 		return vibrationSensorVM;
 	}
 }

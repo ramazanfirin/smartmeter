@@ -17,7 +17,7 @@ import com.masterteknoloji.net.repository.SensorRepository;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 import com.masterteknoloji.net.web.rest.vm.thingsboard.CurrentSensorVM;
-import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationSensorVM;
+import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationEcoSensorVM;
 
 @Service
 public class CurrentMeterService extends BaseLoraDeviceService implements LoraDeviceService{

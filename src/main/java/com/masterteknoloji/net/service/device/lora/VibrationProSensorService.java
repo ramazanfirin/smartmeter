@@ -5,6 +5,7 @@ import java.util.Random;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterteknoloji.net.config.ApplicationProperties;
 import com.masterteknoloji.net.domain.LorawanMessage;
@@ -17,7 +18,8 @@ import com.masterteknoloji.net.repository.VibrationEcoMessageRepository;
 import com.masterteknoloji.net.repository.VibrationProMessageRepository;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
 import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
-import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationSensorVM;
+import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationEcoSensorVM;
+import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationProSensorVM;
 
 @Service
 public class VibrationProSensorService extends BaseLoraDeviceService implements LoraDeviceService{
@@ -77,11 +79,11 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 	public Object parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM)
 			throws Exception {
 		VibrationProMessage vibrationProMessage = new VibrationProMessage();
-		VibrationSensorVM vibrationSensorVM = parseHexData(lorawanMessage);
-		vibrationProMessage.setBatteryValue(0f);
-		vibrationProMessage.setxAxisValue(vibrationSensorVM.getxAxisValue());
-		vibrationProMessage.setyAxisValue(vibrationSensorVM.getyAxisValue());
-		vibrationProMessage.setzAxisValue(vibrationSensorVM.getzAxisValue());
+		VibrationProSensorVM vibrationSensorVM = parseHexData(deviceMessageVM);
+//		vibrationProMessage.setBatteryValue(0f);
+//		vibrationProMessage.setxAxisValue(vibrationSensorVM.getxAxisValue());
+//		vibrationProMessage.setyAxisValue(vibrationSensorVM.getyAxisValue());
+//		vibrationProMessage.setzAxisValue(vibrationSensorVM.getzAxisValue());
 		
 		return vibrationProMessageRepository.save(vibrationProMessage);
 	}
@@ -99,7 +101,7 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 		try {
 			VibrationProMessage message = (VibrationProMessage)object;
 			
-			VibrationSensorVM vibrationSensorVM = new VibrationSensorVM(message.getxAxisValue(), message.getyAxisValue(), message.getzAxisValue(), 0f);
+			VibrationEcoSensorVM vibrationSensorVM = new VibrationEcoSensorVM(message.getxAxisValue(), message.getyAxisValue(), message.getzAxisValue(), 0f);
 			String json = objectMapper.writeValueAsString(vibrationSensorVM);	
 
 			
@@ -113,37 +115,52 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 		
 	}
 	
-	public VibrationSensorVM parseHexData(LorawanMessage lorawanMessage) {
-		Float xAxisValue = 0F;
-		Float yAxisValue = 0F;
-		Float zAxisValue = 0F;
+	public VibrationProSensorVM parseHexData(DeviceMessageVM deviceMessageVM) {
+		Float xVelocity = 0f;
+		Float xAcceleration = 0f;
+		Float yVelocity = 0f;
+		Float yAcceleration = 0f;
+		Float zVelocity = 0f;
+		Float zAcceleration = 0f;
 		
-		String[] values = LoraMessageUtil.parseHex(lorawanMessage.getHexMessage());
-		String xHexValue = values[5]+values[6];
-		String yHexValue = values[7]+values[8];
-		String zHexValue = values[9]+values[10];
-				
-		int xIntvalue =Integer.parseInt(xHexValue, 16);
-		short xSignedValue = (short) xIntvalue;
+		Float temperature = 0f;
+		Float voltage = 0f;
 		
-		int yIntvalue =Integer.parseInt(yHexValue, 16);
-		short ySignedValue = (short) yIntvalue;
+		JsonNode object = deviceMessageVM.getJsonNode().get("object");
+		if (object.get("xVelocity") != null)
+			xVelocity =((float) object.get("xVelocity").asDouble());
+		if (object.get("xAcceleration") != null)
+			xAcceleration =((float) object.get("xAcceleration").asDouble());
 		
-		int zIntvalue =Integer.parseInt(zHexValue, 16);
-		short zSignedValue = (short) zIntvalue;
+		if (object.get("yVelocity") != null)
+			yVelocity =((float) object.get("yVelocity").asDouble());
+		if (object.get("yAcceleration") != null)
+			yAcceleration =((float) object.get("yAcceleration").asDouble());
 		
-		xAxisValue = (float)xSignedValue;
-		yAxisValue = (float)ySignedValue;
-		zAxisValue = (float)zSignedValue;
+		if (object.get("zVelocity") != null)
+			zVelocity =((float) object.get("zVelocity").asDouble());
+		if (object.get("zAcceleration") != null)
+			zAcceleration =((float) object.get("zAcceleration").asDouble());
 		
-		Random random = new Random();
-		xAxisValue = 1 + random.nextFloat() * 99;
-		yAxisValue = 1 + random.nextFloat() * 99;
-		zAxisValue = 1 + random.nextFloat() * 99;
 		
-		System.out.println(xAxisValue+","+yAxisValue+","+zAxisValue);
+		if (object.get("temperature") != null)
+			temperature =((float) object.get("temperature").asDouble());
 		
-		VibrationSensorVM vibrationSensorVM = new VibrationSensorVM(xAxisValue, yAxisValue, zAxisValue, 0F);
-		return vibrationSensorVM;
+		if (object.get("voltage") != null)
+			voltage =((float) object.get("voltage").asDouble());
+		
+		
+		
+		VibrationProSensorVM vibrationProSensorVM = new VibrationProSensorVM();
+		vibrationProSensorVM.setTemperature(temperature);
+		vibrationProSensorVM.setVoltage(voltage);
+		vibrationProSensorVM.setxAcceleration(xAcceleration);
+		vibrationProSensorVM.setxVelocity(xVelocity);
+		vibrationProSensorVM.setyAcceleration(yAcceleration);
+		vibrationProSensorVM.setyVelocity(yVelocity);
+		vibrationProSensorVM.setzAcceleration(zAcceleration);
+		vibrationProSensorVM.setzVelocity(zVelocity);
+		
+		return vibrationProSensorVM;
 	}
 }
