@@ -5,6 +5,7 @@ import java.util.Random;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterteknoloji.net.config.ApplicationProperties;
 import com.masterteknoloji.net.domain.CurrentMeterMessage;
@@ -100,40 +101,31 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 		
 	}
 	
-	public CurrentSensorVM parseHexData(LorawanMessage lorawanMessage) {
-		Float xAxisValue = 0F;
-		Float yAxisValue = 0F;
-		Float zAxisValue = 0F;
+	public CurrentSensorVM parseHexData(DeviceMessageVM deviceMessageVM) {
+		Float current = 0f;
+		Float total_current = 0f;
+		Float battery = 0f;
+
 		
-		String[] values = LoraMessageUtil.parseHex(lorawanMessage.getHexMessage());
-		String xHexValue = values[5]+values[6];
-		String yHexValue = values[7]+values[8];
-		String zHexValue = values[9]+values[10];
-				
-		int xIntvalue =Integer.parseInt(xHexValue, 16);
-		short xSignedValue = (short) xIntvalue;
+		JsonNode object = deviceMessageVM.getJsonNode().get("object");
+		if (object.get("current") != null)
+			current =((float) object.get("current").asDouble());
 		
-		int yIntvalue =Integer.parseInt(yHexValue, 16);
-		short ySignedValue = (short) yIntvalue;
+		if (object.get("total_current") != null)
+			total_current =((float) object.get("total_current").asDouble());
 		
-		int zIntvalue =Integer.parseInt(zHexValue, 16);
-		short zSignedValue = (short) zIntvalue;
-		
-		xAxisValue = (float)xSignedValue;
-		yAxisValue = (float)ySignedValue;
-		zAxisValue = (float)zSignedValue;
-		
-		Random random = new Random();
-		xAxisValue = 1 + random.nextFloat() * 99;
-		yAxisValue = 1 + random.nextFloat() * 99;
-		zAxisValue = 1 + random.nextFloat() * 99;
-		
-		System.out.println(xAxisValue+","+yAxisValue+","+zAxisValue);
+		//TO DO incele
+//		if (object.get("alarm ") != null)
+//			total_current =((float) object.get("alarm ").asDouble());
+//		if (object.get("current_min  ") != null)
+//			total_current =((float) object.get("current_min  ").asDouble());
+//		if (object.get("current_max   ") != null)
+//			total_current =((float) object.get("current_max   ").asDouble());
 		
 		CurrentSensorVM currentSensorVM = new CurrentSensorVM();
 		currentSensorVM.setBattery(0f);
-		currentSensorVM.setCurrent(0f);
-		currentSensorVM.setTotalEnergy(0f);
+		currentSensorVM.setCurrent(current);
+		currentSensorVM.setTotalEnergy(total_current);
 		currentSensorVM.setReason("");
 		currentSensorVM.setCableTemperature(0f);
 		return currentSensorVM;
