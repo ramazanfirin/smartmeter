@@ -1,0 +1,60 @@
+{
+  "deduplicationId": "7d8bf7b3-f771-4af2-966f-1588943dbb63",
+  "time": "2025-03-27T09:09:05.709+00:00",
+  "deviceInfo": {
+    "tenantId": "52f14cd4-c6f1-4fbd-8f87-4025e1d49242",
+    "tenantName": "ChirpStack",
+    "applicationId": "aa067bb9-a7b1-4c57-9c8f-f0af293cbc8b",
+    "applicationName": "ISISAN",
+    "deviceProfileId": "7fb3b0cd-969f-4e7e-a974-9dee2363f3d4",
+    "deviceProfileName": "ITC-103",
+    "deviceName": "ITC-103",
+    "devEui": "24e124746e396351",
+    "deviceClassEnabled": "CLASS_A",
+    "tags": {}
+  },
+  "devAddr": "00b1f720",
+  "adr": true,
+  "dr": 5,
+  "fCnt": 14,
+  "fPort": 85,
+  "confirmed": false,
+  "data": "A5dhMAAABJgAAAln//8=",
+  "object": {
+    "current": 0,
+    "total_current": 123.85,
+    "temperature_exception": "read failed"
+  },
+  "rxInfo": [
+    {
+      "gatewayId": "24e124fffef66c9a",
+      "uplinkId": 14601,
+      "gwTime": "2025-03-27T09:09:05.709300+00:00",
+      "nsTime": "2025-03-27T09:09:05.724472494+00:00",
+      "timeSinceGpsEpoch": "1427101763.709s",
+      "rssi": -44,
+      "snr": 13.2,
+      "channel": 6,
+      "location": {
+        "latitude": 38.2599168,
+        "longitude": 34.0099072
+      },
+      "context": "m1YcZA==",
+      "metadata": {
+        "region_config_id": "eu868",
+        "region_common_name": "EU868"
+      },
+      "crcStatus": "CRC_OK"
+    }
+  ],
+  "txInfo": {
+    "frequency": 867700000,
+    "modulation": {
+      "lora": {
+        "bandwidth": 125000,
+        "spreadingFactor": 7,
+        "codeRate": "CR_4_5"
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+// Decode uplink function.
+//
+// Input is an object with the following fields:
+// - bytes = Byte array containing the uplink payload, e.g. [255, 230, 255, 0]
+// - fPort = Uplink fPort.
+// - variables = Object containing the configured device variables.
+//
+// Output must be an object with the following fields:
+// - data = Object representing the decoded payload.
+function decodeUplink(input) {
+    var obj = {};
+    var warnings = [];
+    var len = input.bytes ? input.bytes.length : 0;
+    var offset = 0, dtype = 0, dlen = 0;
+    do {
+        dtype = input.bytes[offset++];
+        if (0xFF == dtype) {
+            /* 0xFF is ACK from Device */
+            obj.ackcmd = input.bytes[offset++];
+            obj.ackstatus = input.bytes[offset++];
+        } else if (0x00 === dtype) {
+            /* first is device information(0x00) */
+            obj.battery = (input.bytes[offset++] & 0x1F);
+            obj.res = input.bytes[offset++];
+        } else if (0x01 == dtype) {
+            obj.evt = input.bytes[offset++];
+            obj.acceX = (((input.bytes[offset] & 0x80 ? input.bytes[offset] - 0x100 : input.bytes[offset]) << 8) + input.bytes[offset+1]);
+            offset += 2;
+            obj.acceY = (((input.bytes[offset] & 0x80 ? input.bytes[offset] - 0x100 : input.bytes[offset]) << 8) + input.bytes[offset+1]);
+            offset += 2;
+            obj.acceZ = (((input.bytes[offset] & 0x80 ? input.bytes[offset] - 0x100 : input.bytes[offset]) << 8) + input.bytes[offset+1]);
+            offset += 2;
+            obj.angle = input.bytes[offset++];
+        } else if (0x02 == dtype) {
+            offset += 8;
+        } else if (0x03 == dtype) {
+            /* ADC sensor, value unit is mV */
+            obj.adc = ((input.bytes[offset]) << 8) + input.bytes[offset + 1];
+            offset += 2;
+        } else if (0x04 == dtype) {
+            /* temperature sensor, value unit is 0.1 */
+            obj.temperature = (((input.bytes[offset] & 0x80 ? input.bytes[offset] - 0x100 : input.bytes[offset]) << 8) + input.bytes[offset + 1]) / 10;
+            offset += 2;
+        } else if (0x05 == dtype) {
+            /* humidity sensor, value unit is 1 %RH */
+            obj.humidity = input.bytes[offset++];
+        } else if (0x06 == dtype) {
+            obj.oxygen = input.bytes[offset++];
+        } else if (0x07 == dtype) {
+            /* pressure sensor, value unit is 1 Pa */
+            obj.pressure = ((input.bytes[offset] << 24) + (input.bytes[offset + 1] << 16) + (input.bytes[offset + 2] << 8) + input.bytes[offset + 3]);
+            offset += 4;
+        } else if (0x08 == dtype) {
+            /* sensor value */
+            var buffer = new ArrayBuffer(4);
+            var ui8 = new Uint8Array(buffer);
+            var f32data = 0;
+            ui8[3] = input.bytes[offset];
+            ui8[2] = input.bytes[offset+1];
+            ui8[1] = input.bytes[offset+2];
+            ui8[0] = input.bytes[offset+3];
+            var view = new DataView(buffer);
+            f32data = view.getFloat32(0, true);
+            obj.waterlevel = f32data.toFixed(2);
+            offset += 4;
+        } else if (0x09 == dtype) {
+            /* switch or IO sensor, value is ON(1) or OFF(0) */
+            obj.swtichIO = input.bytes[offset++];
+        } else if (0x30 == dtype) {
+            /* Hybrid gas sensor: Length + Gas Type + Value */
+            dlen = input.bytes[offset++];
+            /*  follow data length, normal is 5 */
+            if (dlen >= 5) {
+                /**
+                 *  Gas Type
+                 *  0x01 CH4
+                 *  0x02 CO
+                 *  0x03 H2S
+                 *  0x04 CO2
+                 *  0x05 NH3
+                 */
+                var gastype = input.bytes[offset++];
+                /* Value unit is 0.01 */
+                obj.volume = ((input.bytes[offset] << 24) + (input.bytes[offset + 1] << 16) + (input.bytes[offset + 2] << 8) + input.bytes[offset + 3]) / 100;
+                offset += 4;
+                dlen -= 5;
+                if (obj.volume < 0) {
+                    warnings.push("it's invalid");
+                }
+            }
+            if (dlen > 0) {
+                offset += dlen;
+            }
+        } else {
+            /* ignore all > 0x10 */
+            if(dtype > 0x10){
+                dlen = input.bytes[offset++];
+                if (dlen > 0) {
+                    offset += dlen;
+                }
+            }
+        }
+    } while (len > offset);
+    var data = {};
+    data.data = obj;
+    return data;
+}

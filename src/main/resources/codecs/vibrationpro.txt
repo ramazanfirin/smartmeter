@@ -1,0 +1,34 @@
+function decodeUplink(input) {
+    var bytes = input.bytes;
+
+    if (bytes.length < 16 || bytes.length > 17) {
+        return {
+            errors: ["Invalid payload length"]
+        };
+    }
+
+    if (bytes[0] !== 0x05) {
+        return {
+            errors: ["Invalid CMD value"]
+        };
+    }
+
+    var data = {
+        voltage: (bytes[1] | (bytes[2] << 8)) / 1000.0, // Convert to Volts
+        temperature: (bytes[3] & 0x7F) * ((bytes[3] & 0x80) ? -1 : 1), // Sign bit handling
+        xAcceleration: (bytes[4] | (bytes[5] << 8)) / 100.0,
+        xVelocity: (bytes[6] | (bytes[7] << 8)) / 100.0,
+        yAcceleration: (bytes[8] | (bytes[9] << 8)) / 100.0,
+        yVelocity: (bytes[10] | (bytes[11] << 8)) / 100.0,
+        zAcceleration: (bytes[12] | (bytes[13] << 8)) / 100.0,
+        zVelocity: (bytes[14] | (bytes[15] << 8)) / 100.0,
+    };
+
+    if (bytes.length === 17) {
+        data.parameter = bytes[16]; // Optional parameter ID
+    }
+
+    return {
+        data: data
+    };
+}

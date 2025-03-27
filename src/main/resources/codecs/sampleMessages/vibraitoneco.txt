@@ -1,0 +1,64 @@
+{
+  "deduplicationId": "f8900c73-dd93-4478-bdfc-633b0e686df6",
+  "time": "2025-03-27T09:16:13.430+00:00",
+  "deviceInfo": {
+    "tenantId": "52f14cd4-c6f1-4fbd-8f87-4025e1d49242",
+    "tenantName": "ChirpStack",
+    "applicationId": "f792364a-8e05-41ba-bed3-856df7537874",
+    "applicationName": "çinkom",
+    "deviceProfileId": "eb2e240a-6bf1-4081-8efe-bfe27909ac64",
+    "deviceProfileName": "Vibration Pro",
+    "deviceName": "Vibration Sensor Pro",
+    "devEui": "cacbb80100005335",
+    "deviceClassEnabled": "CLASS_A",
+    "tags": {}
+  },
+  "devAddr": "0082bab6",
+  "adr": true,
+  "dr": 5,
+  "fCnt": 17,
+  "fPort": 1,
+  "confirmed": false,
+  "data": "AH9QAQAB4gAK/LeW",
+  "object": {
+    "acceX": 482,
+    "acceZ": -841,
+    "acceY": 10,
+    "evt": 0,
+    "angle": 150,
+    "res": 80,
+    "battery": 31
+  },
+  "rxInfo": [
+    {
+      "gatewayId": "24e124fffef66c9a",
+      "uplinkId": 62511,
+      "gwTime": "2025-03-27T09:16:13.430576+00:00",
+      "nsTime": "2025-03-27T09:16:13.440302674+00:00",
+      "timeSinceGpsEpoch": "1427102191.430s",
+      "rssi": -43,
+      "snr": 13.5,
+      "channel": 6,
+      "location": {
+        "latitude": 38.2599168,
+        "longitude": 34.0099072
+      },
+      "context": "tNRxKA==",
+      "metadata": {
+        "region_config_id": "eu868",
+        "region_common_name": "EU868"
+      },
+      "crcStatus": "CRC_OK"
+    }
+  ],
+  "txInfo": {
+    "frequency": 867700000,
+    "modulation": {
+      "lora": {
+        "bandwidth": 125000,
+        "spreadingFactor": 7,
+        "codeRate": "CR_4_5"
+      }
+    }
+  }
+}
