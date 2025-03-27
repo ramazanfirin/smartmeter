@@ -25,17 +25,26 @@ public class VibrationProMessage implements Serializable {
     @Column(name = "battery_value")
     private Float batteryValue;
 
-    @Column(name = "x_axis_value")
-    private Float xAxisValue;
-
-    @Column(name = "y_axis_value")
-    private Float yAxisValue;
-
-    @Column(name = "z_axis_value")
-    private Float zAxisValue;
-
     @Column(name = "temperature")
     private Float temperature;
+
+    @Column(name = "x_velocity")
+    private Float xVelocity;
+
+    @Column(name = "x_acceleration")
+    private Float xAcceleration;
+
+    @Column(name = "y_velocity")
+    private Float yVelocity;
+
+    @Column(name = "y_acceleration")
+    private Float yAcceleration;
+
+    @Column(name = "z_velocity")
+    private Float zVelocity;
+
+    @Column(name = "z_acceleration")
+    private Float zAcceleration;
 
     @ManyToOne
     private LorawanMessage loraMessage;
@@ -62,45 +71,6 @@ public class VibrationProMessage implements Serializable {
         this.batteryValue = batteryValue;
     }
 
-    public Float getxAxisValue() {
-        return xAxisValue;
-    }
-
-    public VibrationProMessage xAxisValue(Float xAxisValue) {
-        this.xAxisValue = xAxisValue;
-        return this;
-    }
-
-    public void setxAxisValue(Float xAxisValue) {
-        this.xAxisValue = xAxisValue;
-    }
-
-    public Float getyAxisValue() {
-        return yAxisValue;
-    }
-
-    public VibrationProMessage yAxisValue(Float yAxisValue) {
-        this.yAxisValue = yAxisValue;
-        return this;
-    }
-
-    public void setyAxisValue(Float yAxisValue) {
-        this.yAxisValue = yAxisValue;
-    }
-
-    public Float getzAxisValue() {
-        return zAxisValue;
-    }
-
-    public VibrationProMessage zAxisValue(Float zAxisValue) {
-        this.zAxisValue = zAxisValue;
-        return this;
-    }
-
-    public void setzAxisValue(Float zAxisValue) {
-        this.zAxisValue = zAxisValue;
-    }
-
     public Float getTemperature() {
         return temperature;
     }
@@ -112,6 +82,84 @@ public class VibrationProMessage implements Serializable {
 
     public void setTemperature(Float temperature) {
         this.temperature = temperature;
+    }
+
+    public Float getxVelocity() {
+        return xVelocity;
+    }
+
+    public VibrationProMessage xVelocity(Float xVelocity) {
+        this.xVelocity = xVelocity;
+        return this;
+    }
+
+    public void setxVelocity(Float xVelocity) {
+        this.xVelocity = xVelocity;
+    }
+
+    public Float getxAcceleration() {
+        return xAcceleration;
+    }
+
+    public VibrationProMessage xAcceleration(Float xAcceleration) {
+        this.xAcceleration = xAcceleration;
+        return this;
+    }
+
+    public void setxAcceleration(Float xAcceleration) {
+        this.xAcceleration = xAcceleration;
+    }
+
+    public Float getyVelocity() {
+        return yVelocity;
+    }
+
+    public VibrationProMessage yVelocity(Float yVelocity) {
+        this.yVelocity = yVelocity;
+        return this;
+    }
+
+    public void setyVelocity(Float yVelocity) {
+        this.yVelocity = yVelocity;
+    }
+
+    public Float getyAcceleration() {
+        return yAcceleration;
+    }
+
+    public VibrationProMessage yAcceleration(Float yAcceleration) {
+        this.yAcceleration = yAcceleration;
+        return this;
+    }
+
+    public void setyAcceleration(Float yAcceleration) {
+        this.yAcceleration = yAcceleration;
+    }
+
+    public Float getzVelocity() {
+        return zVelocity;
+    }
+
+    public VibrationProMessage zVelocity(Float zVelocity) {
+        this.zVelocity = zVelocity;
+        return this;
+    }
+
+    public void setzVelocity(Float zVelocity) {
+        this.zVelocity = zVelocity;
+    }
+
+    public Float getzAcceleration() {
+        return zAcceleration;
+    }
+
+    public VibrationProMessage zAcceleration(Float zAcceleration) {
+        this.zAcceleration = zAcceleration;
+        return this;
+    }
+
+    public void setzAcceleration(Float zAcceleration) {
+        this.zAcceleration = zAcceleration;
     }
 
     public LorawanMessage getLoraMessage() {
@@ -153,10 +201,13 @@ public class VibrationProMessage implements Serializable {
         return "VibrationProMessage{" +
             "id=" + getId() +
             ", batteryValue=" + getBatteryValue() +
-            ", xAxisValue=" + getxAxisValue() +
-            ", yAxisValue=" + getyAxisValue() +
-            ", zAxisValue=" + getzAxisValue() +
             ", temperature=" + getTemperature() +
+            ", xVelocity=" + getxVelocity() +
+            ", xAcceleration=" + getxAcceleration() +
+            ", yVelocity=" + getyVelocity() +
+            ", yAcceleration=" + getyAcceleration() +
+            ", zVelocity=" + getzVelocity() +
+            ", zAcceleration=" + getzAcceleration() +
             "}";
     }
 }

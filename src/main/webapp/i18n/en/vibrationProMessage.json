@@ -16,10 +16,13 @@
                 "title": "Vibration Pro Message"
             },
             "batteryValue": "Battery Value",
-            "xAxisValue": "X Axis Value",
-            "yAxisValue": "Y Axis Value",
-            "zAxisValue": "Z Axis Value",
             "temperature": "Temperature",
+            "xVelocity": "X Velocity",
+            "xAcceleration": "X Acceleration",
+            "yVelocity": "Y Velocity",
+            "yAcceleration": "Y Acceleration",
+            "zVelocity": "Z Velocity",
+            "zAcceleration": "Z Acceleration",
             "loraMessage": "Lora Message"
         }
     }

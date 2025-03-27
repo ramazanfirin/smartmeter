@@ -62,10 +62,14 @@ entity VibrationEcoMessage{
 
 entity VibrationProMessage{
     batteryValue Float
-	xAxisValue Float	
-	yAxisValue Float
-	zAxisValue Float
-	temperature Float
+    temperature Float
+	xVelocity Float	
+	xAcceleration Float
+	yVelocity Float
+	yAcceleration Float
+	zVelocity Float
+	zAcceleration Float
+
 	
 }
 

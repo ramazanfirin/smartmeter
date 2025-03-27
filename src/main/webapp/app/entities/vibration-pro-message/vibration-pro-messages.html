@@ -20,10 +20,13 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.vibrationProMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="xAxisValue"><span data-translate="smartmeterApp.vibrationProMessage.xAxisValue">X Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="yAxisValue"><span data-translate="smartmeterApp.vibrationProMessage.yAxisValue">Y Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="zAxisValue"><span data-translate="smartmeterApp.vibrationProMessage.zAxisValue">Z Axis Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="temperature"><span data-translate="smartmeterApp.vibrationProMessage.temperature">Temperature</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="xVelocity"><span data-translate="smartmeterApp.vibrationProMessage.xVelocity">X Velocity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="xAcceleration"><span data-translate="smartmeterApp.vibrationProMessage.xAcceleration">X Acceleration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="yVelocity"><span data-translate="smartmeterApp.vibrationProMessage.yVelocity">Y Velocity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="yAcceleration"><span data-translate="smartmeterApp.vibrationProMessage.yAcceleration">Y Acceleration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="zVelocity"><span data-translate="smartmeterApp.vibrationProMessage.zVelocity">Z Velocity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="zAcceleration"><span data-translate="smartmeterApp.vibrationProMessage.zAcceleration">Z Acceleration</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="loraMessage.id"><span data-translate="smartmeterApp.vibrationProMessage.loraMessage">Lora Message</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -32,10 +35,13 @@
                 <tr ng-repeat="vibrationProMessage in vm.vibrationProMessages track by vibrationProMessage.id">
                     <td><a ui-sref="vibration-pro-message-detail({id:vibrationProMessage.id})">{{vibrationProMessage.id}}</a></td>
                     <td>{{vibrationProMessage.batteryValue}}</td>
-                    <td>{{vibrationProMessage.xAxisValue}}</td>
-                    <td>{{vibrationProMessage.yAxisValue}}</td>
-                    <td>{{vibrationProMessage.zAxisValue}}</td>
                     <td>{{vibrationProMessage.temperature}}</td>
+                    <td>{{vibrationProMessage.xVelocity}}</td>
+                    <td>{{vibrationProMessage.xAcceleration}}</td>
+                    <td>{{vibrationProMessage.yVelocity}}</td>
+                    <td>{{vibrationProMessage.yAcceleration}}</td>
+                    <td>{{vibrationProMessage.zVelocity}}</td>
+                    <td>{{vibrationProMessage.zAcceleration}}</td>
                     <td>
                         <a ui-sref="lorawan-message-detail({id:vibrationProMessage.loraMessage.id})">{{vibrationProMessage.loraMessage.id}}</a>
                     </td>

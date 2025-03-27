@@ -125,10 +125,13 @@
                         entity: function () {
                             return {
                                 batteryValue: null,
-                                xAxisValue: null,
-                                yAxisValue: null,
-                                zAxisValue: null,
                                 temperature: null,
+                                xVelocity: null,
+                                xAcceleration: null,
+                                yVelocity: null,
+                                yAcceleration: null,
+                                zVelocity: null,
+                                zAcceleration: null,
                                 id: null
                             };
                         }

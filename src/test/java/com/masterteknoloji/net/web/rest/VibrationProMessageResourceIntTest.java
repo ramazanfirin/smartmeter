@@ -41,17 +41,26 @@ public class VibrationProMessageResourceIntTest {
     private static final Float DEFAULT_BATTERY_VALUE = 1F;
     private static final Float UPDATED_BATTERY_VALUE = 2F;
 
-    private static final Float DEFAULT_X_AXIS_VALUE = 1F;
-    private static final Float UPDATED_X_AXIS_VALUE = 2F;
-
-    private static final Float DEFAULT_Y_AXIS_VALUE = 1F;
-    private static final Float UPDATED_Y_AXIS_VALUE = 2F;
-
-    private static final Float DEFAULT_Z_AXIS_VALUE = 1F;
-    private static final Float UPDATED_Z_AXIS_VALUE = 2F;
-
     private static final Float DEFAULT_TEMPERATURE = 1F;
     private static final Float UPDATED_TEMPERATURE = 2F;
+
+    private static final Float DEFAULT_X_VELOCITY = 1F;
+    private static final Float UPDATED_X_VELOCITY = 2F;
+
+    private static final Float DEFAULT_X_ACCELERATION = 1F;
+    private static final Float UPDATED_X_ACCELERATION = 2F;
+
+    private static final Float DEFAULT_Y_VELOCITY = 1F;
+    private static final Float UPDATED_Y_VELOCITY = 2F;
+
+    private static final Float DEFAULT_Y_ACCELERATION = 1F;
+    private static final Float UPDATED_Y_ACCELERATION = 2F;
+
+    private static final Float DEFAULT_Z_VELOCITY = 1F;
+    private static final Float UPDATED_Z_VELOCITY = 2F;
+
+    private static final Float DEFAULT_Z_ACCELERATION = 1F;
+    private static final Float UPDATED_Z_ACCELERATION = 2F;
 
     @Autowired
     private VibrationProMessageRepository vibrationProMessageRepository;
@@ -92,10 +101,13 @@ public class VibrationProMessageResourceIntTest {
     public static VibrationProMessage createEntity(EntityManager em) {
         VibrationProMessage vibrationProMessage = new VibrationProMessage()
             .batteryValue(DEFAULT_BATTERY_VALUE)
-            .xAxisValue(DEFAULT_X_AXIS_VALUE)
-            .yAxisValue(DEFAULT_Y_AXIS_VALUE)
-            .zAxisValue(DEFAULT_Z_AXIS_VALUE)
-            .temperature(DEFAULT_TEMPERATURE);
+            .temperature(DEFAULT_TEMPERATURE)
+            .xVelocity(DEFAULT_X_VELOCITY)
+            .xAcceleration(DEFAULT_X_ACCELERATION)
+            .yVelocity(DEFAULT_Y_VELOCITY)
+            .yAcceleration(DEFAULT_Y_ACCELERATION)
+            .zVelocity(DEFAULT_Z_VELOCITY)
+            .zAcceleration(DEFAULT_Z_ACCELERATION);
         return vibrationProMessage;
     }
 
@@ -120,10 +132,13 @@ public class VibrationProMessageResourceIntTest {
         assertThat(vibrationProMessageList).hasSize(databaseSizeBeforeCreate + 1);
         VibrationProMessage testVibrationProMessage = vibrationProMessageList.get(vibrationProMessageList.size() - 1);
         assertThat(testVibrationProMessage.getBatteryValue()).isEqualTo(DEFAULT_BATTERY_VALUE);
-        assertThat(testVibrationProMessage.getxAxisValue()).isEqualTo(DEFAULT_X_AXIS_VALUE);
-        assertThat(testVibrationProMessage.getyAxisValue()).isEqualTo(DEFAULT_Y_AXIS_VALUE);
-        assertThat(testVibrationProMessage.getzAxisValue()).isEqualTo(DEFAULT_Z_AXIS_VALUE);
         assertThat(testVibrationProMessage.getTemperature()).isEqualTo(DEFAULT_TEMPERATURE);
+        assertThat(testVibrationProMessage.getxVelocity()).isEqualTo(DEFAULT_X_VELOCITY);
+        assertThat(testVibrationProMessage.getxAcceleration()).isEqualTo(DEFAULT_X_ACCELERATION);
+        assertThat(testVibrationProMessage.getyVelocity()).isEqualTo(DEFAULT_Y_VELOCITY);
+        assertThat(testVibrationProMessage.getyAcceleration()).isEqualTo(DEFAULT_Y_ACCELERATION);
+        assertThat(testVibrationProMessage.getzVelocity()).isEqualTo(DEFAULT_Z_VELOCITY);
+        assertThat(testVibrationProMessage.getzAcceleration()).isEqualTo(DEFAULT_Z_ACCELERATION);
     }
 
     @Test
@@ -157,10 +172,13 @@ public class VibrationProMessageResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(vibrationProMessage.getId().intValue())))
             .andExpect(jsonPath("$.[*].batteryValue").value(hasItem(DEFAULT_BATTERY_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].xAxisValue").value(hasItem(DEFAULT_X_AXIS_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].yAxisValue").value(hasItem(DEFAULT_Y_AXIS_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].zAxisValue").value(hasItem(DEFAULT_Z_AXIS_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].temperature").value(hasItem(DEFAULT_TEMPERATURE.doubleValue())));
+            .andExpect(jsonPath("$.[*].temperature").value(hasItem(DEFAULT_TEMPERATURE.doubleValue())))
+            .andExpect(jsonPath("$.[*].xVelocity").value(hasItem(DEFAULT_X_VELOCITY.doubleValue())))
+            .andExpect(jsonPath("$.[*].xAcceleration").value(hasItem(DEFAULT_X_ACCELERATION.doubleValue())))
+            .andExpect(jsonPath("$.[*].yVelocity").value(hasItem(DEFAULT_Y_VELOCITY.doubleValue())))
+            .andExpect(jsonPath("$.[*].yAcceleration").value(hasItem(DEFAULT_Y_ACCELERATION.doubleValue())))
+            .andExpect(jsonPath("$.[*].zVelocity").value(hasItem(DEFAULT_Z_VELOCITY.doubleValue())))
+            .andExpect(jsonPath("$.[*].zAcceleration").value(hasItem(DEFAULT_Z_ACCELERATION.doubleValue())));
     }
 
     @Test
@@ -175,10 +193,13 @@ public class VibrationProMessageResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(vibrationProMessage.getId().intValue()))
             .andExpect(jsonPath("$.batteryValue").value(DEFAULT_BATTERY_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.xAxisValue").value(DEFAULT_X_AXIS_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.yAxisValue").value(DEFAULT_Y_AXIS_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.zAxisValue").value(DEFAULT_Z_AXIS_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.temperature").value(DEFAULT_TEMPERATURE.doubleValue()));
+            .andExpect(jsonPath("$.temperature").value(DEFAULT_TEMPERATURE.doubleValue()))
+            .andExpect(jsonPath("$.xVelocity").value(DEFAULT_X_VELOCITY.doubleValue()))
+            .andExpect(jsonPath("$.xAcceleration").value(DEFAULT_X_ACCELERATION.doubleValue()))
+            .andExpect(jsonPath("$.yVelocity").value(DEFAULT_Y_VELOCITY.doubleValue()))
+            .andExpect(jsonPath("$.yAcceleration").value(DEFAULT_Y_ACCELERATION.doubleValue()))
+            .andExpect(jsonPath("$.zVelocity").value(DEFAULT_Z_VELOCITY.doubleValue()))
+            .andExpect(jsonPath("$.zAcceleration").value(DEFAULT_Z_ACCELERATION.doubleValue()));
     }
 
     @Test
@@ -202,10 +223,13 @@ public class VibrationProMessageResourceIntTest {
         em.detach(updatedVibrationProMessage);
         updatedVibrationProMessage
             .batteryValue(UPDATED_BATTERY_VALUE)
-            .xAxisValue(UPDATED_X_AXIS_VALUE)
-            .yAxisValue(UPDATED_Y_AXIS_VALUE)
-            .zAxisValue(UPDATED_Z_AXIS_VALUE)
-            .temperature(UPDATED_TEMPERATURE);
+            .temperature(UPDATED_TEMPERATURE)
+            .xVelocity(UPDATED_X_VELOCITY)
+            .xAcceleration(UPDATED_X_ACCELERATION)
+            .yVelocity(UPDATED_Y_VELOCITY)
+            .yAcceleration(UPDATED_Y_ACCELERATION)
+            .zVelocity(UPDATED_Z_VELOCITY)
+            .zAcceleration(UPDATED_Z_ACCELERATION);
 
         restVibrationProMessageMockMvc.perform(put("/api/vibration-pro-messages")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -217,10 +241,13 @@ public class VibrationProMessageResourceIntTest {
         assertThat(vibrationProMessageList).hasSize(databaseSizeBeforeUpdate);
         VibrationProMessage testVibrationProMessage = vibrationProMessageList.get(vibrationProMessageList.size() - 1);
         assertThat(testVibrationProMessage.getBatteryValue()).isEqualTo(UPDATED_BATTERY_VALUE);
-        assertThat(testVibrationProMessage.getxAxisValue()).isEqualTo(UPDATED_X_AXIS_VALUE);
-        assertThat(testVibrationProMessage.getyAxisValue()).isEqualTo(UPDATED_Y_AXIS_VALUE);
-        assertThat(testVibrationProMessage.getzAxisValue()).isEqualTo(UPDATED_Z_AXIS_VALUE);
         assertThat(testVibrationProMessage.getTemperature()).isEqualTo(UPDATED_TEMPERATURE);
+        assertThat(testVibrationProMessage.getxVelocity()).isEqualTo(UPDATED_X_VELOCITY);
+        assertThat(testVibrationProMessage.getxAcceleration()).isEqualTo(UPDATED_X_ACCELERATION);
+        assertThat(testVibrationProMessage.getyVelocity()).isEqualTo(UPDATED_Y_VELOCITY);
+        assertThat(testVibrationProMessage.getyAcceleration()).isEqualTo(UPDATED_Y_ACCELERATION);
+        assertThat(testVibrationProMessage.getzVelocity()).isEqualTo(UPDATED_Z_VELOCITY);
+        assertThat(testVibrationProMessage.getzAcceleration()).isEqualTo(UPDATED_Z_ACCELERATION);
     }
 
     @Test

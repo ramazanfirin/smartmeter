@@ -21,6 +21,8 @@ import com.masterteknoloji.net.web.rest.vm.DeviceMessageVM;
 import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationEcoSensorVM;
 import com.masterteknoloji.net.web.rest.vm.thingsboard.VibrationProSensorVM;
 
+import liquibase.pro.packaged.v;
+
 @Service
 public class VibrationProSensorService extends BaseLoraDeviceService implements LoraDeviceService{
 
@@ -80,10 +82,19 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 			throws Exception {
 		VibrationProMessage vibrationProMessage = new VibrationProMessage();
 		VibrationProSensorVM vibrationSensorVM = parseHexData(deviceMessageVM);
-//		vibrationProMessage.setBatteryValue(0f);
-//		vibrationProMessage.setxAxisValue(vibrationSensorVM.getxAxisValue());
-//		vibrationProMessage.setyAxisValue(vibrationSensorVM.getyAxisValue());
-//		vibrationProMessage.setzAxisValue(vibrationSensorVM.getzAxisValue());
+		vibrationProMessage.setBatteryValue(vibrationSensorVM.getVoltage());
+		vibrationProMessage.setTemperature(vibrationSensorVM.getTemperature());
+		
+		vibrationProMessage.setxAcceleration(vibrationProMessage.getxAcceleration());
+		vibrationProMessage.setxVelocity(vibrationProMessage.getxVelocity());
+		
+		vibrationProMessage.setyAcceleration(vibrationProMessage.getyAcceleration());
+		vibrationProMessage.setyVelocity(vibrationProMessage.getyVelocity());
+		
+		vibrationProMessage.setzAcceleration(vibrationProMessage.getzAcceleration());
+		vibrationProMessage.setzVelocity(vibrationProMessage.getzVelocity());
+		
+		
 		
 		return vibrationProMessageRepository.save(vibrationProMessage);
 	}
@@ -101,7 +112,20 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 		try {
 			VibrationProMessage message = (VibrationProMessage)object;
 			
-			VibrationEcoSensorVM vibrationSensorVM = new VibrationEcoSensorVM(message.getxAxisValue(), message.getyAxisValue(), message.getzAxisValue(), 0f);
+			VibrationProSensorVM vibrationSensorVM = new VibrationProSensorVM();
+			vibrationSensorVM.setTemperature(message.getTemperature());
+			vibrationSensorVM.setVoltage(message.getBatteryValue());
+			
+			vibrationSensorVM.setxAcceleration(message.getxAcceleration());
+			vibrationSensorVM.setxVelocity(message.getxVelocity());
+
+			vibrationSensorVM.setyAcceleration(message.getyAcceleration());
+			vibrationSensorVM.setyVelocity(message.getyVelocity());
+
+			vibrationSensorVM.setzAcceleration(message.getzAcceleration());
+			vibrationSensorVM.setxVelocity(message.getzVelocity());
+
+			
 			String json = objectMapper.writeValueAsString(vibrationSensorVM);	
 
 			

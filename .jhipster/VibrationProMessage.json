@@ -14,19 +14,31 @@
             "fieldType": "Float"
         },
         {
-            "fieldName": "xAxisValue",
-            "fieldType": "Float"
-        },
-        {
-            "fieldName": "yAxisValue",
-            "fieldType": "Float"
-        },
-        {
-            "fieldName": "zAxisValue",
-            "fieldType": "Float"
-        },
-        {
             "fieldName": "temperature",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "xVelocity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "xAcceleration",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "yVelocity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "yAcceleration",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "zVelocity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "zAcceleration",
             "fieldType": "Float"
         }
     ],

@@ -26,19 +26,31 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="x_axis_value" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="y_axis_value" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="z_axis_value" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
-
             <column name="temperature" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="x_velocity" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="x_acceleration" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="y_velocity" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="y_acceleration" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="z_velocity" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="z_acceleration" type="${floatType}">
                 <constraints nullable="true" />
             </column>
 
