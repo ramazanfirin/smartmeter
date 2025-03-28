@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('M2mMessageController', M2mMessageController);
 
-    M2mMessageController.$inject = ['$state', 'DataUtils', 'M2mMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    M2mMessageController.$inject = ['$state', 'DataUtils', 'M2mMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Sensor', '$scope'];
 
-    function M2mMessageController($state, DataUtils, M2mMessage, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function M2mMessageController($state, DataUtils, M2mMessage, ParseLinks, AlertService, paginationConstants, pagingParams, Sensor, $scope) {
 
         var vm = this;
 
@@ -18,6 +18,9 @@
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
+        vm.sensors = [];
+        vm.selectedSensor = '';
+        vm.selectedTimeRange = '24';
 
         loadAll();
 
@@ -58,5 +61,37 @@
                 search: vm.currentSearch
             });
         }
+
+        vm.loadSensors = function() {
+            Sensor.query(function(result) {
+                vm.sensors = result;
+                if (result && result.length > 0) {
+                    vm.selectedSensor = '';
+                }
+            });
+        };
+
+        vm.loadSensors();
+
+        function onFilterSuccess(data, headers) {
+            vm.links = ParseLinks.parse(headers('link'));
+            vm.totalItems = headers('X-Total-Count');
+            vm.queryCount = vm.totalItems;
+            vm.m2mMessages = data;
+            vm.page = pagingParams.page;
+        }
+
+        function onFilterError(error) {
+            AlertService.error(error.data.message);
+        }
+
+        vm.filterMessages = function() {
+            M2mMessage.filter({
+                page: pagingParams.page - 1,
+                size: vm.itemsPerPage,
+                sensorId: vm.selectedSensor,
+                timeRange: vm.selectedTimeRange
+            }, onFilterSuccess, onFilterError);
+        };
     }
 })();

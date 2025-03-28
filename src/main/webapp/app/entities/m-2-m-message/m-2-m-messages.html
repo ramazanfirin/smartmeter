@@ -1,6 +1,41 @@
 <div>
     <h2 data-translate="smartmeterApp.m2mMessage.home.title">M 2 M Messages</h2>
     <jhi-alert></jhi-alert>
+    
+    <!-- Arama Bölümü -->
+    <div class="row mb-3">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="sensorSelect">Sayaç Seçiniz</label>
+                <select class="form-control" id="sensorSelect" ng-model="vm.selectedSensor">
+                    <option value="">Tüm Sayaçlar</option>
+                    <option ng-repeat="sensor in vm.sensors track by sensor.id" value="{{sensor.id}}">
+                        {{sensor.devEui}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="timeRange">Zaman Aralığı</label>
+                <select class="form-control" id="timeRange" ng-model="vm.selectedTimeRange">
+                    <option value="24">Son 24 Saat</option>
+                    <option value="168">Son 1 Hafta</option>
+                    <option value="720">Son 1 Ay</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <button class="btn btn-primary form-control" ng-click="vm.filterMessages()">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <span>Ara</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
@@ -85,7 +120,17 @@
         </table>
     </div>
     <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        <jhi-item-count 
+            page="vm.page" 
+            total="vm.queryCount" 
+            items-per-page="vm.itemsPerPage">
+        </jhi-item-count>
+        <uib-pagination 
+            class="pagination-sm" 
+            total-items="vm.totalItems" 
+            items-per-page="vm.itemsPerPage" 
+            ng-model="vm.page" 
+            ng-change="vm.transition()">
+        </uib-pagination>
     </div>
 </div>

@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.time.ZonedDateTime;
 
 /**
  * REST controller for managing M2mMessage.
@@ -124,5 +125,40 @@ public class M2mMessageResource {
         log.debug("REST request to delete M2mMessage : {}", id);
         m2mMessageRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /m-2-m-messages/filter : Filter m2mMessages by sensor and time range.
+     *
+     * @param pageable the pagination information
+     * @param sensorId the sensor ID to filter by (optional)
+     * @param timeRange the time range in hours to filter by (optional)
+     * @return the ResponseEntity with status 200 (OK) and the filtered list of m2mMessages in body
+     */
+    @GetMapping("/m-2-m-messages/filter")
+    @Timed
+    public ResponseEntity<List<M2mMessage>> filterM2mMessages(
+        Pageable pageable,
+        @RequestParam(required = false) Long sensorId,
+        @RequestParam(required = false) Integer timeRange) {
+        
+        log.debug("REST request to filter M2mMessages by sensor: {} and timeRange: {}", sensorId, timeRange);
+        
+        Page<M2mMessage> page = m2mMessageRepository.findAll(pageable);
+        if (sensorId != null && timeRange != null) {
+            // Şu andan timeRange saat öncesine kadar olan süre
+            ZonedDateTime fromDate = ZonedDateTime.now().minusHours(timeRange);
+            //page = m2mMessageRepository.findBySensorIdAndInsertDateAfter(sensorId, fromDate, pageable);
+        } else if (sensorId != null) {
+            //page = m2mMessageRepository.findBySensorId(sensorId, pageable);
+        } else if (timeRange != null) {
+            ZonedDateTime fromDate = ZonedDateTime.now().minusHours(timeRange);
+           // page = m2mMessageRepository.findByInsertDateAfter(fromDate, pageable);
+        } else {
+          //  page = m2mMessageRepository.findAllValidImages(pageable);
+        }
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/m-2-m-messages/filter");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }
