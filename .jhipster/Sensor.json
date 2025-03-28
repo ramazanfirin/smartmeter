@@ -29,7 +29,7 @@
         {
             "fieldName": "type",
             "fieldType": "Type",
-            "fieldValues": "VIBRATION,BUTTON,WATER_METER,VIBRATION_ECO,VIBRATION_PRO"
+            "fieldValues": "VIBRATION,BUTTON,WATER_METER,VIBRATION_ECO,VIBRATION_PRO,CURRENT_METER"
         },
         {
             "fieldName": "thingsBoardDeviceId",

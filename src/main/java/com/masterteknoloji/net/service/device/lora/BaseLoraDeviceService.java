@@ -85,6 +85,8 @@ public class BaseLoraDeviceService implements LoraDeviceService{
 		String url = applicationProperties.getThingsBoardUrl()+sensor.getThingsBoardDeviceId()+"/telemetry ";
         RequestBody body = RequestBody.create(jsonString, MediaType.parse("application/json; charset=utf-8"));
 
+        System.out.println("data gönderiliyor. url: " + url);
+        
         Request request = new Request.Builder()
                 .url(url)  // URL'yi burada belirtin
                 .post(body)  // POST metodunu kullanıyoruz

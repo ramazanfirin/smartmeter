@@ -85,14 +85,14 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 		vibrationProMessage.setBatteryValue(vibrationSensorVM.getVoltage());
 		vibrationProMessage.setTemperature(vibrationSensorVM.getTemperature());
 		
-		vibrationProMessage.setxAcceleration(vibrationProMessage.getxAcceleration());
-		vibrationProMessage.setxVelocity(vibrationProMessage.getxVelocity());
+		vibrationProMessage.setxAcceleration(vibrationSensorVM.getxAcceleration());
+		vibrationProMessage.setxVelocity(vibrationSensorVM.getxVelocity());
 		
-		vibrationProMessage.setyAcceleration(vibrationProMessage.getyAcceleration());
-		vibrationProMessage.setyVelocity(vibrationProMessage.getyVelocity());
+		vibrationProMessage.setyAcceleration(vibrationSensorVM.getyAcceleration());
+		vibrationProMessage.setyVelocity(vibrationSensorVM.getyVelocity());
 		
-		vibrationProMessage.setzAcceleration(vibrationProMessage.getzAcceleration());
-		vibrationProMessage.setzVelocity(vibrationProMessage.getzVelocity());
+		vibrationProMessage.setzAcceleration(vibrationSensorVM.getzAcceleration());
+		vibrationProMessage.setzVelocity(vibrationSensorVM.getzVelocity());
 		
 		
 		

@@ -6,7 +6,8 @@
             "BUTTON": "BUTTON",
             "WATER_METER": "WATER_METER",
             "VIBRATION_ECO": "VIBRATION_ECO",
-            "VIBRATION_PRO": "VIBRATION_PRO"
+            "VIBRATION_PRO": "VIBRATION_PRO",
+            "CURRENT_METER": "CURRENT_METER"
         }
     }
 }

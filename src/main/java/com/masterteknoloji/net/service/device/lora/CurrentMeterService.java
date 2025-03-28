@@ -61,7 +61,7 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 			throws Exception {
 		CurrentMeterMessage currentMeterMessage = new CurrentMeterMessage();
 		
-		CurrentSensorVM currentSensorVM = parseHexData(lorawanMessage);
+		CurrentSensorVM currentSensorVM = parseHexData(deviceMessageVM);
 		currentMeterMessage.setBatteryValue(currentSensorVM.getBattery());
 		currentMeterMessage.setCurrent(currentSensorVM.getCurrent());
 		currentMeterMessage.setTotalEnergy(currentSensorVM.getTotalEnergy());
