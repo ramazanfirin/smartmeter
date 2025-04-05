@@ -139,53 +139,61 @@
         }
 
         function showGraph() {
-            vm.isGraphVisible = !vm.isGraphVisible;
-            if (vm.isGraphVisible) {
-                drawGraph();
-            }
+            drawGraph();
+            $('#graphModal').modal('show');
         }
 
         function drawGraph() {
-            var ctx = document.getElementById('vibrationGraph').getContext('2d');
+            if (vm.chart) {
+                vm.chart.destroy();
+            }
+
+            var canvas = document.getElementById('vibrationGraph');
+            if (!canvas) {
+                console.error('Canvas element not found');
+                return;
+            }
+
+            var ctx = canvas.getContext('2d');
             
             // Verileri hazırla
-            var labels = vm.vibrationProMessages.map(function(msg) {
-                return new Date(msg.loraMessage.insertDate).toLocaleString();
+            var labels = vm.vibrationProMessages.map(function(item) {
+                return item.loraMessage.insertDate;
             });
-
-            var xData = vm.vibrationProMessages.map(function(msg) {
-                return msg.xVelocity;
+            
+            var xVelocityData = vm.vibrationProMessages.map(function(item) {
+                return item.xVelocity;
             });
-
-            var yData = vm.vibrationProMessages.map(function(msg) {
-                return msg.yVelocity;
+            
+            var yVelocityData = vm.vibrationProMessages.map(function(item) {
+                return item.yVelocity;
             });
-
-            var zData = vm.vibrationProMessages.map(function(msg) {
-                return msg.zVelocity;
+            
+            var zVelocityData = vm.vibrationProMessages.map(function(item) {
+                return item.zVelocity;
             });
 
             // Grafik oluştur
-            new Chart(ctx, {
+            vm.chart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [
                         {
                             label: 'X Hızı',
-                            data: xData,
+                            data: xVelocityData,
                             borderColor: 'rgb(255, 99, 132)',
                             tension: 0.1
                         },
                         {
                             label: 'Y Hızı',
-                            data: yData,
+                            data: yVelocityData,
                             borderColor: 'rgb(54, 162, 235)',
                             tension: 0.1
                         },
                         {
                             label: 'Z Hızı',
-                            data: zData,
+                            data: zVelocityData,
                             borderColor: 'rgb(75, 192, 192)',
                             tension: 0.1
                         }
@@ -193,6 +201,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true

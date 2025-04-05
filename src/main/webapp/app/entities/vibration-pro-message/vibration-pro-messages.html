@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Vibration Pro Messages</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -122,15 +124,21 @@
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 
-    <!-- Grafik -->
-    <div class="row" ng-show="vm.isGraphVisible">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Titreşim Grafiği</h3>
+    <!-- Grafik Modal -->
+    <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="graphModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="graphModalLabel">Titreşim Grafiği</h4>
                 </div>
-                <div class="panel-body">
+                <div class="modal-body">
                     <canvas id="vibrationGraph"></canvas>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
                 </div>
             </div>
         </div>
@@ -198,5 +206,16 @@
 canvas {
     width: 100% !important;
     height: 400px !important;
+}
+.modal-dialog {
+    width: 90%;
+    max-width: 1200px;
+}
+.modal-body {
+    padding: 20px;
+}
+canvas {
+    width: 100% !important;
+    height: 500px !important;
 }
 </style>
