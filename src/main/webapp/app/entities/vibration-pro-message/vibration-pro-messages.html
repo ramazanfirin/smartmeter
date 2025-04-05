@@ -43,7 +43,7 @@
                     <td>{{vibrationProMessage.zVelocity}}</td>
                     <td>{{vibrationProMessage.zAcceleration}}</td>
                     <td>
-                        <a ui-sref="lorawan-message-detail({id:vibrationProMessage.loraMessage.id})">{{vibrationProMessage.loraMessage.id}}</a>
+                        <a ui-sref="lorawan-message-detail({id:vibrationProMessage.loraMessage.id})">{{vibrationProMessage.loraMessage.insertDate | date:'medium'}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
@@ -53,12 +53,12 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="vibration-pro-message.edit({id:vibrationProMessage.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                            </button>
+<!--                             <button type="submit" -->
+<!--                                     ui-sref="vibration-pro-message.edit({id:vibrationProMessage.id})" -->
+<!--                                     class="btn btn-primary btn-sm"> -->
+<!--                                 <span class="glyphicon glyphicon-pencil"></span> -->
+<!--                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span> -->
+<!--                             </button> -->
                             <button type="submit"
                                     ui-sref="vibration-pro-message.delete({id:vibrationProMessage.id})"
                                     class="btn btn-danger btn-sm">

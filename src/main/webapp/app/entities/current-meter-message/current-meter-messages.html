@@ -35,7 +35,7 @@
                     <td>{{currentMeterMessage.totalEnergy}}</td>
                     <td>{{currentMeterMessage.reason}}</td>
                     <td>
-                        <a ui-sref="lorawan-message-detail({id:currentMeterMessage.loraMessage.id})">{{currentMeterMessage.loraMessage.id}}</a>
+                        <a ui-sref="lorawan-message-detail({id:currentMeterMessage.loraMessage.id})">{{currentMeterMessage.loraMessage.insertDate | date:'medium'}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
@@ -45,12 +45,12 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="current-meter-message.edit({id:currentMeterMessage.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                            </button>
+<!--                             <button type="submit" -->
+<!--                                     ui-sref="current-meter-message.edit({id:currentMeterMessage.id})" -->
+<!--                                     class="btn btn-primary btn-sm"> -->
+<!--                                 <span class="glyphicon glyphicon-pencil"></span> -->
+<!--                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span> -->
+<!--                             </button> -->
                             <button type="submit"
                                     ui-sref="current-meter-message.delete({id:currentMeterMessage.id})"
                                     class="btn btn-danger btn-sm">

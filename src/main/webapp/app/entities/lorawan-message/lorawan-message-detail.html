@@ -12,36 +12,36 @@
         <dd>
             <span>{{vm.lorawanMessage.hexMessage}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.lorawanMessage.index">Index</span></dt>
-        <dd>
-            <span>{{vm.lorawanMessage.index}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.lorawanMessage.totalMessageCount">Total Message Count</span></dt>
-        <dd>
-            <span>{{vm.lorawanMessage.totalMessageCount}}</span>
-        </dd>
+<!--         <dt><span data-translate="smartmeterApp.lorawanMessage.index">Index</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.lorawanMessage.index}}</span> -->
+<!--         </dd> -->
+<!--         <dt><span data-translate="smartmeterApp.lorawanMessage.totalMessageCount">Total Message Count</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.lorawanMessage.totalMessageCount}}</span> -->
+<!--         </dd> -->
         <dt><span data-translate="smartmeterApp.lorawanMessage.insertDate">Insert Date</span></dt>
         <dd>
             <span>{{vm.lorawanMessage.insertDate | date:'medium'}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.lorawanMessage.image">Image</span></dt>
-        <dd>
-            <div ng-if="vm.lorawanMessage.image">
-                <a ng-click="vm.openFile(vm.lorawanMessage.imageContentType, vm.lorawanMessage.image)">
-                    <img data-ng-src="{{'data:' + vm.lorawanMessage.imageContentType + ';base64,' + vm.lorawanMessage.image}}"  
-                     alt="lorawanMessage image"/>
-                </a> 
-                {{vm.lorawanMessage.imageContentType}}, {{vm.byteSize(vm.lorawanMessage.image)}}
-            </div>
-        </dd>
-        <dt><span data-translate="smartmeterApp.lorawanMessage.batteryValue">Battery Value</span></dt>
-        <dd>
-            <span>{{vm.lorawanMessage.batteryValue}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.lorawanMessage.sensorValue">Sensor Value</span></dt>
-        <dd>
-            <span>{{vm.lorawanMessage.sensorValue}}</span>
-        </dd>
+<!--         <dt><span data-translate="smartmeterApp.lorawanMessage.image">Image</span></dt> -->
+<!--         <dd> -->
+<!--             <div ng-if="vm.lorawanMessage.image"> -->
+<!--                 <a ng-click="vm.openFile(vm.lorawanMessage.imageContentType, vm.lorawanMessage.image)"> -->
+<!--                     <img data-ng-src="{{'data:' + vm.lorawanMessage.imageContentType + ';base64,' + vm.lorawanMessage.image}}"   -->
+<!--                      alt="lorawanMessage image"/> -->
+<!--                 </a>  -->
+<!--                 {{vm.lorawanMessage.imageContentType}}, {{vm.byteSize(vm.lorawanMessage.image)}} -->
+<!--             </div> -->
+<!--         </dd> -->
+<!--         <dt><span data-translate="smartmeterApp.lorawanMessage.batteryValue">Battery Value</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.lorawanMessage.batteryValue}}</span> -->
+<!--         </dd> -->
+<!--         <dt><span data-translate="smartmeterApp.lorawanMessage.sensorValue">Sensor Value</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.lorawanMessage.sensorValue}}</span> -->
+<!--         </dd> -->
         <dt><span data-translate="smartmeterApp.lorawanMessage.fPort">F Port</span></dt>
         <dd>
             <span>{{vm.lorawanMessage.fPort}}</span>
@@ -50,10 +50,10 @@
         <dd>
             <span>{{vm.lorawanMessage.fCnt}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.lorawanMessage.imageId">Image Id</span></dt>
-        <dd>
-            <span>{{vm.lorawanMessage.imageId}}</span>
-        </dd>
+<!--         <dt><span data-translate="smartmeterApp.lorawanMessage.imageId">Image Id</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.lorawanMessage.imageId}}</span> -->
+<!--         </dd> -->
         <dt><span data-translate="smartmeterApp.lorawanMessage.sensor">Sensor</span></dt>
         <dd>
             <a ui-sref="sensor-detail({id:vm.lorawanMessage.sensor.id})">{{vm.lorawanMessage.sensor.id}}</a>
