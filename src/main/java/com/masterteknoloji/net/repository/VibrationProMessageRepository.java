@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface VibrationProMessageRepository extends JpaRepository<VibrationPr
            "(:endDate IS NULL OR v.loraMessage.insertDate <= :endDate)")
     List<VibrationProMessage> search(
         @Param("sensorId") Long sensorId,
-        @Param("startDate") Instant startDate,
-        @Param("endDate") Instant endDate
+        @Param("startDate") ZonedDateTime startDate,
+        @Param("endDate") ZonedDateTime endDate
     );
 }

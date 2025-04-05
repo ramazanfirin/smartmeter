@@ -91,9 +91,16 @@ public class SensorResource {
      */
     @GetMapping("/sensors")
     @Timed
-    public ResponseEntity<List<Sensor>> getAllSensors(Pageable pageable) {
-        log.debug("REST request to get a page of Sensors");
-        Page<Sensor> page = sensorRepository.findAll(pageable);
+    public ResponseEntity<List<Sensor>> getAllSensors(
+            @RequestParam(required = false) String type,
+            Pageable pageable) {
+        log.debug("REST request to get a page of Sensors with type: {}", type);
+        Page<Sensor> page;
+        if (type != null) {
+            page = sensorRepository.findByType( com.masterteknoloji.net.domain.enumeration.Type.valueOf(type), pageable);
+        } else {
+            page = sensorRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sensors");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -129,7 +129,7 @@
         }
 
         function loadSensors() {
-            Sensor.query({}, function(data) {
+            Sensor.query({type: 'VIBRATION_PRO'}, function(data) {
                 vm.sensors = data;
             }, function(error) {
                 AlertService.error(error.data.message);

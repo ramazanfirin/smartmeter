@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,12 +139,12 @@ public class VibrationProMessageResource {
     @Timed
     public ResponseEntity<List<VibrationProMessage>> searchVibrationProMessages(
         @RequestParam(required = false) Long sensorId,
-        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant startDate,
-        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant endDate
+        @RequestParam(required = false) String startDate,
+        @RequestParam(required = false) String endDate
     ) {
         log.debug("REST request to search VibrationProMessages with sensorId: {}, startDate: {}, endDate: {}", 
             sensorId, startDate, endDate);
-        List<VibrationProMessage> result = vibrationProMessageRepository.search(sensorId, startDate, endDate);
+        List<VibrationProMessage> result = vibrationProMessageRepository.search(sensorId, ZonedDateTime.parse(startDate), ZonedDateTime.parse(endDate));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
