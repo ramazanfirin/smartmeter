@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('VibrationProMessageController', VibrationProMessageController);
 
-    VibrationProMessageController.$inject = ['$state', 'VibrationProMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    VibrationProMessageController.$inject = ['$state', 'VibrationProMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Sensor'];
 
-    function VibrationProMessageController($state, VibrationProMessage, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function VibrationProMessageController($state, VibrationProMessage, ParseLinks, AlertService, paginationConstants, pagingParams, Sensor) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -30,6 +30,7 @@
         ];
 
         loadAll();
+        loadSensors();
 
         function loadAll() {
             var params = {
@@ -125,6 +126,14 @@
             function onSearchError(error) {
                 AlertService.error(error.data.message);
             }
+        }
+
+        function loadSensors() {
+            Sensor.query({}, function(data) {
+                vm.sensors = data;
+            }, function(error) {
+                AlertService.error(error.data.message);
+            });
         }
     }
 })();

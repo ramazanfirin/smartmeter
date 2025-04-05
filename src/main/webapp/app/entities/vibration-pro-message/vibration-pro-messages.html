@@ -12,7 +12,7 @@
                             <label for="sensor" data-translate="smartmeterApp.vibrationProMessage.sensor">Sensor</label>
                             <select class="form-control" id="sensor" ng-model="vm.selectedSensor">
                                 <option value="">Tümü</option>
-                                <option ng-repeat="sensor in vm.sensors" value="{{sensor.id}}">{{sensor.name}}</option>
+                                <option ng-repeat="sensor in vm.sensors" value="{{sensor.id}}">{{sensor.devEui}}</option>
                             </select>
                         </div>
                     </div>
