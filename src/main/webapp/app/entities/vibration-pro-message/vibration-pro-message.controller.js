@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('VibrationProMessageController', VibrationProMessageController);
 
-    VibrationProMessageController.$inject = ['$state', 'VibrationProMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Sensor'];
+    VibrationProMessageController.$inject = ['$state', 'VibrationProMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Sensor', '$scope'];
 
-    function VibrationProMessageController($state, VibrationProMessage, ParseLinks, AlertService, paginationConstants, pagingParams, Sensor) {
+    function VibrationProMessageController($state, VibrationProMessage, ParseLinks, AlertService, paginationConstants, pagingParams, Sensor, $scope) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -16,6 +16,8 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.search = search;
+        vm.showGraph = showGraph;
+        vm.isGraphVisible = false;
         
         // Arama için değişkenler
         vm.selectedSensor = '';
@@ -133,6 +135,70 @@
                 vm.sensors = data;
             }, function(error) {
                 AlertService.error(error.data.message);
+            });
+        }
+
+        function showGraph() {
+            vm.isGraphVisible = !vm.isGraphVisible;
+            if (vm.isGraphVisible) {
+                drawGraph();
+            }
+        }
+
+        function drawGraph() {
+            var ctx = document.getElementById('vibrationGraph').getContext('2d');
+            
+            // Verileri hazırla
+            var labels = vm.vibrationProMessages.map(function(msg) {
+                return new Date(msg.loraMessage.insertDate).toLocaleString();
+            });
+
+            var xData = vm.vibrationProMessages.map(function(msg) {
+                return msg.xVelocity;
+            });
+
+            var yData = vm.vibrationProMessages.map(function(msg) {
+                return msg.yVelocity;
+            });
+
+            var zData = vm.vibrationProMessages.map(function(msg) {
+                return msg.zVelocity;
+            });
+
+            // Grafik oluştur
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'X Hızı',
+                            data: xData,
+                            borderColor: 'rgb(255, 99, 132)',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Y Hızı',
+                            data: yData,
+                            borderColor: 'rgb(54, 162, 235)',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Z Hızı',
+                            data: zData,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
             });
         }
     }

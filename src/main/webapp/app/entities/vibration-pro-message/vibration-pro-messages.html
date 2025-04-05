@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vibration Pro Messages</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
 <div>
     <h2 data-translate="smartmeterApp.vibrationProMessage.home.title">Vibration Pro Messages</h2>
     <jhi-alert></jhi-alert>
@@ -31,10 +39,16 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>&nbsp;</label>
-                            <button type="button" class="btn btn-primary form-control" ng-click="vm.search()">
-                                <span class="glyphicon glyphicon-search"></span>
-                                <span data-translate="entity.action.search">Ara</span>
-                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary" ng-click="vm.search()">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    <span data-translate="entity.action.search">Ara</span>
+                                </button>
+                                <button type="button" class="btn btn-success" ng-click="vm.showGraph()">
+                                    <span class="glyphicon glyphicon-stats"></span>
+                                    <span>Grafik</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,6 +121,20 @@
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
+
+    <!-- Grafik -->
+    <div class="row" ng-show="vm.isGraphVisible">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Titreşim Grafiği</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="vibrationGraph"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style>
@@ -153,5 +181,22 @@
 
 .glyphicon-search {
     margin-right: 5px;
+}
+
+.panel {
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.panel-heading {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+.panel-body {
+    padding: 20px;
+}
+canvas {
+    width: 100% !important;
+    height: 400px !important;
 }
 </style>
