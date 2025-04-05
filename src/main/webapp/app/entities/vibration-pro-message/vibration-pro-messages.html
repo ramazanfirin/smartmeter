@@ -1,19 +1,57 @@
 <div>
     <h2 data-translate="smartmeterApp.vibrationProMessage.home.title">Vibration Pro Messages</h2>
     <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="vibration-pro-message.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="smartmeterApp.vibrationProMessage.home.createLabel">
-                        Create new Vibration Pro Message
-                    </span>
-                </button>
+    
+    <!-- Arama Formu -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="search-panel">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="sensor" data-translate="smartmeterApp.vibrationProMessage.sensor">Sensor</label>
+                            <select class="form-control" id="sensor" ng-model="vm.selectedSensor">
+                                <option value="">Tümü</option>
+                                <option ng-repeat="sensor in vm.sensors" value="{{sensor.id}}">{{sensor.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="dateFilter" data-translate="smartmeterApp.vibrationProMessage.dateFilter">Tarih Filtresi</label>
+                            <select class="form-control" id="dateFilter" ng-model="vm.selectedDateFilter">
+                                <option value="">Tümü</option>
+                                <option value="24h">Son 24 Saat</option>
+                                <option value="7d">Son 1 Hafta</option>
+                                <option value="30d">Son 1 Ay</option>
+                                <option value="365d">Son 1 Yıl</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button type="button" class="btn btn-primary form-control" ng-click="vm.search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <span data-translate="entity.action.search">Ara</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-4 no-padding-left">
+            <button class="btn btn-primary" ui-sref="vibration-pro-message.new">
+                <span class="glyphicon glyphicon-plus"></span>
+                <span data-translate="smartmeterApp.vibrationProMessage.home.createLabel">Create new Vibration Pro Message</span>
+            </button>
+        </div>
+    </div>
     <br/>
+
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
@@ -53,12 +91,6 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-<!--                             <button type="submit" -->
-<!--                                     ui-sref="vibration-pro-message.edit({id:vibrationProMessage.id})" -->
-<!--                                     class="btn btn-primary btn-sm"> -->
-<!--                                 <span class="glyphicon glyphicon-pencil"></span> -->
-<!--                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span> -->
-<!--                             </button> -->
                             <button type="submit"
                                     ui-sref="vibration-pro-message.delete({id:vibrationProMessage.id})"
                                     class="btn btn-danger btn-sm">
@@ -76,3 +108,50 @@
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>
+
+<style>
+.search-panel {
+    background-color: #f8f9fa;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.form-control {
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-primary:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.glyphicon-search {
+    margin-right: 5px;
+}
+</style>

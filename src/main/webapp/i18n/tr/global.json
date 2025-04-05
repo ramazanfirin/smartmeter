@@ -95,7 +95,8 @@
             "edit": "Düzenle",
             "open": "Aç",
             "save": "Kaydet",
-            "view": "Görüntüle"
+            "view": "Görüntüle",
+            "search": "Ara"
         },
         "detail": {
             "field": "Alan",

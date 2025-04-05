@@ -23,7 +23,16 @@
             "yAcceleration": "Y Acceleration",
             "zVelocity": "Z Velocity",
             "zAcceleration": "Z Acceleration",
-            "loraMessage": "Lora Message"
+            "loraMessage": "Lora Message",
+            "sensor": "Sensor",
+            "dateFilter": "Tarih Filtresi",
+            "dateFilterOptions": {
+                "all": "Tümü",
+                "24h": "Son 24 Saat",
+                "7d": "Son 1 Hafta",
+                "30d": "Son 1 Ay",
+                "365d": "Son 1 Yıl"
+            }
         }
     }
 }
