@@ -94,7 +94,7 @@ public class VibrationProSensorService extends BaseLoraDeviceService implements 
 		vibrationProMessage.setzAcceleration(vibrationSensorVM.getzAcceleration());
 		vibrationProMessage.setzVelocity(vibrationSensorVM.getzVelocity());
 		
-		
+		vibrationProMessage.setLoraMessage(lorawanMessage);
 		
 		return vibrationProMessageRepository.save(vibrationProMessage);
 	}

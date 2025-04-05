@@ -81,7 +81,7 @@ public class VibrationEcoSensorService extends BaseLoraDeviceService implements 
 		vibrationEcoMessage.setxAxisValue(vibrationSensorVM.getxAxisValue());
 		vibrationEcoMessage.setyAxisValue(vibrationSensorVM.getyAxisValue());
 		vibrationEcoMessage.setzAxisValue(vibrationSensorVM.getzAxisValue());
-		
+		vibrationEcoMessage.setLoraMessage(lorawanMessage);
 		return vibrationEcoMessageRepository.save(vibrationEcoMessage);
 	}
 	

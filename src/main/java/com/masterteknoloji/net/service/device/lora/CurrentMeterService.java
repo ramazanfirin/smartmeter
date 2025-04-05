@@ -66,7 +66,7 @@ public class CurrentMeterService extends BaseLoraDeviceService implements LoraDe
 		currentMeterMessage.setCurrent(currentSensorVM.getCurrent());
 		currentMeterMessage.setTotalEnergy(currentSensorVM.getTotalEnergy());
 		currentMeterMessage.setReason(currentSensorVM.getReason());
-		
+		currentMeterMessage.setLoraMessage(lorawanMessage);
 		return currentMeterMessageRepository.save(currentMeterMessage);
 	}
 	
