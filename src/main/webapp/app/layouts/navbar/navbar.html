@@ -38,32 +38,32 @@
                                     <span data-translate="global.menu.entities.sensor">Sensor</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="!vm.FEATURE_FLAGS.isAISensorSysyem">
                                 <a ui-sref="lorawan-message" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.lorawanMessage">Lorawan Message</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
-                                <a ui-sref="m-2-m-message" ng-click="vm.collapseNavbar()">
+                                <a ui-sref="m-2-m-message" ng-click="vm.collapseNavbar()" ng-if="vm.FEATURE_FLAGS.isAISensorSysyem">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.m2MMessage">M 2 M Message</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
-                                <a ui-sref="vibration-eco-message" ng-click="vm.collapseNavbar()">
+                                <a ui-sref="vibration-eco-message" ng-click="vm.collapseNavbar()" ng-if="!vm.FEATURE_FLAGS.isAISensorSysyem">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.vibrationEcoMessage">Vibration Eco Message</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
-                                <a ui-sref="vibration-pro-message" ng-click="vm.collapseNavbar()">
+                                <a ui-sref="vibration-pro-message" ng-click="vm.collapseNavbar()" ng-if="!vm.FEATURE_FLAGS.isAISensorSysyem">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.vibrationProMessage">Vibration Pro Message</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
-                                <a ui-sref="current-meter-message" ng-click="vm.collapseNavbar()">
+                                <a ui-sref="current-meter-message" ng-click="vm.collapseNavbar()" ng-if="!vm.FEATURE_FLAGS.isAISensorSysyem">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.currentMeterMessage">Current Meter Message</span>
                                 </a>

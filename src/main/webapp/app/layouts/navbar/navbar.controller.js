@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService','FEATURE_FLAGS'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
+    function NavbarController ($state, Auth, Principal, ProfileService, LoginService,FEATURE_FLAGS) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -23,6 +23,8 @@
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
+        
+        vm.FEATURE_FLAGS = FEATURE_FLAGS;
 
         function login() {
             collapseNavbar();
