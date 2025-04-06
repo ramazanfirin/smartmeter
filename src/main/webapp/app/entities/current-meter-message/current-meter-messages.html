@@ -11,27 +11,15 @@
     <h2 data-translate="smartmeterApp.currentMeterMessage.home.title">Current Meter Messages</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="current-meter-message.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="smartmeterApp.currentMeterMessage.home.createLabel">
-                        Create new Current Meter Message
-                    </span>
-                </button>
-            </div>
-        </div>
+        
     </div>
     <br/>
 
     <!-- Arama Paneli -->
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Arama</h3>
-                </div>
-                <div class="panel-body">
+            <div class="search-panel">
+                <div class="">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -50,7 +38,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>&nbsp;</label>
                                 <button class="btn btn-primary form-control" ng-click="vm.search()">
@@ -59,11 +47,34 @@
                                 </button>
                             </div>
                         </div>
+                         <div class="col-md-2">   
+                             <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-primary form-control" ng-click="vm.showGraph()">
+                                    <span class="glyphicon glyphicon-stats"></span>
+                                    <span data-translate="smartmeterApp.currentMeterMessage.graph">Ara</span>
+                                </button>
+                                
+                                
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="current-meter-message.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="smartmeterApp.currentMeterMessage.home.createLabel">
+                        Create new Current Meter Message
+                    </span>
+                </button>
+            </div>
+        </div>
 
     <div class="table-responsive">
         <table class="jh-table table table-striped">
@@ -75,12 +86,7 @@
                     <th jh-sort-by="totalEnergy"><span data-translate="smartmeterApp.currentMeterMessage.totalEnergy">Total Energy</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="reason"><span data-translate="smartmeterApp.currentMeterMessage.reason">Reason</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="loraMessage.id"><span data-translate="smartmeterApp.currentMeterMessage.loraMessage">Lora Message</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th>
-                        <button class="btn btn-info btn-sm" ng-click="vm.showGraph()">
-                            <span class="glyphicon glyphicon-stats"></span>
-                            <span class="hidden-sm-down" data-translate="smartmeterApp.currentMeterMessage.graph">Grafik</span>
-                        </button>
-                    </th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -139,3 +145,78 @@
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>
+
+<style>
+.search-panel {
+    background-color: #f8f9fa;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.form-control {
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-primary:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.glyphicon-search {
+    margin-right: 5px;
+}
+
+.panel {
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.panel-heading {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+.panel-body {
+    padding: 20px;
+}
+canvas {
+    width: 100% !important;
+    height: 400px !important;
+}
+.modal-dialog {
+    width: 90%;
+    max-width: 1200px;
+}
+.modal-body {
+    padding: 20px;
+}
+canvas {
+    width: 100% !important;
+    height: 500px !important;
+}
+</style>

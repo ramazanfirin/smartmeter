@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="search-panel">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="sensor" data-translate="smartmeterApp.vibrationEcoMessage.sensor">Sensor</label>
                             <select class="form-control" id="sensor" ng-model="vm.selectedSensor">
@@ -26,7 +26,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="dateFilter" data-translate="smartmeterApp.vibrationEcoMessage.dateFilter">Tarih Filtresi</label>
                             <select class="form-control" id="dateFilter" ng-model="vm.selectedDateFilter">
@@ -41,16 +41,25 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>&nbsp;</label>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary" ng-click="vm.search()">
+                            
+                                <button type="button" class="btn btn-primary form-control" ng-click="vm.search()">
                                     <span class="glyphicon glyphicon-search"></span>
                                     <span data-translate="entity.action.search">Ara</span>
                                 </button>
-                                <button type="button" class="btn btn-success" ng-click="vm.showGraph()">
+                       
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            
+                               
+                                <button type="button" class="btn btn-primary form-control" ng-click="vm.showGraph()">
                                     <span class="glyphicon glyphicon-stats"></span>
                                     <span>Grafik</span>
                                 </button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
