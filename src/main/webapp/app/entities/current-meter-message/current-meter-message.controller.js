@@ -5,10 +5,9 @@
         .module('smartmeterApp')
         .controller('CurrentMeterMessageController', CurrentMeterMessageController);
 
-    CurrentMeterMessageController.$inject = ['$state', 'CurrentMeterMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CurrentMeterMessageController.$inject = ['$state', 'CurrentMeterMessage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Sensor', '$scope'];
 
-    function CurrentMeterMessageController($state, CurrentMeterMessage, ParseLinks, AlertService, paginationConstants, pagingParams) {
-
+    function CurrentMeterMessageController($state, CurrentMeterMessage, ParseLinks, AlertService, paginationConstants, pagingParams, Sensor, $scope) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -16,22 +15,40 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.search = search;
+        vm.loadAll = loadAll;
+        vm.showGraph = showGraph;
+        vm.isGraphVisible = false;
+        
+        // Arama için değişkenler
+        vm.selectedSensor = '';
+        vm.selectedDateFilter = '';
+        vm.sensors = []; // Daha sonra doldurulacak
+        vm.dateFilters = [
+            { id: '', name: 'Tümü' },
+            { id: '24h', name: 'Son 24 Saat' },
+            { id: '7d', name: 'Son 1 Hafta' },
+            { id: '30d', name: 'Son 1 Ay' },
+            { id: '365d', name: 'Son 1 Yıl' }
+        ];
 
         loadAll();
+        loadSensors();
 
-        function loadAll () {
-            CurrentMeterMessage.query({
+        function loadAll() {
+            var params = {
                 page: pagingParams.page - 1,
-                size: vm.itemsPerPage,
-                sort: sort()
-            }, onSuccess, onError);
-            function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
-                if (vm.predicate !== 'id') {
-                    result.push('id');
-                }
-                return result;
+                size: vm.itemsPerPage
+            };
+
+            // Sıralama parametrelerini ekle
+            params.sort = vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc');
+            if (vm.predicate !== 'id') {
+                params.sort = [params.sort, 'id'].join(',');
             }
+
+            CurrentMeterMessage.query(params, onSuccess, onError);
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
@@ -39,9 +56,16 @@
                 vm.currentMeterMessages = data;
                 vm.page = pagingParams.page;
             }
+
             function onError(error) {
                 AlertService.error(error.data.message);
             }
+        }
+
+        function loadSensors() {
+            Sensor.query({type: 'CURRENT_METER'}, function(data) {
+                vm.sensors = data;
+            });
         }
 
         function loadPage(page) {
@@ -54,6 +78,124 @@
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
+            });
+        }
+
+        function search() {
+            var params = {
+                page: 0,
+                size: vm.itemsPerPage
+            };
+
+            // Sıralama parametrelerini ekle
+            params.sort = vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc');
+            if (vm.predicate !== 'id') {
+                params.sort = [params.sort, 'id'].join(',');
+            }
+
+            // Tarih filtresi ekle
+            if (vm.selectedDateFilter) {
+                var endDate = new Date();
+                var startDate = new Date();
+                
+                switch(vm.selectedDateFilter) {
+                    case '24h':
+                        startDate.setHours(startDate.getHours() - 24);
+                        break;
+                    case '7d':
+                        startDate.setDate(startDate.getDate() - 7);
+                        break;
+                    case '30d':
+                        startDate.setDate(startDate.getDate() - 30);
+                        break;
+                    case '365d':
+                        startDate.setDate(startDate.getDate() - 365);
+                        break;
+                }
+
+                params.startDate = startDate.toISOString();
+                params.endDate = endDate.toISOString();
+            }
+
+            // Sensor filtresi ekle
+            if (vm.selectedSensor) {
+                params.sensorId = vm.selectedSensor;
+            }
+
+            // Arama servisini çağır
+            CurrentMeterMessage.search(params, onSearchSuccess, onSearchError);
+
+            function onSearchSuccess(data) {
+                vm.currentMeterMessages = data;
+                vm.page = 1;
+                vm.totalItems = data.length;
+                vm.queryCount = data.length;
+            }
+
+            function onSearchError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
+        function showGraph() {
+            drawGraph();
+            $('#graphModal').modal('show');
+        }
+
+        function drawGraph() {
+            if (vm.chart) {
+                vm.chart.destroy();
+            }
+
+            var canvas = document.getElementById('currentMeterGraph');
+            if (!canvas) {
+                console.error('Canvas element not found');
+                return;
+            }
+
+            var ctx = canvas.getContext('2d');
+            
+            // Verileri hazırla
+            var labels = vm.currentMeterMessages.map(function(item) {
+                return item.loraMessage.insertDate;
+            });
+            
+            var currentData = vm.currentMeterMessages.map(function(item) {
+                return item.current;
+            });
+            
+            var totalEnergyData = vm.currentMeterMessages.map(function(item) {
+                return item.totalEnergy;
+            });
+
+            // Grafik oluştur
+            vm.chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Akım Değeri',
+                            data: currentData,
+                            borderColor: 'rgb(255, 99, 132)',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Toplam Enerji',
+                            data: totalEnergyData,
+                            borderColor: 'rgb(54, 162, 235)',
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
             });
         }
     }

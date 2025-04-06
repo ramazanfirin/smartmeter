@@ -14,6 +14,49 @@
         </div>
     </div>
     <br/>
+
+    <!-- Arama Paneli -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Arama</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="sensor" data-translate="smartmeterApp.currentMeterMessage.sensor">Sensor</label>
+                                <select class="form-control" id="sensor" ng-model="vm.selectedSensor">
+                                    <option value="">Tümü</option>
+                                    <option ng-repeat="sensor in vm.sensors" value="{{sensor.id}}">{{sensor.devEui}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="dateFilter" data-translate="smartmeterApp.currentMeterMessage.dateFilter">Tarih Filtresi</label>
+                                <select class="form-control" id="dateFilter" ng-model="vm.selectedDateFilter">
+                                    <option ng-repeat="filter in vm.dateFilters" value="{{filter.id}}">{{filter.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-primary form-control" ng-click="vm.search()">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    <span data-translate="smartmeterApp.currentMeterMessage.search">Ara</span>
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
@@ -45,12 +88,6 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-<!--                             <button type="submit" -->
-<!--                                     ui-sref="current-meter-message.edit({id:currentMeterMessage.id})" -->
-<!--                                     class="btn btn-primary btn-sm"> -->
-<!--                                 <span class="glyphicon glyphicon-pencil"></span> -->
-<!--                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span> -->
-<!--                             </button> -->
                             <button type="submit"
                                     ui-sref="current-meter-message.delete({id:currentMeterMessage.id})"
                                     class="btn btn-danger btn-sm">
@@ -63,6 +100,27 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Grafik Modal -->
+    <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="graphModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="graphModalLabel" data-translate="smartmeterApp.currentMeterMessage.graphTitle">Akım ve Enerji Grafiği</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="currentMeterGraph"></canvas>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-translate="smartmeterApp.currentMeterMessage.close">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>

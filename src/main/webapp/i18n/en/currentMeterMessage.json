@@ -19,7 +19,13 @@
             "current": "Current",
             "totalEnergy": "Total Energy",
             "reason": "Reason",
-            "loraMessage": "Lora Message"
+            "loraMessage": "Lora Message",
+            "sensor": "Sensor",
+            "dateFilter": "Date Filter",
+            "search": "Search",
+            "graph": "Graph",
+            "graphTitle": "Current and Energy Graph",
+            "close": "Close"
         }
     }
 }

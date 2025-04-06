@@ -20,7 +20,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'search': {
+                method: 'GET',
+                url: 'api/current-meter-messages/search',
+                isArray: true
+            }
         });
     }
 })();

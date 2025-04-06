@@ -17,9 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,7 @@ public class CurrentMeterMessageResource {
      */
     @PostMapping("/current-meter-messages")
     @Timed
-    public ResponseEntity<CurrentMeterMessage> createCurrentMeterMessage(@RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
+    public ResponseEntity<CurrentMeterMessage> createCurrentMeterMessage(@Valid @RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
         log.debug("REST request to save CurrentMeterMessage : {}", currentMeterMessage);
         if (currentMeterMessage.getId() != null) {
             throw new BadRequestAlertException("A new currentMeterMessage cannot already have an ID", ENTITY_NAME, "idexists");
@@ -71,7 +72,7 @@ public class CurrentMeterMessageResource {
      */
     @PutMapping("/current-meter-messages")
     @Timed
-    public ResponseEntity<CurrentMeterMessage> updateCurrentMeterMessage(@RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
+    public ResponseEntity<CurrentMeterMessage> updateCurrentMeterMessage(@Valid @RequestBody CurrentMeterMessage currentMeterMessage) throws URISyntaxException {
         log.debug("REST request to update CurrentMeterMessage : {}", currentMeterMessage);
         if (currentMeterMessage.getId() == null) {
             return createCurrentMeterMessage(currentMeterMessage);
@@ -123,5 +124,36 @@ public class CurrentMeterMessageResource {
         log.debug("REST request to delete CurrentMeterMessage : {}", id);
         currentMeterMessageRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /current-meter-messages/search : search current meter messages by sensor and date range.
+     *
+     * @param sensorId the sensor ID to filter by
+     * @param startDate the start date to filter by
+     * @param endDate the end date to filter by
+     * @return the ResponseEntity with status 200 (OK) and the list of current meter messages in body
+     */
+    @GetMapping("/current-meter-messages/search")
+    @Timed
+    public ResponseEntity<List<CurrentMeterMessage>> searchCurrentMeterMessages(
+        @RequestParam(required = false) Long sensorId,
+        @RequestParam(required = false) String startDate,
+        @RequestParam(required = false) String endDate) {
+        log.debug("REST request to search CurrentMeterMessages by sensor: {} and date range: {} - {}", sensorId, startDate, endDate);
+        
+        ZonedDateTime startDateTime = null;
+        ZonedDateTime endDateTime = null;
+        
+        if (startDate != null) {
+            startDateTime = ZonedDateTime.parse(startDate);
+        }
+        if (endDate != null) {
+            endDateTime = ZonedDateTime.parse(endDate);
+        }
+        
+        
+        List<CurrentMeterMessage> result = currentMeterMessageRepository.search(sensorId, startDateTime, endDateTime);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

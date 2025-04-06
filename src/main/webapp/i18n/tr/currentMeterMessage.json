@@ -2,24 +2,30 @@
     "smartmeterApp": {
         "currentMeterMessage" : {
             "home": {
-                "title": "Current Meter Messages",
-                "createLabel": "Create a new Current Meter Message",
-                "createOrEditLabel": "Create or edit a Current Meter Message"
+                "title": "Akım Ölçer Mesajları",
+                "createLabel": "Yeni Akım Ölçer Mesajı Oluştur",
+                "createOrEditLabel": "Akım Ölçer Mesajı Oluştur veya Düzenle"
             },
-            "created": "A new Current Meter Message is created with identifier {{ param }}",
-            "updated": "A Current Meter Message is updated with identifier {{ param }}",
-            "deleted": "A Current Meter Message is deleted with identifier {{ param }}",
+            "created": "{{ param }} ID'li yeni bir Akım Ölçer Mesajı oluşturuldu",
+            "updated": "{{ param }} ID'li Akım Ölçer Mesajı güncellendi",
+            "deleted": "{{ param }} ID'li Akım Ölçer Mesajı silindi",
             "delete": {
-                "question": "Are you sure you want to delete Current Meter Message {{ id }}?"
+                "question": "{{ id }} ID'li Akım Ölçer Mesajını silmek istediğinizden emin misiniz?"
             },
             "detail": {
-                "title": "Current Meter Message"
+                "title": "Akım Ölçer Mesajı"
             },
-            "batteryValue": "Battery Value",
-            "current": "Current",
-            "totalEnergy": "Total Energy",
-            "reason": "Reason",
-            "loraMessage": "Lora Message"
+            "batteryValue": "Pil Değeri",
+            "current": "Akım",
+            "totalEnergy": "Toplam Enerji",
+            "reason": "Neden",
+            "loraMessage": "Lora Mesajı",
+            "sensor": "Sensör",
+            "dateFilter": "Tarih Filtresi",
+            "search": "Ara",
+            "graph": "Grafik",
+            "graphTitle": "Akım ve Enerji Grafiği",
+            "close": "Kapat"
         }
     }
 }
