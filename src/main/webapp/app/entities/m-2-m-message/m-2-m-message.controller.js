@@ -64,10 +64,9 @@
 
         vm.loadSensors = function() {
             Sensor.query(function(result) {
-                vm.sensors = result;
-                if (result && result.length > 0) {
-                    vm.selectedSensor = '';
-                }
+                vm.sensors = result.filter(function(sensor) {
+                    return sensor.type === 'WATER_METER';
+                });
             });
         };
 
