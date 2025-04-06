@@ -55,6 +55,7 @@ public class SensorResource {
         if (sensor.getId() != null) {
             throw new BadRequestAlertException("A new sensor cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        sensor.setImei(sensor.getDevEui());
         Sensor result = sensorRepository.save(sensor);
         return ResponseEntity.created(new URI("/api/sensors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
