@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vibration Pro Messages</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <div>
     <h2 data-translate="smartmeterApp.currentMeterMessage.home.title">Current Meter Messages</h2>
     <jhi-alert></jhi-alert>
@@ -48,7 +57,6 @@
                                     <span class="glyphicon glyphicon-search"></span>
                                     <span data-translate="smartmeterApp.currentMeterMessage.search">Ara</span>
                                 </button>
-                                
                             </div>
                         </div>
                     </div>
@@ -67,7 +75,12 @@
                     <th jh-sort-by="totalEnergy"><span data-translate="smartmeterApp.currentMeterMessage.totalEnergy">Total Energy</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="reason"><span data-translate="smartmeterApp.currentMeterMessage.reason">Reason</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="loraMessage.id"><span data-translate="smartmeterApp.currentMeterMessage.loraMessage">Lora Message</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <th>
+                        <button class="btn btn-info btn-sm" ng-click="vm.showGraph()">
+                            <span class="glyphicon glyphicon-stats"></span>
+                            <span class="hidden-sm-down" data-translate="smartmeterApp.currentMeterMessage.graph">Grafik</span>
+                        </button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
