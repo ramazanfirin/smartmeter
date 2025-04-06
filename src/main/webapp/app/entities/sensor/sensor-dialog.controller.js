@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('SensorDialogController', SensorDialogController);
 
-    SensorDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Sensor'];
+    SensorDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Sensor', 'Meter'];
 
-    function SensorDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Sensor) {
+    function SensorDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Sensor, Meter) {
         var vm = this;
 
         vm.sensor = entity;
@@ -17,6 +17,7 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
+        vm.meters = Meter.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

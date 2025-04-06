@@ -25,24 +25,24 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="vm.sensor.connectionType == 'LORA'">
             <label class="control-label" data-translate="smartmeterApp.sensor.appEui" for="field_appEui">App Eui</label>
             <input type="text" class="form-control" name="appEui" id="field_appEui"
                     ng-model="vm.sensor.appEui"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="vm.sensor.connectionType == 'LORA'">
             <label class="control-label" data-translate="smartmeterApp.sensor.appKey" for="field_appKey">App Key</label>
             <input type="text" class="form-control" name="appKey" id="field_appKey"
                     ng-model="vm.sensor.appKey"
                     />
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.sensor.imei" for="field_imei">Imei</label>
-            <input type="text" class="form-control" name="imei" id="field_imei"
-                    ng-model="vm.sensor.imei"
-                    />
-        </div>
+<!--         <div class="form-group"> -->
+<!--             <label class="control-label" data-translate="smartmeterApp.sensor.imei" for="field_imei">Imei</label> -->
+<!--             <input type="text" class="form-control" name="imei" id="field_imei" -->
+<!--                     ng-model="vm.sensor.imei" -->
+<!--                     /> -->
+<!--         </div> -->
         <div class="form-group">
             <label class="control-label" data-translate="smartmeterApp.sensor.connectionType" for="field_connectionType">Connection Type</label>
             <select class="form-control" name="connectionType" ng-model="vm.sensor.connectionType" id="field_connectionType">
@@ -53,12 +53,12 @@
         <div class="form-group">
             <label class="control-label" data-translate="smartmeterApp.sensor.type" for="field_type">Type</label>
             <select class="form-control" name="type" ng-model="vm.sensor.type" id="field_type">
-                <option value="VIBRATION" data-translate="smartmeterApp.Type.VIBRATION">VIBRATION</option>
-                <option value="BUTTON" data-translate="smartmeterApp.Type.BUTTON">BUTTON</option>
+<!--                 <option value="VIBRATION" data-translate="smartmeterApp.Type.VIBRATION">VIBRATION</option> -->
+<!--                 <option value="BUTTON" data-translate="smartmeterApp.Type.BUTTON">BUTTON</option> -->
                 <option value="WATER_METER" data-translate="smartmeterApp.Type.WATER_METER">WATER_METER</option>
-                <option value="VIBRATION_ECO" data-translate="smartmeterApp.Type.VIBRATION_ECO">VIBRATION_ECO</option>
-                <option value="VIBRATION_PRO" data-translate="smartmeterApp.Type.VIBRATION_PRO">VIBRATION_PRO</option>
-                <option value="CURRENT_METER" data-translate="smartmeterApp.Type.CURRENT_METER">CURRENT_METER</option>
+                <option ng-if="vm.sensor.connectionType == 'LORA'" value="VIBRATION_ECO" data-translate="smartmeterApp.Type.VIBRATION_ECO">VIBRATION_ECO</option>
+                <option ng-if="vm.sensor.connectionType == 'LORA'" value="VIBRATION_PRO" data-translate="smartmeterApp.Type.VIBRATION_PRO">VIBRATION_PRO</option>
+                <option ng-if="vm.sensor.connectionType == 'LORA'" value="CURRENT_METER" data-translate="smartmeterApp.Type.CURRENT_METER">CURRENT_METER</option>
             </select>
         </div>
         <div class="form-group">
@@ -67,51 +67,57 @@
                     ng-model="vm.sensor.thingsBoardDeviceId"
                     />
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.sensor.lastSeenDate" for="field_lastSeenDate">Last Seen Date</label>
-                <div class="input-group">
-                    <input id="field_lastSeenDate" type="text" class="form-control" name="lastSeenDate" datetime-picker="{{dateformat}}" ng-model="vm.sensor.lastSeenDate" is-open="vm.datePickerOpenStatus.lastSeenDate"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastSeenDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smartmeterApp.sensor.lastMessage" for="field_lastMessage">Last Message</label>
-            <input type="text" class="form-control" name="lastMessage" id="field_lastMessage"
-                    ng-model="vm.sensor.lastMessage"
-                    ng-maxlength="4000"/>
-            <div ng-show="editForm.lastMessage.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.lastMessage.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000">
-                    This field cannot be longer than 4000 characters.
-                </p>
-            </div>
-        </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setLastImage($file, vm.sensor)" ngf-pattern="'image/*'">
-            <label class="control-label" data-translate="smartmeterApp.sensor.lastImage" for="field_lastImage">Last Image</label>
-            <div>
-                <img data-ng-src="{{'data:' + vm.sensor.lastImageContentType + ';base64,' + vm.sensor.lastImage}}" style="max-height: 100px;" ng-if="vm.sensor.lastImage" alt="sensor image"/>
-                <div ng-if="vm.sensor.lastImage" class="help-block clearfix">
-                    <span class="pull-left">{{vm.sensor.lastImageContentType}}, {{vm.byteSize(vm.sensor.lastImage)}}</span>
-                    <button type="button" ng-click="vm.sensor.lastImage=null;vm.sensor.lastImageContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </div>
-                <button type="button" ngf-select class="btn btn-default btn-block"
-                        ngf-change="vm.setLastImage($file, vm.sensor)" accept="image/*" data-translate="entity.action.addimage">
-                    Add image
-                </button>
-            </div>
-            <input type="hidden" class="form-control" name="lastImage" id="field_lastImage"
-                    ng-model="vm.sensor.lastImage"
-                    />
-            <input type="hidden" class="form-control" name="lastImageContentType" id="field_lastImageContentType"
-                    ng-model="vm.sensor.lastImageContentType" />
-        </div>
+<!--         <div class="form-group"> -->
+<!--             <label class="control-label" data-translate="smartmeterApp.sensor.lastSeenDate" for="field_lastSeenDate">Last Seen Date</label> -->
+<!--                 <div class="input-group"> -->
+<!--                     <input id="field_lastSeenDate" type="text" class="form-control" name="lastSeenDate" datetime-picker="{{dateformat}}" ng-model="vm.sensor.lastSeenDate" is-open="vm.datePickerOpenStatus.lastSeenDate" -->
+<!--                     /> -->
+<!--                     <span class="input-group-btn"> -->
+<!--                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastSeenDate')"><i class="glyphicon glyphicon-calendar"></i></button> -->
+<!--                     </span> -->
+<!--                 </div> -->
+<!--         </div> -->
+<!--         <div class="form-group"> -->
+<!--             <label class="control-label" data-translate="smartmeterApp.sensor.lastMessage" for="field_lastMessage">Last Message</label> -->
+<!--             <input type="text" class="form-control" name="lastMessage" id="field_lastMessage" -->
+<!--                     ng-model="vm.sensor.lastMessage" -->
+<!--                     ng-maxlength="4000"/> -->
+<!--             <div ng-show="editForm.lastMessage.$invalid"> -->
+<!--                 <p class="help-block" -->
+<!--                     ng-show="editForm.lastMessage.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4000"> -->
+<!--                     This field cannot be longer than 4000 characters. -->
+<!--                 </p> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--         <div class="form-group" ngf-drop ngf-change="vm.setLastImage($file, vm.sensor)" ngf-pattern="'image/*'"> -->
+<!--             <label class="control-label" data-translate="smartmeterApp.sensor.lastImage" for="field_lastImage">Last Image</label> -->
+<!--             <div> -->
+<!--                 <img data-ng-src="{{'data:' + vm.sensor.lastImageContentType + ';base64,' + vm.sensor.lastImage}}" style="max-height: 100px;" ng-if="vm.sensor.lastImage" alt="sensor image"/> -->
+<!--                 <div ng-if="vm.sensor.lastImage" class="help-block clearfix"> -->
+<!--                     <span class="pull-left">{{vm.sensor.lastImageContentType}}, {{vm.byteSize(vm.sensor.lastImage)}}</span> -->
+<!--                     <button type="button" ng-click="vm.sensor.lastImage=null;vm.sensor.lastImageContentType=null;" -->
+<!--                             class="btn btn-default btn-xs pull-right"> -->
+<!--                         <span class="glyphicon glyphicon-remove"></span> -->
+<!--                     </button> -->
+<!--                 </div> -->
+<!--                 <button type="button" ngf-select class="btn btn-default btn-block" -->
+<!--                         ngf-change="vm.setLastImage($file, vm.sensor)" accept="image/*" data-translate="entity.action.addimage"> -->
+<!--                     Add image -->
+<!--                 </button> -->
+<!--             </div> -->
+<!--             <input type="hidden" class="form-control" name="lastImage" id="field_lastImage" -->
+<!--                     ng-model="vm.sensor.lastImage" -->
+<!--                     /> -->
+<!--             <input type="hidden" class="form-control" name="lastImageContentType" id="field_lastImageContentType" -->
+<!--                     ng-model="vm.sensor.lastImageContentType" /> -->
+<!--         </div> -->
 
+        <div class="form-group">
+            <label data-translate="smartmeterApp.sensor.meter" for="field_meter">Meter</label>
+            <select class="form-control" id="field_meter" name="meter" ng-model="vm.sensor.meter" ng-options="meter as meter.id for meter in vm.meters track by meter.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

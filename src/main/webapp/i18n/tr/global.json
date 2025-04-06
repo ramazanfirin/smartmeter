@@ -13,6 +13,7 @@
                 "vibrationEcoMessage": "Vibration Eco Message",
                 "vibrationProMessage": "Vibration Pro Message",
                 "currentMeterMessage": "Current Meter Message",
+                "meter": "Meter",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

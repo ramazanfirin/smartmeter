@@ -15,7 +15,7 @@
             "detail": {
                 "title": "Sensor"
             },
-            "devEui": "Dev Eui",
+            "devEui": "Dev Eui / IMEI",
             "appEui": "App Eui",
             "appKey": "App Key",
             "imei": "Imei",
@@ -24,7 +24,8 @@
             "thingsBoardDeviceId": "Things Board Device Id",
             "lastSeenDate": "Last Seen Date",
             "lastMessage": "Last Message",
-            "lastImage": "Last Image"
+            "lastImage": "Last Image",
+            "meter": "Meter"
         }
     }
 }

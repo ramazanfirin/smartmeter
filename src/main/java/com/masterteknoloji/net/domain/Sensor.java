@@ -66,6 +66,9 @@ public class Sensor implements Serializable {
     @Column(name = "last_image_content_type")
     private String lastImageContentType;
 
+    @ManyToOne
+    private Meter meter;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -216,6 +219,19 @@ public class Sensor implements Serializable {
 
     public void setLastImageContentType(String lastImageContentType) {
         this.lastImageContentType = lastImageContentType;
+    }
+
+    public Meter getMeter() {
+        return meter;
+    }
+
+    public Sensor meter(Meter meter) {
+        this.meter = meter;
+        return this;
+    }
+
+    public void setMeter(Meter meter) {
+        this.meter = meter;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

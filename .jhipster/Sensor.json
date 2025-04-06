@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "meter",
+            "otherEntityName": "meter",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "devEui",

@@ -14,11 +14,17 @@
     <include file="config/liquibase/changelog/20250322151714_added_entity_VibrationEcoMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250322151715_added_entity_VibrationProMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250322151716_added_entity_CurrentMeterMessage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250406185511_added_entity_Meter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250406192457_added_entity_Sensor.xml" relativeToChangelogFile="false"/>
+    
+    
+    
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20250125110418_added_entity_constraints_LorawanMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250211142457_added_entity_constraints_M2mMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250322151714_added_entity_constraints_VibrationEcoMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250322151715_added_entity_constraints_VibrationProMessage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250322151716_added_entity_constraints_CurrentMeterMessage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250407110417_added_entity_constraints_Sensor.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
