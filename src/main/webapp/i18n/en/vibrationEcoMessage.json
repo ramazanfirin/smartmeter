@@ -19,7 +19,16 @@
             "xAxisValue": "X Axis Value",
             "yAxisValue": "Y Axis Value",
             "zAxisValue": "Z Axis Value",
-            "loraMessage": "Lora Message"
+            "loraMessage": "Lora Message",
+            "sensor": "Sensor",
+            "dateFilter": "Date Filter",
+            "dateFilterOptions": {
+                "all": "All",
+                "24h": "Last 24 Hours",
+                "7d": "Last 1 Week",
+                "30d": "Last 1 Month",
+                "365d": "Last 1 Year"
+            }
         }
     }
 }

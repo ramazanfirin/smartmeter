@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * REST controller for managing VibrationEcoMessage.
@@ -123,5 +127,36 @@ public class VibrationEcoMessageResource {
         log.debug("REST request to delete VibrationEcoMessage : {}", id);
         vibrationEcoMessageRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /vibration-eco-messages/search : search vibrationEcoMessages.
+     *
+     * @param sensorId the sensor ID to filter by
+     * @param startDate the start date to filter by
+     * @param endDate the end date to filter by
+     * @return the ResponseEntity with status 200 (OK) and the list of vibrationEcoMessages in body
+     */
+    @GetMapping("/vibration-eco-messages/search")
+    @Timed
+    public ResponseEntity<List<VibrationEcoMessage>> searchVibrationEcoMessages(
+        @RequestParam(required = false) Long sensorId,
+        @RequestParam(required = false) String startDate,
+        @RequestParam(required = false) String endDate
+    ) {
+        log.debug("REST request to search VibrationEcoMessages for sensor {} between {} and {}", sensorId, startDate, endDate);
+        
+        ZonedDateTime startDateTime = null;
+        ZonedDateTime endDateTime = null;
+        
+        if (startDate != null) {
+            startDateTime = ZonedDateTime.parse(startDate);
+        }
+        if (endDate != null) {
+            endDateTime = ZonedDateTime.parse(endDate);
+        }
+        
+        List<VibrationEcoMessage> result = vibrationEcoMessageRepository.search(sensorId, startDateTime, endDateTime);
+        return ResponseEntity.ok().body(result);
     }
 }
