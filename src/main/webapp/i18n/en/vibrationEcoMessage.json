@@ -1,0 +1,34 @@
+{
+    "smartmeterApp": {
+        "vibrationEcoMessage" : {
+            "home": {
+                "title": "Vibration Eco Messages",
+                "createLabel": "Create a new Vibration Eco Message",
+                "createOrEditLabel": "Create or edit a Vibration Eco Message"
+            },
+            "created": "A new Vibration Eco Message is created with identifier {{ param }}",
+            "updated": "A Vibration Eco Message is updated with identifier {{ param }}",
+            "deleted": "A Vibration Eco Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Vibration Eco Message {{ id }}?"
+            },
+            "detail": {
+                "title": "Vibration Eco Message"
+            },
+            "batteryValue": "Battery Value",
+            "xAxisValue": "X Axis Value",
+            "yAxisValue": "Y Axis Value",
+            "zAxisValue": "Z Axis Value",
+            "loraMessage": "Lora Message",
+            "sensor": "Sensor",
+            "dateFilter": "Date Filter",
+            "dateFilterOptions": {
+                "all": "All",
+                "24h": "Last 24 Hours",
+                "7d": "Last 1 Week",
+                "30d": "Last 1 Month",
+                "365d": "Last 1 Year"
+            }
+        }
+    }
+}

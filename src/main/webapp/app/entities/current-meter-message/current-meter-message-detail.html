@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.currentMeterMessage.detail.title">Current Meter Message</span> {{vm.currentMeterMessage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.batteryValue">Battery Value</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.batteryValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.current">Current</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.current}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.totalEnergy">Total Energy</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.totalEnergy}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.reason">Reason</span></dt>
+        <dd>
+            <span>{{vm.currentMeterMessage.reason}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.currentMeterMessage.loraMessage">Lora Message</span></dt>
+        <dd>
+            <a ui-sref="lorawan-message-detail({id:vm.currentMeterMessage.loraMessage.id})">{{vm.currentMeterMessage.loraMessage.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="current-meter-message-detail.edit({id:vm.currentMeterMessage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

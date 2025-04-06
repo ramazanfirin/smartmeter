@@ -1,0 +1,141 @@
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" data-translate="smartmeterApp.vibrationProMessage.home.title">Vibration Pro Messages</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- Arama Formu -->
+                    <div class="row search-form">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="sensor" data-translate="smartmeterApp.vibrationProMessage.sensor">Sensor</label>
+                                <select class="form-control" id="sensor" ng-model="vm.selectedSensor">
+                                    <option value="">Tümü</option>
+                                    <option ng-repeat="sensor in vm.sensors" value="{{sensor.id}}">{{sensor.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="dateFilter" data-translate="smartmeterApp.vibrationProMessage.dateFilter">Tarih Filtresi</label>
+                                <select class="form-control" id="dateFilter" ng-model="vm.selectedDateFilter">
+                                    <option ng-repeat="filter in vm.dateFilters" value="{{filter.id}}">{{filter.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-primary form-control" ng-click="vm.search()" data-translate="entity.action.search">
+                                    Ara
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tablo -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th ng-click="vm.predicate = 'id'; vm.reverse = !vm.reverse">
+                                        <span data-translate="global.field.id">ID</span>
+                                        <span class="glyphicon glyphicon-sort"></span>
+                                    </th>
+                                    <th ng-click="vm.predicate = 'loraMessage.sensor.name'; vm.reverse = !vm.reverse">
+                                        <span data-translate="smartmeterApp.vibrationProMessage.sensor">Sensor</span>
+                                        <span class="glyphicon glyphicon-sort"></span>
+                                    </th>
+                                    <th ng-click="vm.predicate = 'loraMessage.insertDate'; vm.reverse = !vm.reverse">
+                                        <span data-translate="smartmeterApp.vibrationProMessage.insertDate">Insert Date</span>
+                                        <span class="glyphicon glyphicon-sort"></span>
+                                    </th>
+                                    <th ng-click="vm.predicate = 'vibrationValue'; vm.reverse = !vm.reverse">
+                                        <span data-translate="smartmeterApp.vibrationProMessage.vibrationValue">Vibration Value</span>
+                                        <span class="glyphicon glyphicon-sort"></span>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="vibrationProMessage in vm.vibrationProMessages track by vibrationProMessage.id">
+                                    <td><a ui-sref="vibration-pro-message-detail({id:vibrationProMessage.id})">{{vibrationProMessage.id}}</a></td>
+                                    <td>{{vibrationProMessage.loraMessage.sensor.name}}</td>
+                                    <td>{{vibrationProMessage.loraMessage.insertDate | date:'medium'}}</td>
+                                    <td>{{vibrationProMessage.vibrationValue}}</td>
+                                    <td class="text-right">
+                                        <div class="btn-group flex-btn-group-container">
+                                            <button type="submit"
+                                                    ui-sref="vibration-pro-message-detail({id:vibrationProMessage.id})"
+                                                    class="btn btn-info btn-sm">
+                                                <span class="glyphicon glyphicon-eye-open"></span>
+                                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view">View</span>
+                                            </button>
+                                            <button type="submit"
+                                                    ui-sref="vibration-pro-message.edit({id:vibrationProMessage.id})"
+                                                    class="btn btn-primary btn-sm">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit">Edit</span>
+                                            </button>
+                                            <button type="submit"
+                                                    ui-sref="vibration-pro-message.delete({id:vibrationProMessage.id})"
+                                                    class="btn btn-danger btn-sm">
+                                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete">Delete</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sayfalama -->
+                    <div class="text-center">
+                        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+                        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.search-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+.search-form .form-group {
+    margin-bottom: 0;
+}
+.search-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.table-responsive {
+    margin-top: 20px;
+}
+.panel {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.panel-heading {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #ddd;
+}
+.table > thead > tr > th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+    cursor: pointer;
+}
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+.btn-group {
+    white-space: nowrap;
+}
+</style> 

@@ -13,6 +13,8 @@ import com.masterteknoloji.net.domain.enumeration.Type;
 import com.masterteknoloji.net.repository.LorawanMessageRepository;
 import com.masterteknoloji.net.repository.SensorRepository;
 import com.masterteknoloji.net.service.device.lora.CurrentMeterService;
+import com.masterteknoloji.net.service.device.lora.VibrationEcoSensorService;
+import com.masterteknoloji.net.service.device.lora.VibrationProSensorService;
 import com.masterteknoloji.net.service.device.lora.VibrationSensorService;
 import com.masterteknoloji.net.service.device.lora.WaterMeterService;
 import com.masterteknoloji.net.web.rest.util.LoraMessageUtil;
@@ -32,17 +34,25 @@ public class LorawanMessageService {
     private final CurrentMeterService currentMeterService;
     
     private final LorawanMessageRepository lorawanMessageRepository;
+    
+    private final VibrationEcoSensorService vibrationEcoSensorService;
+    
+    private final VibrationProSensorService vibrationProSensorService;
 	
 	public LorawanMessageService(SensorRepository sensorRepository,WaterMeterService waterMeterService,
 			LorawanMessageRepository lorawanMessageRepository,
 			VibrationSensorService vibrationSensorService,
-			CurrentMeterService currentMeterService) {
+			CurrentMeterService currentMeterService,
+			VibrationEcoSensorService vibrationEcoSensorService,
+			VibrationProSensorService vibrationProSensorService) {
 		super();
 		this.sensorRepository = sensorRepository;
 		this.waterMeterService = waterMeterService;
 		this.lorawanMessageRepository = lorawanMessageRepository;
 		this.vibrationSensorService = vibrationSensorService;
 		this.currentMeterService = currentMeterService;
+		this.vibrationEcoSensorService = vibrationEcoSensorService;
+		this.vibrationProSensorService = vibrationProSensorService;
 
 	}
 	
@@ -67,8 +77,10 @@ public class LorawanMessageService {
 			vibrationSensorService.process(deviceMessageVM);
 		else if(deviceMessageVM.getSensor().getType() == Type.BUTTON) 	
 			currentMeterService.process(deviceMessageVM);
-
-		
+		else if(deviceMessageVM.getSensor().getType() == Type.VIBRATION_ECO) 	
+			vibrationEcoSensorService.process(deviceMessageVM);
+		else if(deviceMessageVM.getSensor().getType() == Type.VIBRATION_PRO) 	
+			vibrationProSensorService.process(deviceMessageVM);
 	}
 
 	public DeviceMessageVM convertToDeviceMessage(String message) throws Exception {

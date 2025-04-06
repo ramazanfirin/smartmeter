@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "loraMessage",
+            "otherEntityName": "lorawanMessage",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "batteryValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "xAxisValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "yAxisValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "zAxisValue",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20250322151714",
+    "entityTableName": "vibration_eco_message",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

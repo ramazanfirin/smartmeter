@@ -49,6 +49,9 @@ public class Sensor implements Serializable {
     @Column(name = "jhi_type")
     private Type type;
 
+    @Column(name = "things_board_device_id")
+    private String thingsBoardDeviceId;
+
     @Column(name = "last_seen_date")
     private ZonedDateTime lastSeenDate;
 
@@ -150,6 +153,19 @@ public class Sensor implements Serializable {
         this.type = type;
     }
 
+    public String getThingsBoardDeviceId() {
+        return thingsBoardDeviceId;
+    }
+
+    public Sensor thingsBoardDeviceId(String thingsBoardDeviceId) {
+        this.thingsBoardDeviceId = thingsBoardDeviceId;
+        return this;
+    }
+
+    public void setThingsBoardDeviceId(String thingsBoardDeviceId) {
+        this.thingsBoardDeviceId = thingsBoardDeviceId;
+    }
+
     public ZonedDateTime getLastSeenDate() {
         return lastSeenDate;
     }
@@ -233,6 +249,7 @@ public class Sensor implements Serializable {
             ", imei='" + getImei() + "'" +
             ", connectionType='" + getConnectionType() + "'" +
             ", type='" + getType() + "'" +
+            ", thingsBoardDeviceId='" + getThingsBoardDeviceId() + "'" +
             ", lastSeenDate='" + getLastSeenDate() + "'" +
             ", lastMessage='" + getLastMessage() + "'" +
             ", lastImage='" + getLastImage() + "'" +

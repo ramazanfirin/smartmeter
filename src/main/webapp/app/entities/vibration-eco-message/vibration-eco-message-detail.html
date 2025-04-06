@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.vibrationEcoMessage.detail.title">Vibration Eco Message</span> {{vm.vibrationEcoMessage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.batteryValue">Battery Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.batteryValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.xAxisValue">X Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.xAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.yAxisValue">Y Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.yAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.zAxisValue">Z Axis Value</span></dt>
+        <dd>
+            <span>{{vm.vibrationEcoMessage.zAxisValue}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.vibrationEcoMessage.loraMessage">Lora Message</span></dt>
+        <dd>
+            <a ui-sref="lorawan-message-detail({id:vm.vibrationEcoMessage.loraMessage.id})">{{vm.vibrationEcoMessage.loraMessage.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="vibration-eco-message-detail.edit({id:vm.vibrationEcoMessage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

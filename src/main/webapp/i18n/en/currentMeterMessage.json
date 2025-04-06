@@ -1,0 +1,31 @@
+{
+    "smartmeterApp": {
+        "currentMeterMessage" : {
+            "home": {
+                "title": "Current Meter Messages",
+                "createLabel": "Create a new Current Meter Message",
+                "createOrEditLabel": "Create or edit a Current Meter Message"
+            },
+            "created": "A new Current Meter Message is created with identifier {{ param }}",
+            "updated": "A Current Meter Message is updated with identifier {{ param }}",
+            "deleted": "A Current Meter Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Current Meter Message {{ id }}?"
+            },
+            "detail": {
+                "title": "Current Meter Message"
+            },
+            "batteryValue": "Battery Value",
+            "current": "Current",
+            "totalEnergy": "Total Energy",
+            "reason": "Reason",
+            "loraMessage": "Lora Message",
+            "sensor": "Sensor",
+            "dateFilter": "Date Filter",
+            "search": "Search",
+            "graph": "Graph",
+            "graphTitle": "Current and Energy Graph",
+            "close": "Close"
+        }
+    }
+}

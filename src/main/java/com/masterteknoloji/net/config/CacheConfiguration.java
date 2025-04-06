@@ -44,6 +44,9 @@ public class CacheConfiguration {
             cm.createCache(com.masterteknoloji.net.domain.Sensor.class.getName(), jcacheConfiguration);
             cm.createCache(com.masterteknoloji.net.domain.LorawanMessage.class.getName(), jcacheConfiguration);
             cm.createCache(com.masterteknoloji.net.domain.M2mMessage.class.getName(), jcacheConfiguration);
+            cm.createCache(com.masterteknoloji.net.domain.VibrationEcoMessage.class.getName(), jcacheConfiguration);
+            cm.createCache(com.masterteknoloji.net.domain.VibrationProMessage.class.getName(), jcacheConfiguration);
+            cm.createCache(com.masterteknoloji.net.domain.CurrentMeterMessage.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

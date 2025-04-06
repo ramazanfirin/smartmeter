@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "loraMessage",
+            "otherEntityName": "lorawanMessage",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "batteryValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "current",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "totalEnergy",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "reason",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20250322151716",
+    "entityTableName": "current_meter_message",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

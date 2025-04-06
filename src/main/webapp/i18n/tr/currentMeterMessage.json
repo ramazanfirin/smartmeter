@@ -1,0 +1,31 @@
+{
+    "smartmeterApp": {
+        "currentMeterMessage" : {
+            "home": {
+                "title": "Akım Ölçer Mesajları",
+                "createLabel": "Yeni Akım Ölçer Mesajı Oluştur",
+                "createOrEditLabel": "Akım Ölçer Mesajı Oluştur veya Düzenle"
+            },
+            "created": "{{ param }} ID'li yeni bir Akım Ölçer Mesajı oluşturuldu",
+            "updated": "{{ param }} ID'li Akım Ölçer Mesajı güncellendi",
+            "deleted": "{{ param }} ID'li Akım Ölçer Mesajı silindi",
+            "delete": {
+                "question": "{{ id }} ID'li Akım Ölçer Mesajını silmek istediğinizden emin misiniz?"
+            },
+            "detail": {
+                "title": "Akım Ölçer Mesajı"
+            },
+            "batteryValue": "Pil Değeri",
+            "current": "Akım",
+            "totalEnergy": "Toplam Enerji",
+            "reason": "Neden",
+            "loraMessage": "Lora Mesajı",
+            "sensor": "Sensör",
+            "dateFilter": "Tarih Filtresi",
+            "search": "Ara",
+            "graph": "Grafik",
+            "graphTitle": "Akım ve Enerji Grafiği",
+            "close": "Kapat"
+        }
+    }
+}

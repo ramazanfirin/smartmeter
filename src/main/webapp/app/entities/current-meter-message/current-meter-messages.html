@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vibration Pro Messages</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<div>
+    <h2 data-translate="smartmeterApp.currentMeterMessage.home.title">Current Meter Messages</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        
+    </div>
+    <br/>
+
+    <!-- Arama Paneli -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="search-panel">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="sensor" data-translate="smartmeterApp.currentMeterMessage.sensor">Sensor</label>
+                                <select class="form-control" id="sensor" ng-model="vm.selectedSensor">
+                                    <option value="">Tümü</option>
+                                    <option ng-repeat="sensor in vm.sensors" value="{{sensor.id}}">{{sensor.devEui}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="dateFilter" data-translate="smartmeterApp.currentMeterMessage.dateFilter">Tarih Filtresi</label>
+                                <select class="form-control" id="dateFilter" ng-model="vm.selectedDateFilter">
+                                    <option ng-repeat="filter in vm.dateFilters" value="{{filter.id}}">{{filter.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-primary form-control" ng-click="vm.search()">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    <span data-translate="smartmeterApp.currentMeterMessage.search">Ara</span>
+                                </button>
+                            </div>
+                        </div>
+                         <div class="col-md-2">   
+                             <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-primary form-control" ng-click="vm.showGraph()">
+                                    <span class="glyphicon glyphicon-stats"></span>
+                                    <span data-translate="smartmeterApp.currentMeterMessage.graph">Ara</span>
+                                </button>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="current-meter-message.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="smartmeterApp.currentMeterMessage.home.createLabel">
+                        Create new Current Meter Message
+                    </span>
+                </button>
+            </div>
+        </div>
+
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.currentMeterMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="current"><span data-translate="smartmeterApp.currentMeterMessage.current">Current</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalEnergy"><span data-translate="smartmeterApp.currentMeterMessage.totalEnergy">Total Energy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reason"><span data-translate="smartmeterApp.currentMeterMessage.reason">Reason</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="loraMessage.id"><span data-translate="smartmeterApp.currentMeterMessage.loraMessage">Lora Message</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="currentMeterMessage in vm.currentMeterMessages track by currentMeterMessage.id">
+                    <td><a ui-sref="current-meter-message-detail({id:currentMeterMessage.id})">{{currentMeterMessage.id}}</a></td>
+                    <td>{{currentMeterMessage.batteryValue}}</td>
+                    <td>{{currentMeterMessage.current}}</td>
+                    <td>{{currentMeterMessage.totalEnergy}}</td>
+                    <td>{{currentMeterMessage.reason}}</td>
+                    <td>
+                        <a ui-sref="lorawan-message-detail({id:currentMeterMessage.loraMessage.id})">{{currentMeterMessage.loraMessage.insertDate | date:'medium'}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="current-meter-message-detail({id:currentMeterMessage.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="current-meter-message.delete({id:currentMeterMessage.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Grafik Modal -->
+    <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="graphModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="graphModalLabel" data-translate="smartmeterApp.currentMeterMessage.graphTitle">Akım ve Enerji Grafiği</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="currentMeterGraph"></canvas>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-translate="smartmeterApp.currentMeterMessage.close">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+
+<style>
+.search-panel {
+    background-color: #f8f9fa;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.form-control {
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-primary:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.glyphicon-search {
+    margin-right: 5px;
+}
+
+.panel {
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.panel-heading {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+.panel-body {
+    padding: 20px;
+}
+canvas {
+    width: 100% !important;
+    height: 400px !important;
+}
+.modal-dialog {
+    width: 90%;
+    max-width: 1200px;
+}
+.modal-body {
+    padding: 20px;
+}
+canvas {
+    width: 100% !important;
+    height: 500px !important;
+}
+</style>

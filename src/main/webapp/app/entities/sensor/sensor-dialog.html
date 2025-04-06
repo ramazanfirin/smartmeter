@@ -56,7 +56,16 @@
                 <option value="VIBRATION" data-translate="smartmeterApp.Type.VIBRATION">VIBRATION</option>
                 <option value="BUTTON" data-translate="smartmeterApp.Type.BUTTON">BUTTON</option>
                 <option value="WATER_METER" data-translate="smartmeterApp.Type.WATER_METER">WATER_METER</option>
+                <option value="VIBRATION_ECO" data-translate="smartmeterApp.Type.VIBRATION_ECO">VIBRATION_ECO</option>
+                <option value="VIBRATION_PRO" data-translate="smartmeterApp.Type.VIBRATION_PRO">VIBRATION_PRO</option>
+                <option value="CURRENT_METER" data-translate="smartmeterApp.Type.CURRENT_METER">CURRENT_METER</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.sensor.thingsBoardDeviceId" for="field_thingsBoardDeviceId">Things Board Device Id</label>
+            <input type="text" class="form-control" name="thingsBoardDeviceId" id="field_thingsBoardDeviceId"
+                    ng-model="vm.sensor.thingsBoardDeviceId"
+                    />
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="smartmeterApp.sensor.lastSeenDate" for="field_lastSeenDate">Last Seen Date</label>

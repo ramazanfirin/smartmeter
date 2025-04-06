@@ -1,0 +1,56 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myVibrationEcoMessageLabel" data-translate="smartmeterApp.vibrationEcoMessage.home.createOrEditLabel">Create or edit a Vibration Eco Message</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.vibrationEcoMessage.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.vibrationEcoMessage.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.batteryValue" for="field_batteryValue">Battery Value</label>
+            <input type="number" class="form-control" name="batteryValue" id="field_batteryValue"
+                    ng-model="vm.vibrationEcoMessage.batteryValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.xAxisValue" for="field_xAxisValue">X Axis Value</label>
+            <input type="number" class="form-control" name="xAxisValue" id="field_xAxisValue"
+                    ng-model="vm.vibrationEcoMessage.xAxisValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.yAxisValue" for="field_yAxisValue">Y Axis Value</label>
+            <input type="number" class="form-control" name="yAxisValue" id="field_yAxisValue"
+                    ng-model="vm.vibrationEcoMessage.yAxisValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationEcoMessage.zAxisValue" for="field_zAxisValue">Z Axis Value</label>
+            <input type="number" class="form-control" name="zAxisValue" id="field_zAxisValue"
+                    ng-model="vm.vibrationEcoMessage.zAxisValue"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="smartmeterApp.vibrationEcoMessage.loraMessage" for="field_loraMessage">Lora Message</label>
+            <select class="form-control" id="field_loraMessage" name="loraMessage" ng-model="vm.vibrationEcoMessage.loraMessage" ng-options="lorawanMessage as lorawanMessage.id for lorawanMessage in vm.lorawanmessages track by lorawanMessage.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

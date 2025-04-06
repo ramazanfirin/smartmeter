@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myVibrationProMessageLabel" data-translate="smartmeterApp.vibrationProMessage.home.createOrEditLabel">Create or edit a Vibration Pro Message</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.vibrationProMessage.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.vibrationProMessage.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.batteryValue" for="field_batteryValue">Battery Value</label>
+            <input type="number" class="form-control" name="batteryValue" id="field_batteryValue"
+                    ng-model="vm.vibrationProMessage.batteryValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.temperature" for="field_temperature">Temperature</label>
+            <input type="number" class="form-control" name="temperature" id="field_temperature"
+                    ng-model="vm.vibrationProMessage.temperature"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.xVelocity" for="field_xVelocity">X Velocity</label>
+            <input type="number" class="form-control" name="xVelocity" id="field_xVelocity"
+                    ng-model="vm.vibrationProMessage.xVelocity"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.xAcceleration" for="field_xAcceleration">X Acceleration</label>
+            <input type="number" class="form-control" name="xAcceleration" id="field_xAcceleration"
+                    ng-model="vm.vibrationProMessage.xAcceleration"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.yVelocity" for="field_yVelocity">Y Velocity</label>
+            <input type="number" class="form-control" name="yVelocity" id="field_yVelocity"
+                    ng-model="vm.vibrationProMessage.yVelocity"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.yAcceleration" for="field_yAcceleration">Y Acceleration</label>
+            <input type="number" class="form-control" name="yAcceleration" id="field_yAcceleration"
+                    ng-model="vm.vibrationProMessage.yAcceleration"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.zVelocity" for="field_zVelocity">Z Velocity</label>
+            <input type="number" class="form-control" name="zVelocity" id="field_zVelocity"
+                    ng-model="vm.vibrationProMessage.zVelocity"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smartmeterApp.vibrationProMessage.zAcceleration" for="field_zAcceleration">Z Acceleration</label>
+            <input type="number" class="form-control" name="zAcceleration" id="field_zAcceleration"
+                    ng-model="vm.vibrationProMessage.zAcceleration"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="smartmeterApp.vibrationProMessage.loraMessage" for="field_loraMessage">Lora Message</label>
+            <select class="form-control" id="field_loraMessage" name="loraMessage" ng-model="vm.vibrationProMessage.loraMessage" ng-options="lorawanMessage as lorawanMessage.id for lorawanMessage in vm.lorawanmessages track by lorawanMessage.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

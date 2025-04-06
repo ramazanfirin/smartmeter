@@ -10,6 +10,9 @@
                 "sensor": "Sensor",
                 "lorawanMessage": "Lorawan Message",
                 "m2MMessage": "M 2 M Message",
+                "vibrationEcoMessage": "Vibration Eco Message",
+                "vibrationProMessage": "Vibration Pro Message",
+                "currentMeterMessage": "Current Meter Message",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -92,7 +95,8 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "search": "Search"
         },
         "detail": {
             "field": "Field",

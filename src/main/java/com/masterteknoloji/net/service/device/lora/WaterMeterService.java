@@ -32,7 +32,7 @@ public class WaterMeterService extends BaseLoraDeviceService implements LoraDevi
 
 	
 
-	public void parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM) throws Exception {
+	public Object parseSensorSpecificData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM) throws Exception {
 		JsonNode object = deviceMessageVM.getJsonNode().get("object");
 		if (object.get("BatV") != null)
 			lorawanMessage.setBatteryValue((float) object.get("BatV").asDouble());
@@ -40,6 +40,7 @@ public class WaterMeterService extends BaseLoraDeviceService implements LoraDevi
 			lorawanMessage.setSensorValue((float) object.get("Reading").asDouble());
 
 		parseImageData(lorawanMessage, deviceMessageVM);
+		return "";
 	}
 
 	public void parseImageData(LorawanMessage lorawanMessage, DeviceMessageVM deviceMessageVM) throws Exception {
@@ -114,7 +115,7 @@ public class WaterMeterService extends BaseLoraDeviceService implements LoraDevi
 	}
 
 	@Override
-	public void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage) throws Exception {
+	public void sendData(DeviceMessageVM deviceMessageVM,LorawanMessage lorawanMessage,Object oject) throws Exception {
 		
 //		String deviceToken = "46zdi8vwnloavhrnot77";
 //		

@@ -25,6 +25,7 @@
                     <th jh-sort-by="imei"><span data-translate="smartmeterApp.sensor.imei">Imei</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="connectionType"><span data-translate="smartmeterApp.sensor.connectionType">Connection Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="type"><span data-translate="smartmeterApp.sensor.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="thingsBoardDeviceId"><span data-translate="smartmeterApp.sensor.thingsBoardDeviceId">Things Board Device Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastSeenDate"><span data-translate="smartmeterApp.sensor.lastSeenDate">Last Seen Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastMessage"><span data-translate="smartmeterApp.sensor.lastMessage">Last Message</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastImage"><span data-translate="smartmeterApp.sensor.lastImage">Last Image</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -40,6 +41,7 @@
                     <td>{{sensor.imei}}</td>
                     <td data-translate="{{'smartmeterApp.ConnectionType.' + sensor.connectionType}}">{{sensor.connectionType}}</td>
                     <td data-translate="{{'smartmeterApp.Type.' + sensor.type}}">{{sensor.type}}</td>
+                    <td>{{sensor.thingsBoardDeviceId}}</td>
                     <td>{{sensor.lastSeenDate | date:'medium'}}</td>
                     <td>{{sensor.lastMessage}}</td>
                     <td>

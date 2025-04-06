@@ -1,0 +1,38 @@
+{
+    "smartmeterApp": {
+        "vibrationProMessage" : {
+            "home": {
+                "title": "Vibration Pro Messages",
+                "createLabel": "Create a new Vibration Pro Message",
+                "createOrEditLabel": "Create or edit a Vibration Pro Message"
+            },
+            "created": "A new Vibration Pro Message is created with identifier {{ param }}",
+            "updated": "A Vibration Pro Message is updated with identifier {{ param }}",
+            "deleted": "A Vibration Pro Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Vibration Pro Message {{ id }}?"
+            },
+            "detail": {
+                "title": "Vibration Pro Message"
+            },
+            "batteryValue": "Battery Value",
+            "temperature": "Temperature",
+            "xVelocity": "X Velocity",
+            "xAcceleration": "X Acceleration",
+            "yVelocity": "Y Velocity",
+            "yAcceleration": "Y Acceleration",
+            "zVelocity": "Z Velocity",
+            "zAcceleration": "Z Acceleration",
+            "loraMessage": "Lora Message",
+            "sensor": "Sensor",
+            "dateFilter": "Tarih Filtresi",
+            "dateFilterOptions": {
+                "all": "Tümü",
+                "24h": "Son 24 Saat",
+                "7d": "Son 1 Hafta",
+                "30d": "Son 1 Ay",
+                "365d": "Son 1 Yıl"
+            }
+        }
+    }
+}

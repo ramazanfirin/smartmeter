@@ -1,0 +1,67 @@
+{
+  "deduplicationId": "87f08a27-3c0e-4ae3-9301-f357f658e0b6",
+  "time": "2025-03-27T09:07:07.961+00:00",
+  "deviceInfo": {
+    "tenantId": "52f14cd4-c6f1-4fbd-8f87-4025e1d49242",
+    "tenantName": "ChirpStack",
+    "applicationId": "1528fcd9-5b96-44d6-a4d3-b8b45618317b",
+    "applicationName": "kayseri ulaşım",
+    "deviceProfileId": "fffb9943-a01d-4171-aa37-91a0eedec3d4",
+    "deviceProfileName": "Vibration Sensor Pro -2",
+    "deviceName": "Vibration Sensor Pro -2",
+    "devEui": "1200000000080409",
+    "deviceClassEnabled": "CLASS_A",
+    "tags": {}
+  },
+  "devAddr": "01bad74d",
+  "adr": true,
+  "dr": 0,
+  "fCnt": 2,
+  "fPort": 1,
+  "confirmed": true,
+  "data": "BW8NGQMAAwACAAMAAgACAAA=",
+  "object": {
+    "yAcceleration": 0.02,
+    "zAcceleration": 0.02,
+    "temperature": 25,
+    "voltage": 3.439,
+    "xVelocity": 0.03,
+    "xAcceleration": 0.03,
+    "yVelocity": 0.03,
+    "zVelocity": 0.02,
+    "parameter": 0
+  },
+  "rxInfo": [
+    {
+      "gatewayId": "24e124fffef66c9a",
+      "uplinkId": 32807,
+      "gwTime": "2025-03-27T09:07:07.961443+00:00",
+      "nsTime": "2025-03-27T09:07:07.991353675+00:00",
+      "timeSinceGpsEpoch": "1427101645.961s",
+      "rssi": -34,
+      "snr": 9.2,
+      "channel": 1,
+      "rfChain": 1,
+      "location": {
+        "latitude": 38.2599168,
+        "longitude": 34.0099072
+      },
+      "context": "lFFu0w==",
+      "metadata": {
+        "region_config_id": "eu868",
+        "region_common_name": "EU868"
+      },
+      "crcStatus": "CRC_OK"
+    }
+  ],
+  "txInfo": {
+    "frequency": 868300000,
+    "modulation": {
+      "lora": {
+        "bandwidth": 125000,
+        "spreadingFactor": 12,
+        "codeRate": "CR_4_5"
+      }
+    }
+  }
+}

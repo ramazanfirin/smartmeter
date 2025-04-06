@@ -33,7 +33,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/smartmeter?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Turkey&allowPublicKeyRetrieval=True&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://localhost:3306/smartmeter3?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Turkey&allowPublicKeyRetrieval=True&allowPublicKeyRetrieval=true
         username: root
         password: ra5699mo
         hikari:

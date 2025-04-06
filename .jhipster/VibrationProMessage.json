@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "loraMessage",
+            "otherEntityName": "lorawanMessage",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "batteryValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "temperature",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "xVelocity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "xAcceleration",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "yVelocity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "yAcceleration",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "zVelocity",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "zAcceleration",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20250322151715",
+    "entityTableName": "vibration_pro_message",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

@@ -44,8 +44,8 @@ public class MultiThreadedUdpServer {
 
 	@PostConstruct
     public void startServer() {
-        executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-        executorService.execute(this::runServer);
+        //executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        //executorService.execute(this::runServer);
     }
 
     @PreDestroy

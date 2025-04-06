@@ -5,6 +5,7 @@ entity Sensor{
 	imei String
 	connectionType ConnectionType
     type Type
+    thingsBoardDeviceId String
     lastSeenDate ZonedDateTime
     lastMessage String  maxlength(4000)
     lastImage ImageBlob 
@@ -18,7 +19,10 @@ enum ConnectionType{
 enum Type{
 	VIBRATION,
 	BUTTON,
-	WATER_METER
+	WATER_METER,
+	VIBRATION_ECO,
+	VIBRATION_PRO,
+	CURRENT_METER
 }
 
 entity LorawanMessage{
@@ -50,13 +54,42 @@ entity M2mMessage{
 	ip String
 }   
 
+entity VibrationEcoMessage{
+    batteryValue Float
+	xAxisValue Float	
+	yAxisValue Float
+	zAxisValue Float
+}
+
+entity VibrationProMessage{
+    batteryValue Float
+    temperature Float
+	xVelocity Float	
+	xAcceleration Float
+	yVelocity Float
+	yAcceleration Float
+	zVelocity Float
+	zAcceleration Float
+
+	
+}
+
+entity CurrentMeterMessage{
+    batteryValue Float
+	current Float	
+	totalEnergy Float
+	reason String
+}
 
 relationship ManyToOne {
 	LorawanMessage{sensor} to Sensor
 	M2mMessage{sensor} to Sensor
+	VibrationEcoMessage{loraMessage} to LorawanMessage
+	VibrationProMessage{loraMessage} to LorawanMessage
+	CurrentMeterMessage{loraMessage} to LorawanMessage
 }	
 	
 
 
-paginate LorawanMessage,Sensor,M2mMessage with pagination
+paginate LorawanMessage,Sensor,M2mMessage,VibrationEcoMessage,VibrationProMessage,CurrentMeterMessage with pagination
 
