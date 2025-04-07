@@ -118,7 +118,7 @@
 
         <div class="form-group">
             <label data-translate="smartmeterApp.m2mMessage.sensor" for="field_sensor">Sensor</label>
-            <select class="form-control" id="field_sensor" name="sensor" ng-model="vm.m2mMessage.sensor" ng-options="sensor as sensor.id for sensor in vm.sensors track by sensor.id">
+            <select class="form-control" id="field_sensor" name="sensor" ng-model="vm.m2mMessage.sensor" ng-options="sensor as sensor.devEui for sensor in vm.sensors track by sensor.id">
                 <option value=""></option>
             </select>
         </div>

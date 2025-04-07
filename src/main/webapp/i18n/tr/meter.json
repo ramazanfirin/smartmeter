@@ -2,22 +2,22 @@
     "smartmeterApp": {
         "meter" : {
             "home": {
-                "title": "Meters",
-                "createLabel": "Create a new Meter",
-                "createOrEditLabel": "Create or edit a Meter"
+                "title": "Sayaç",
+                "createLabel": "Sayaç Oluştur",
+                "createOrEditLabel": "Sayaş Oluştur / Düzenle"
             },
-            "created": "A new Meter is created with identifier {{ param }}",
-            "updated": "A Meter is updated with identifier {{ param }}",
-            "deleted": "A Meter is deleted with identifier {{ param }}",
+            "created": "Sayaç Oluşturuldu {{ param }}",
+            "updated": "Sayaç Güncellendi {{ param }}",
+            "deleted": "Sayaç Silindi {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Meter {{ id }}?"
+                "question": "Silmek İstediğinize emin misiniz ? {{ id }}?"
             },
             "detail": {
-                "title": "Meter"
+                "title": "Sayaç"
             },
-            "meterNo": "Meter No",
-            "customerNo": "Customer No",
-            "address": "Address"
+            "meterNo": "Sayaç No",
+            "customerNo": "Müşteri No",
+            "address": "Adres"
         }
     }
 }

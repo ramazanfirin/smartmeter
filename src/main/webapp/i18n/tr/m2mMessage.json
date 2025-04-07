@@ -2,27 +2,27 @@
     "smartmeterApp": {
         "m2mMessage" : {
             "home": {
-                "title": "M 2 M Messages",
-                "createLabel": "Create a new M 2 M Message",
-                "createOrEditLabel": "Create or edit a M 2 M Message"
+                "title": "M2M Mesaj",
+                "createLabel": "Yeni M2M Mesaj Oluştur",
+                "createOrEditLabel": "M2M Mesaj Oluştur / Güncelle"
             },
-            "created": "A new M 2 M Message is created with identifier {{ param }}",
-            "updated": "A M 2 M Message is updated with identifier {{ param }}",
-            "deleted": "A M 2 M Message is deleted with identifier {{ param }}",
+            "created": "Yeni M2M Mesaj Oluşturuldu {{ param }}",
+            "updated": "M2M Mesaj Güncellendi {{ param }}",
+            "deleted": "M2M Mesaj Silindi {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete M 2 M Message {{ id }}?"
+                "question": "Silmek İstediğinize emin misiniz  {{ id }}?"
             },
             "detail": {
-                "title": "M 2 M Message"
+                "title": "M2M Mesaj"
             },
-            "base64Message": "Base 64 Message",
-            "hexMessage": "Hex Message",
+            "base64Message": "Base 64 Mesaj",
+            "hexMessage": "Hex Mesaj",
             "index": "Index",
             "totalMessageCount": "Total Message Count",
-            "insertDate": "Insert Date",
+            "insertDate": "Date",
             "image": "Image",
-            "batteryValue": "Battery Value",
-            "sensorValue": "Sensor Value",
+            "batteryValue": "Batarya",
+            "sensorValue": "Değer",
             "port": "Port",
             "imageData": "Image Data",
             "validImage": "Valid Image",
