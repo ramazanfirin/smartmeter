@@ -1,0 +1,23 @@
+{
+    "smartmeterApp": {
+        "meter" : {
+            "home": {
+                "title": "Sayaç",
+                "createLabel": "Sayaç Oluştur",
+                "createOrEditLabel": "Sayaş Oluştur / Düzenle"
+            },
+            "created": "Sayaç Oluşturuldu {{ param }}",
+            "updated": "Sayaç Güncellendi {{ param }}",
+            "deleted": "Sayaç Silindi {{ param }}",
+            "delete": {
+                "question": "Silmek İstediğinize emin misiniz ? {{ id }}?"
+            },
+            "detail": {
+                "title": "Sayaç"
+            },
+            "meterNo": "Sayaç No",
+            "customerNo": "Müşteri No",
+            "address": "Adres"
+        }
+    }
+}

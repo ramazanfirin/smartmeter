@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="smartmeterApp.meter.detail.title">Meter</span> {{vm.meter.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smartmeterApp.meter.meterNo">Meter No</span></dt>
+        <dd>
+            <span>{{vm.meter.meterNo}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.meter.customerNo">Customer No</span></dt>
+        <dd>
+            <span>{{vm.meter.customerNo}}</span>
+        </dd>
+        <dt><span data-translate="smartmeterApp.meter.address">Address</span></dt>
+        <dd>
+            <span>{{vm.meter.address}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="meter-detail.edit({id:vm.meter.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -28,7 +28,8 @@
                     <th jh-sort-by="thingsBoardDeviceId"><span data-translate="smartmeterApp.sensor.thingsBoardDeviceId">Things Board Device Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastSeenDate"><span data-translate="smartmeterApp.sensor.lastSeenDate">Last Seen Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastMessage"><span data-translate="smartmeterApp.sensor.lastMessage">Last Message</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastImage"><span data-translate="smartmeterApp.sensor.lastImage">Last Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+<!--                     <th jh-sort-by="lastImage"><span data-translate="smartmeterApp.sensor.lastImage">Last Image</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+                    <th jh-sort-by="meter.id"><span data-translate="smartmeterApp.sensor.meter">Meter</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -44,11 +45,14 @@
                     <td>{{sensor.thingsBoardDeviceId}}</td>
                     <td>{{sensor.lastSeenDate | date:'medium'}}</td>
                     <td>{{sensor.lastMessage}}</td>
+<!--                     <td> -->
+<!--                         <a ng-if="sensor.lastImage" ng-click="vm.openFile(sensor.lastImageContentType, sensor.lastImage)"> -->
+<!--                             <img data-ng-src="{{'data:' + sensor.lastImageContentType + ';base64,' + sensor.lastImage}}" style="max-height: 30px;" alt="sensor image"/> -->
+<!--                         </a> -->
+<!--                         <span ng-if="sensor.lastImage">{{sensor.lastImageContentType}}, {{vm.byteSize(sensor.lastImage)}}</span> -->
+<!--                     </td> -->
                     <td>
-                        <a ng-if="sensor.lastImage" ng-click="vm.openFile(sensor.lastImageContentType, sensor.lastImage)">
-                            <img data-ng-src="{{'data:' + sensor.lastImageContentType + ';base64,' + sensor.lastImage}}" style="max-height: 30px;" alt="sensor image"/>
-                        </a>
-                        <span ng-if="sensor.lastImage">{{sensor.lastImageContentType}}, {{vm.byteSize(sensor.lastImage)}}</span>
+                        <a ui-sref="meter-detail({id:sensor.meter.id})">{{sensor.meter.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

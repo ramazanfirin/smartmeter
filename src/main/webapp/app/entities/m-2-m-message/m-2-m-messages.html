@@ -10,7 +10,7 @@
                 <select class="form-control" id="sensorSelect" ng-model="vm.selectedSensor">
                     <option value="">Tüm Sayaçlar</option>
                     <option ng-repeat="sensor in vm.sensors track by sensor.id" value="{{sensor.id}}">
-                        {{sensor.devEui}}
+                        {{sensor.meter.meterNo}}-{{sensor.devEui}}
                     </option>
                 </select>
             </div>
@@ -62,10 +62,10 @@
                     <th jh-sort-by="image"><span data-translate="smartmeterApp.m2mMessage.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.m2mMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sensorValue"><span data-translate="smartmeterApp.m2mMessage.sensorValue">Sensor Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="port"><span data-translate="smartmeterApp.m2mMessage.port">Port</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="imageData"><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="validImage"><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ip"><span data-translate="smartmeterApp.m2mMessage.ip">Ip</span> <span class="glyphicon glyphicon-sort"></span></th>
+<!--                     <th jh-sort-by="port"><span data-translate="smartmeterApp.m2mMessage.port">Port</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+<!--                     <th jh-sort-by="imageData"><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+<!--                     <th jh-sort-by="validImage"><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+<!--                     <th jh-sort-by="ip"><span data-translate="smartmeterApp.m2mMessage.ip">Ip</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -86,12 +86,12 @@
                     </td>
                     <td>{{m2mMessage.batteryValue}}</td>
                     <td>{{m2mMessage.sensorValue}}</td>
-                    <td>{{m2mMessage.port}}</td>
-                    <td>{{m2mMessage.imageData}}</td>
-                    <td>{{m2mMessage.validImage}}</td>
-                    <td>{{m2mMessage.ip}}</td>
+<!--                     <td>{{m2mMessage.port}}</td> -->
+<!--                     <td>{{m2mMessage.imageData}}</td> -->
+<!--                     <td>{{m2mMessage.validImage}}</td> -->
+<!--                     <td>{{m2mMessage.ip}}</td> -->
                     <td>
-                        <a ui-sref="sensor-detail({id:m2mMessage.sensor.id})">{{m2mMessage.sensor.id}}</a>
+                        <a ui-sref="sensor-detail({id:m2mMessage.sensor.id})">{{m2mMessage.sensor.meter.meterNo}}-{{m2mMessage.sensor.devEui}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
@@ -101,12 +101,12 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="m-2-m-message.edit({id:m2mMessage.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                            </button>
+<!--                             <button type="submit" -->
+<!--                                     ui-sref="m-2-m-message.edit({id:m2mMessage.id})" -->
+<!--                                     class="btn btn-primary btn-sm"> -->
+<!--                                 <span class="glyphicon glyphicon-pencil"></span> -->
+<!--                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span> -->
+<!--                             </button> -->
                             <button type="submit"
                                     ui-sref="m-2-m-message.delete({id:m2mMessage.id})"
                                     class="btn btn-danger btn-sm">

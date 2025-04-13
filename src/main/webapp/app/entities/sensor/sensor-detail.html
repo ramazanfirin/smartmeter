@@ -49,6 +49,10 @@
                 {{vm.sensor.lastImageContentType}}, {{vm.byteSize(vm.sensor.lastImage)}}
             </div>
         </dd>
+        <dt><span data-translate="smartmeterApp.sensor.meter">Meter</span></dt>
+        <dd>
+            <a ui-sref="meter-detail({id:vm.sensor.meter.id})">{{vm.sensor.meter.id}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

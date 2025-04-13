@@ -12,14 +12,14 @@
         <dd>
             <span>{{vm.m2mMessage.hexMessage}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.m2mMessage.index">Index</span></dt>
-        <dd>
-            <span>{{vm.m2mMessage.index}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.m2mMessage.totalMessageCount">Total Message Count</span></dt>
-        <dd>
-            <span>{{vm.m2mMessage.totalMessageCount}}</span>
-        </dd>
+<!--         <dt><span data-translate="smartmeterApp.m2mMessage.index">Index</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.m2mMessage.index}}</span> -->
+<!--         </dd> -->
+<!--         <dt><span data-translate="smartmeterApp.m2mMessage.totalMessageCount">Total Message Count</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.m2mMessage.totalMessageCount}}</span> -->
+<!--         </dd> -->
         <dt><span data-translate="smartmeterApp.m2mMessage.insertDate">Insert Date</span></dt>
         <dd>
             <span>{{vm.m2mMessage.insertDate | date:'medium'}}</span>
@@ -41,25 +41,25 @@
         <dd>
             <span>{{vm.m2mMessage.sensorValue}}</span>
         </dd>
-        <dt><span data-translate="smartmeterApp.m2mMessage.port">Port</span></dt>
-        <dd>
-            <span>{{vm.m2mMessage.port}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span></dt>
-        <dd>
-            <span>{{vm.m2mMessage.imageData}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span></dt>
-        <dd>
-            <span>{{vm.m2mMessage.validImage}}</span>
-        </dd>
-        <dt><span data-translate="smartmeterApp.m2mMessage.ip">Ip</span></dt>
-        <dd>
-            <span>{{vm.m2mMessage.ip}}</span>
-        </dd>
+<!--         <dt><span data-translate="smartmeterApp.m2mMessage.port">Port</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.m2mMessage.port}}</span> -->
+<!--         </dd> -->
+<!--         <dt><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.m2mMessage.imageData}}</span> -->
+<!--         </dd> -->
+<!--         <dt><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.m2mMessage.validImage}}</span> -->
+<!--         </dd> -->
+<!--         <dt><span data-translate="smartmeterApp.m2mMessage.ip">Ip</span></dt> -->
+<!--         <dd> -->
+<!--             <span>{{vm.m2mMessage.ip}}</span> -->
+<!--         </dd> -->
         <dt><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span></dt>
         <dd>
-            <a ui-sref="sensor-detail({id:vm.m2mMessage.sensor.id})">{{vm.m2mMessage.sensor.id}}</a>
+            <a ui-sref="sensor-detail({id:vm.m2mMessage.sensor.id})">{{vm.m2mMessage.sensor.meter.meterNo}}-{{vm.m2mMessage.sensor.devEui}}</a>
         </dd>
     </dl>
 

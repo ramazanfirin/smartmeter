@@ -5,9 +5,9 @@
         .module('smartmeterApp')
         .controller('SensorDetailController', SensorDetailController);
 
-    SensorDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Sensor'];
+    SensorDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Sensor', 'Meter'];
 
-    function SensorDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Sensor) {
+    function SensorDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Sensor, Meter) {
         var vm = this;
 
         vm.sensor = entity;

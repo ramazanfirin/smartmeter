@@ -81,15 +81,22 @@ entity CurrentMeterMessage{
 	reason String
 }
 
+entity Meter{
+	meterNo String
+	customerNo String
+	address String
+}
+
 relationship ManyToOne {
 	LorawanMessage{sensor} to Sensor
 	M2mMessage{sensor} to Sensor
 	VibrationEcoMessage{loraMessage} to LorawanMessage
 	VibrationProMessage{loraMessage} to LorawanMessage
 	CurrentMeterMessage{loraMessage} to LorawanMessage
+	Sensor{meter} to Meter
 }	
 	
 
 
-paginate LorawanMessage,Sensor,M2mMessage,VibrationEcoMessage,VibrationProMessage,CurrentMeterMessage with pagination
+paginate LorawanMessage,Sensor,M2mMessage,VibrationEcoMessage,VibrationProMessage,CurrentMeterMessage,Meter with pagination
 

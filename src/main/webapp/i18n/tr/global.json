@@ -9,10 +9,11 @@
                 "main": "Varlıklar",
                 "sensor": "Sensor",
                 "lorawanMessage": "Lorawan Message",
-                "m2MMessage": "M 2 M Message",
+                "m2MMessage": "M2M Mesaj",
                 "vibrationEcoMessage": "Vibration Eco Message",
                 "vibrationProMessage": "Vibration Pro Message",
                 "currentMeterMessage": "Current Meter Message",
+                "meter": "Sayaç",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
