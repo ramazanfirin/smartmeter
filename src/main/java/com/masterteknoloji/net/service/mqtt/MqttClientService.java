@@ -38,7 +38,7 @@ public class MqttClientService implements MqttCallback {
 
 	@PostConstruct
     public void init() {
-       // connect();
+       connect();
     }
 
     private void connect() {
