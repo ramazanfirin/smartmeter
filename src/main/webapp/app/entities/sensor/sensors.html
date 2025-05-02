@@ -44,7 +44,7 @@
                     <td data-translate="{{'smartmeterApp.Type.' + sensor.type}}">{{sensor.type}}</td>
                     <td>{{sensor.thingsBoardDeviceId}}</td>
                     <td>{{sensor.lastSeenDate | date:'medium'}}</td>
-                    <td>{{sensor.lastMessage}}</td>
+                    <td><!-- {{sensor.lastMessage}} --></td>
 <!--                     <td> -->
 <!--                         <a ng-if="sensor.lastImage" ng-click="vm.openFile(sensor.lastImageContentType, sensor.lastImage)"> -->
 <!--                             <img data-ng-src="{{'data:' + sensor.lastImageContentType + ';base64,' + sensor.lastImage}}" style="max-height: 30px;" alt="sensor image"/> -->
@@ -52,7 +52,7 @@
 <!--                         <span ng-if="sensor.lastImage">{{sensor.lastImageContentType}}, {{vm.byteSize(sensor.lastImage)}}</span> -->
 <!--                     </td> -->
                     <td>
-                        <a ui-sref="meter-detail({id:sensor.meter.id})">{{sensor.meter.id}}</a>
+                        <a ui-sref="meter-detail({id:sensor.meter.id})">{{sensor.meter.meterNo}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

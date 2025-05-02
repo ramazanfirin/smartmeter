@@ -24,6 +24,25 @@ public interface M2mMessageRepository extends JpaRepository<M2mMessage, Long> {
 	@Query("select m from M2mMessage m where m.ip =:ip and m.port =:port and m.imageData=false and m.validImage=false and m.insertDate>:insertDate order by m.insertDate")
 	List<M2mMessage> getLastMessage(@Param("ip") String ip,@Param("port") Long port,@Param("insertDate") ZonedDateTime insertDate);
 	
-	@Query("select m from M2mMessage m where m.imageData=false")
+	@Query("select m from M2mMessage m where m.imageData=false order by m.insertDate desc")
 	Page<M2mMessage> findAllValidImages(Pageable pageable);
+
+	@Query("select m from M2mMessage m where m.sensor.id = :sensorId and m.insertDate > :fromDate and m.imageData=false order by m.insertDate desc")
+	Page<M2mMessage> findBySensorIdAndInsertDateAfter(
+		@Param("sensorId") Long sensorId,
+		@Param("fromDate") ZonedDateTime fromDate,
+		Pageable pageable
+	);
+
+	@Query("select m from M2mMessage m where m.sensor.id = :sensorId and m.imageData=false order by m.insertDate desc")
+	Page<M2mMessage> findBySensorId(
+		@Param("sensorId") Long sensorId,
+		Pageable pageable
+	);
+
+	@Query("select m from M2mMessage m where m.insertDate > :fromDate and m.imageData=false order by m.insertDate desc")
+	Page<M2mMessage> findByInsertDateAfter(
+		@Param("fromDate") ZonedDateTime fromDate,
+		Pageable pageable
+	);
 }

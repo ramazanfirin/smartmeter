@@ -2,7 +2,7 @@
     "smartmeterApp": {
         "m2mMessage" : {
             "home": {
-                "title": "M2M Mesaj",
+                "title": "Sayaç Değerleri",
                 "createLabel": "Yeni M2M Mesaj Oluştur",
                 "createOrEditLabel": "M2M Mesaj Oluştur / Güncelle"
             },
@@ -13,7 +13,7 @@
                 "question": "Silmek İstediğinize emin misiniz  {{ id }}?"
             },
             "detail": {
-                "title": "M2M Mesaj"
+                "title": "Sayaç Değerleri"
             },
             "base64Message": "Base 64 Mesaj",
             "hexMessage": "Hex Mesaj",

@@ -144,18 +144,21 @@ public class M2mMessageResource {
         
         log.debug("REST request to filter M2mMessages by sensor: {} and timeRange: {}", sensorId, timeRange);
         
-        Page<M2mMessage> page = m2mMessageRepository.findAll(pageable);
+        Page<M2mMessage> page;
         if (sensorId != null && timeRange != null) {
-            // Şu andan timeRange saat öncesine kadar olan süre
+            // Hem sensör ID hem de zaman aralığı belirtilmişse
             ZonedDateTime fromDate = ZonedDateTime.now().minusHours(timeRange);
-            //page = m2mMessageRepository.findBySensorIdAndInsertDateAfter(sensorId, fromDate, pageable);
+            page = m2mMessageRepository.findBySensorIdAndInsertDateAfter(sensorId, fromDate, pageable);
         } else if (sensorId != null) {
-            //page = m2mMessageRepository.findBySensorId(sensorId, pageable);
+            // Sadece sensör ID belirtilmişse
+            page = m2mMessageRepository.findBySensorId(sensorId, pageable);
         } else if (timeRange != null) {
+            // Sadece zaman aralığı belirtilmişse
             ZonedDateTime fromDate = ZonedDateTime.now().minusHours(timeRange);
-           // page = m2mMessageRepository.findByInsertDateAfter(fromDate, pageable);
+            page = m2mMessageRepository.findByInsertDateAfter(fromDate, pageable);
         } else {
-          //  page = m2mMessageRepository.findAllValidImages(pageable);
+            // Hiçbir filtre belirtilmemişse
+            page = m2mMessageRepository.findAllValidImages(pageable);
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/m-2-m-messages/filter");

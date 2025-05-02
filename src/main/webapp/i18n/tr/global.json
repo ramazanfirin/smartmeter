@@ -9,7 +9,7 @@
                 "main": "Varlıklar",
                 "sensor": "Sensor",
                 "lorawanMessage": "Lorawan Message",
-                "m2MMessage": "M2M Mesaj",
+                "m2MMessage": "Sayaç Değerleri",
                 "vibrationEcoMessage": "Vibration Eco Message",
                 "vibrationProMessage": "Vibration Pro Message",
                 "currentMeterMessage": "Current Meter Message",

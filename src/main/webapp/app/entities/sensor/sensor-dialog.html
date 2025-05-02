@@ -114,7 +114,7 @@
 
         <div class="form-group">
             <label data-translate="smartmeterApp.sensor.meter" for="field_meter">Meter</label>
-            <select class="form-control" id="field_meter" name="meter" ng-model="vm.sensor.meter" ng-options="meter as meter.id for meter in vm.meters track by meter.id">
+            <select class="form-control" id="field_meter" name="meter" ng-model="vm.sensor.meter" ng-options="meter as meter.meterNo for meter in vm.meters track by meter.id">
                 <option value=""></option>
             </select>
         </div>
