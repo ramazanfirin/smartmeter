@@ -28,44 +28,50 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label>&nbsp;</label>
-                <button class="btn btn-primary form-control" ng-click="vm.filterMessages()">
-                    <span class="glyphicon glyphicon-search"></span>
-                    <span>Ara</span>
+                <button class="btn btn-primary form-control" ng-click="vm.filterMessages()" ng-disabled="vm.loading">
+                    <span class="glyphicon" ng-class="{'glyphicon-search': !vm.loading, 'glyphicon-refresh spinning': vm.loading}"></span>
+                    <span>{{vm.loading ? 'Yükleniyor...' : 'Ara'}}</span>
                 </button>
             </div>
         </div>
     </div>
 
-<!--     <div class="container-fluid"> -->
-<!--         <div class="row"> -->
-<!--             <div class="col-xs-4 no-padding-left"> -->
-<!--                 <button class="btn btn-primary" ui-sref="m-2-m-message.new" > -->
-<!--                     <span class="glyphicon glyphicon-plus"></span> -->
-<!--                     <span  data-translate="smartmeterApp.m2mMessage.home.createLabel"> -->
-<!--                         Create new M 2 M Message -->
-<!--                     </span> -->
-<!--                 </button> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="m-2-m-message.new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span data-translate="smartmeterApp.m2mMessage.home.createLabel">
+                        Create new M 2 M Message
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
     <br/>
-    <div class="table-responsive">
+    
+    <!-- Yükleme göstergesi -->
+    <div ng-if="vm.loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Yükleniyor...</span>
+        </div>
+    </div>
+
+    <!-- Veri yoksa gösterilecek mesaj -->
+    <div ng-if="!vm.loading && (!vm.m2mMessages || vm.m2mMessages.length === 0)" class="alert alert-info">
+        Veri bulunamadı
+    </div>
+
+    <!-- Veri tablosu -->
+    <div class="table-responsive" ng-if="!vm.loading && vm.m2mMessages && vm.m2mMessages.length > 0">
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-<!--                     <th jh-sort-by="base64Message"><span data-translate="smartmeterApp.m2mMessage.base64Message">Base 64 Message</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="hexMessage"><span data-translate="smartmeterApp.m2mMessage.hexMessage">Hex Message</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="index"><span data-translate="smartmeterApp.m2mMessage.index">Index</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="totalMessageCount"><span data-translate="smartmeterApp.m2mMessage.totalMessageCount">Total Message Count</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="insertDate"><span data-translate="smartmeterApp.m2mMessage.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="image"><span data-translate="smartmeterApp.m2mMessage.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="batteryValue"><span data-translate="smartmeterApp.m2mMessage.batteryValue">Battery Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sensorValue"><span data-translate="smartmeterApp.m2mMessage.sensorValue">Sensor Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-<!--                     <th jh-sort-by="port"><span data-translate="smartmeterApp.m2mMessage.port">Port</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="imageData"><span data-translate="smartmeterApp.m2mMessage.imageData">Image Data</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="validImage"><span data-translate="smartmeterApp.m2mMessage.validImage">Valid Image</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="ip"><span data-translate="smartmeterApp.m2mMessage.ip">Ip</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="sensor.id"><span data-translate="smartmeterApp.m2mMessage.sensor">Sensor</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -73,23 +79,17 @@
             <tbody>
                 <tr ng-repeat="m2mMessage in vm.m2mMessages track by m2mMessage.id">
                     <td><a ui-sref="m-2-m-message-detail({id:m2mMessage.id})">{{m2mMessage.id}}</a></td>
-<!--                     <td>{{m2mMessage.base64Message}}</td> -->
-<!--                     <td>{{m2mMessage.hexMessage}}</td> -->
-<!--                     <td>{{m2mMessage.index}}</td> -->
-<!--                     <td>{{m2mMessage.totalMessageCount}}</td> -->
                     <td>{{m2mMessage.insertDate | date:'medium'}}</td>
                     <td>
                         <a ng-if="m2mMessage.image" ng-click="vm.openFile(m2mMessage.imageContentType, m2mMessage.image)">
-                            <img data-ng-src="{{'data:' + m2mMessage.imageContentType + ';base64,' + m2mMessage.image}}" style="max-height: 100px;" alt="m2mMessage image"/>
+                            <img data-ng-src="{{'data:' + m2mMessage.imageContentType + ';base64,' + m2mMessage.image}}" 
+                                 style="max-height: 100px;" 
+                                 alt="m2mMessage image"
+                                 onerror="this.onerror=null; this.src='assets/images/loading.gif';"/>
                         </a>
-<!--                         <span ng-if="m2mMessage.image">{{m2mMessage.imageContentType}}, {{vm.byteSize(m2mMessage.image)}}</span> -->
                     </td>
                     <td>{{m2mMessage.batteryValue}}</td>
                     <td><!-- {{m2mMessage.sensorValue}} --></td>
-<!--                     <td>{{m2mMessage.port}}</td> -->
-<!--                     <td>{{m2mMessage.imageData}}</td> -->
-<!--                     <td>{{m2mMessage.validImage}}</td> -->
-<!--                     <td>{{m2mMessage.ip}}</td> -->
                     <td>
                         <a ui-sref="sensor-detail({id:m2mMessage.sensor.id})">{{m2mMessage.sensor.meter.meterNo}}-{{m2mMessage.sensor.devEui}}</a>
                     </td>
@@ -101,12 +101,6 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-<!--                             <button type="submit" -->
-<!--                                     ui-sref="m-2-m-message.edit({id:m2mMessage.id})" -->
-<!--                                     class="btn btn-primary btn-sm"> -->
-<!--                                 <span class="glyphicon glyphicon-pencil"></span> -->
-<!--                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span> -->
-<!--                             </button> -->
                             <button type="submit"
                                     ui-sref="m-2-m-message.delete({id:m2mMessage.id})"
                                     class="btn btn-danger btn-sm">
@@ -134,3 +128,20 @@
         </uib-pagination>
     </div>
 </div>
+
+<style>
+.spinning {
+    animation: spin 1s infinite linear;
+    display: inline-block;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+</style>
