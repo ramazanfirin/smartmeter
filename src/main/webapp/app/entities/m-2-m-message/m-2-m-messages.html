@@ -80,7 +80,7 @@
                     <td>{{m2mMessage.insertDate | date:'medium'}}</td>
                     <td>
                         <a ng-if="m2mMessage.image" ng-click="vm.openFile(m2mMessage.imageContentType, m2mMessage.image)">
-                            <img data-ng-src="{{'data:' + m2mMessage.imageContentType + ';base64,' + m2mMessage.image}}" style="max-height: 30px;" alt="m2mMessage image"/>
+                            <img data-ng-src="{{'data:' + m2mMessage.imageContentType + ';base64,' + m2mMessage.image}}" style="max-height: 100px;" alt="m2mMessage image"/>
                         </a>
 <!--                         <span ng-if="m2mMessage.image">{{m2mMessage.imageContentType}}, {{vm.byteSize(m2mMessage.image)}}</span> -->
                     </td>
