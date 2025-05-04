@@ -77,7 +77,7 @@ public class WaterMeterServiceM2M extends BaseM2mDeviceService implements M2mDev
             if(!m2mMessage.isImageData())
             	return;
 		    
-	    	List<M2mMessage>  list = m2mMessageRepository.findBySensorId(m2mMessage.getSensor().getId(),m2mMessage.getPort(),ZonedDateTime.now().minusMinutes(1));
+	    	List<M2mMessage>  list = m2mMessageRepository.findBySensorId(m2mMessage.getSensor().getId(),m2mMessage.getPort(),ZonedDateTime.now().minusMinutes(2));
 	    	M2mMessage firstData = list.get(0);
 	    	
 	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

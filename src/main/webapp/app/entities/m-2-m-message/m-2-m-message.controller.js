@@ -94,7 +94,7 @@
             vm.loading = true;
             M2mMessage.filter({
                 page: pagingParams.page - 1,
-                size: vm.itemsPerPage,
+                size: 300,
                 sensorId: vm.selectedSensor,
                 timeRange: vm.selectedTimeRange
             }, onFilterSuccess, onFilterError);

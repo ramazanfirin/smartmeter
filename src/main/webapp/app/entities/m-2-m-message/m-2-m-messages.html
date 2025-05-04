@@ -83,7 +83,7 @@
                     <td>
                         <a ng-if="m2mMessage.image" ng-click="vm.openFile(m2mMessage.imageContentType, m2mMessage.image)">
                             <img data-ng-src="{{'data:' + m2mMessage.imageContentType + ';base64,' + m2mMessage.image}}" 
-                                 style="max-height: 100px;" 
+                                 style="max-height: 75px;" 
                                  alt="m2mMessage image"
                                  onerror="this.onerror=null; this.src='assets/images/loading.gif';"/>
                         </a>
